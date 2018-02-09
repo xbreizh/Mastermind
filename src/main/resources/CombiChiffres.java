@@ -21,7 +21,7 @@ public void play(){
 		
 
 		int referenceCombi = 1;// reference du nombre a trouver
-		String valeur_entrée;
+		String valeur_entree;
 		int proposition = 0;
 		
 		// Explication du jeu
@@ -36,22 +36,22 @@ public void play(){
 			
 			while(!valid){
 			System.out.println("trouvez la valeur "+referenceCombi);
-			valeur_entrée=sc.nextLine();
+			valeur_entree=sc.nextLine();
 			
-			if(valeur_entrée.length()==0){
+			if(valeur_entree.length()==0){
 				System.err.println("vous n'avez entré aucune valeur");
 			}else{
-				if(isInteger(valeur_entrée)){
-					Integer.parseInt(valeur_entrée);
-					if(Integer.valueOf(valeur_entrée)>=0 && Integer.valueOf(valeur_entrée)<=100){
-						proposition=Integer.valueOf(valeur_entrée);
+				if(isInteger(valeur_entree)){
+					Integer.parseInt(valeur_entree);
+					if(Integer.valueOf(valeur_entree)>=0 && Integer.valueOf(valeur_entree)<=100){
+						proposition=Integer.valueOf(valeur_entree);
 						valid=true;
 					}else{
-						System.err.println("nombre invalide: \""+valeur_entrée+"\". \nle nombre doit etre compris entre "+min+" et "+max+"!");
+						System.err.println("nombre invalide: \""+valeur_entree+"\". \nle nombre doit etre compris entre "+min+" et "+max+"!");
 					}	
 					
 				}else{
-				System.err.println("nombre invalide.\n\""+valeur_entrée+"\" n'est pas un entier valide");
+				System.err.println("nombre invalide.\n\""+valeur_entree+"\" n'est pas un entier valide");
 				}
 					
 			}
