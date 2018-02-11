@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class CombiChiffres extends Jeu{
 	
-	CombiChiffres(){
+	public CombiChiffres(){
 		super();
 	}
 	
@@ -30,7 +30,7 @@ public void play(){
 		for (int i = 0; liste.size() > 0; i++) {
 			while (nbreEssais <= nbreEssaisMax && trouve != tailleCombi) {
 				// le jeu continue tant qu'il reste des essais ou que la combinaison
-				// est trouvée
+				// est trouvï¿½e
 			boolean valid=false;
 			boolean correct;
 			
@@ -39,7 +39,7 @@ public void play(){
 			valeur_entree=sc.nextLine();
 			
 			if(valeur_entree.length()==0){
-				System.err.println("vous n'avez entré aucune valeur");
+				System.err.println("vous n'avez entrï¿½ aucune valeur");
 			}else{
 				if(isInteger(valeur_entree)){
 					Integer.parseInt(valeur_entree);
@@ -58,31 +58,31 @@ public void play(){
 			
 				}
 			int reponse = liste.get(0);
-			if (proposition == reponse) { // cas ou le nombre est trouvé
-				System.out.println("bravo, chiffre " + referenceCombi + " trouvé");
+			if (proposition == reponse) { // cas ou le nombre est trouvï¿½
+				System.out.println("bravo, chiffre " + referenceCombi + " trouvï¿½");
 				liste.remove(0); // retire le nombre de la liste
-				trouve++; // incrémente le nombre de nombres trouvées
+				trouve++; // incrï¿½mente le nombre de nombres trouvï¿½es
 				referenceCombi++;// passe au nombre suivant
-			} else {// verifie si la valeur proposée est plus grande ou plus
-					// petite et renvoie la réponse
+			} else {// verifie si la valeur proposï¿½e est plus grande ou plus
+					// petite et renvoie la rï¿½ponse
 				if (proposition > reponse) {
-					System.out.println("le nombre à trouver est plus petit");
+					System.out.println("le nombre ï¿½ trouver est plus petit");
 				} else {
-					System.out.println("le nombre à trouver est plus grand");
+					System.out.println("le nombre ï¿½ trouver est plus grand");
 				}
 			}
 			nbreEssais++;
 		}
-		System.out.println("\njeu terminé");
+		System.out.println("\njeu terminï¿½");
 		sc.close();
 		break;
 
 	}
 	if (trouve == tailleCombi) {
-		System.out.println("félicitations, vous avez trouvé le code en " + nbreEssais + " essais!");
+		System.out.println("fï¿½licitations, vous avez trouvï¿½ le code en " + nbreEssais + " essais!");
 	} else {
 		System.out.println(
-				"désolé, vous n'avez pas trouvé la combinaison cette fois ci. Score:" + trouve + "/"+tailleCombi);
+				"dï¿½solï¿½, vous n'avez pas trouvï¿½ la combinaison cette fois ci. Score:" + trouve + "/"+tailleCombi);
 	}
 
 }
@@ -106,7 +106,7 @@ return valid;
 protected static boolean checkNotNull(String value){
 	 boolean valid=false;
 	 if(value.length()==0){
-		 System.err.println("vous n'avez rien écrit");
+		 System.err.println("vous n'avez rien ï¿½crit");
 	 }else{
 		 valid=true;
 	 }
@@ -117,7 +117,7 @@ protected static boolean checkNotNull(String value){
 	void consigne() {
 		System.out.println("TROUVER LE NOMBRE");
 		System.out.println("Vous devez trouver un nombre entier compris entre "+min+" et "+max);
-		System.out.println("Vous avez droit à "+nbreEssaisMax+" essais maximum.\n");
+		System.out.println("Vous avez droit ï¿½ "+nbreEssaisMax+" essais maximum.\n");
 		
 	}
 

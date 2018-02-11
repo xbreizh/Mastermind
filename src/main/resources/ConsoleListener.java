@@ -2,25 +2,21 @@ package main.resources;
 
 import java.util.Scanner;
 
-public class Controller {
+public class ConsoleListener {
 	
 	boolean stop=false;
-	Controller(){
+	public ConsoleListener(){
 		while( stop==false){
 			System.out.println(getInput());
 			}
 	}
-	// ouvre le flux du scanner et recupère l'input sous forme de String
+	// ouvre le flux du scanner et recupï¿½re l'input sous forme de String
 	 Scanner ouvreFlux(){
 		Scanner sc = new Scanner(System.in);
 		return sc;
 	}
-
-	/**
-	 * @param sc
-	 * @return
-	 */
-	protected String getInput() {
+	 
+	public String getInput() {
 		String str= ouvreFlux().next();
 		return str;
 	}
