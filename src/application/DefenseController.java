@@ -1,39 +1,26 @@
 package application;
 
-import java.util.Scanner;
+public class DefenseController extends MainController{
 
-public class Controller {
+	String input;
 
-	private Scanner sc;
-//	String list;
-
-	public Controller() {
-		openScanner();
+	public DefenseController() {
 	}
 
-	Scanner openScanner() {
-		sc = new Scanner(System.in);
-		return sc;
-	}
+	
 
 	public void controllerKeepPlaying(Game game, boolean keepPlaying) {
 		if (!game.keepPlayingCheck()) {
 			System.out.println("Perdu, vous avez atteint le nombre maximum d'essais possible!");
-			controllerPlayAgain(game);
+			game.askRestart();
 		} else {
-//			System.out.println(game.getList());
 			game.rules();
 		}
 
 	}
 
-	public String controllerGetInput() {
-		String input = sc.nextLine();
-		return input;
-	}
-
 	public void controllerCheck(Game game) {
-		String input = controllerGetInput();
+		input = controllerGetInput();
 		if (!game.checkInput(input)) {
 			game.rules();
 		} else {
@@ -42,28 +29,35 @@ public class Controller {
 	}
 
 	public void controllerResult(Game game, String input) {
-		if (game.checkResult(input, game.getList())) {
+		if(input.toUpperCase().equals("q".toUpperCase())){
+			game.askRestart();
+		}
+		else if (game.checkResult(input, game.getList())) {
 			System.out.printf("Proposition : %s -> Bravo, vous avez trouvé la combinaison! en %s essais", input,
 					game.attempts);
-			controllerPlayAgain(game);
+			game.askRestart();
 		} else {
 			controllerKeepPlaying(game, true);
 		}
 	}
 
 	public void controllerPlayAgain(Game game) {
-		if (!game.playAgain()) {
-			System.out.println("thanks for playing!");
-			closeScanner();
+
+		input = controllerGetInput();
+				
+		if (!game.playAgain(input)) {
+			System.out.println("Fin du jeu!");
+			menu();
 		} else {
 			game.attempts = 0;
 			controllerKeepPlaying(game, true);
 		}
 
 	}
+	
 
-	public void closeScanner() {
-		sc.close();
-	}
+	
+
+	
 
 }

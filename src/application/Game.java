@@ -1,20 +1,33 @@
 package application;
 
-abstract class Game {
-	String list="";
-	int attempts = 0;
-	abstract String getList();
-	Controller ct = new Controller();
+import model.CheckInput;
 
+abstract class Game extends Main {
+	boolean keepPlaying = true;
+	protected String list;
+	static int min;
+	static int max;
+	static int max_attempts;
+	int attempts = 0;
+	CheckInput ch;
+
+	// List of abstract methods
 	abstract void rules();
 
-	// abstract List initialize();
-	// abstract void play();
-	// abstract boolean checkInput();
-	abstract boolean playAgain();
-	 abstract boolean checkResult(String check, String good);
-	 abstract void finalResult(String verdict);
-	 abstract boolean keepPlayingCheck();
+	abstract boolean keepPlayingCheck();
+
 	abstract boolean checkInput(String input);
+
+	abstract String getList();
+
+	abstract void setList(String list);
+
+	abstract boolean checkResult(String check, String good);
+
+	abstract void finalResult(String verdict);
+
+	abstract boolean playAgain(String input);
+
+	abstract void askRestart();
 
 }

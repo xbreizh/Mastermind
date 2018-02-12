@@ -3,30 +3,45 @@ package application;
 public class Main {
 	public static int min = 0;
 	public static int max = 100;
+	protected static DefenseController ct;
+
+	Main() {
+
+	}
 
 	public static void main(String[] args) {
+		new MainController().menu();
 		
-		
+//		Game g =new Game();
+//		
+//		g.playAgain();
 
-//		MoreLess ml = new MoreLess();
-//		new Menu();
-		
-		MoreLess ml =new MoreLess();
-//		ml.rules();
-//		ml.input = ct.controllerGetInput();
-//		ml.ct.controllerCheck(ml);
-		
-		
-		
-		
-		
-//		System.out.println("you typed: "+input);
-//		System.out.println("type something else: ");
-//		input = ct.controllerGetInput();
-//		System.out.println("you typed: "+input);
-//		System.out.println(input);
-//		input = Controller.controllerGetInput();
-//		System.out.println(input);
+//		 Scanner sc = new Scanner(System.in);
+//		 String input = "e";
+//		 CheckInput ch = null;
+//		
+//		 while(!input.equals("q")){
+//		 System.out.println("type something: ");
+//		 input=sc.nextLine();
+//		 String[] test = {"a", "b"};
+//		 System.out.println(ch.checkValidString(input, "ww" ));
+//		 }
+//		 System.out.println("valid!");
+
+		// MoreLess ml = new MoreLess();
+		// new Menu();
+
+		// ml.rules();
+		// ml.input = ct.controllerGetInput();
+		// ml.ct.controllerCheck(ml);
+
+		// System.out.println("you typed: "+input);
+		// System.out.println("type something else: ");
+		// input = ct.controllerGetInput();
+		// System.out.println("you typed: "+input);
+		// System.out.println(input);
+		// input = Controller.controllerGetInput();
+		// System.out.println(input);
 
 		// String input = sc.nextLine();
 		// int good = Integer.valueOf(list.get(0));

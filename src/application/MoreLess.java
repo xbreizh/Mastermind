@@ -5,37 +5,31 @@ import java.util.Scanner;
 import model.CheckInput;
 
 public class MoreLess extends Game {
+	String input;
+	Scanner sc;
 
-	private String list="";
-	
-	public void setList(String list) {
+	void setList(String list) {
 		this.list = list;
 	}
 
-	static int min = 1000;
-	static int max = 9999;
-	static int max_attempts = 5;
-	Scanner sc = new Scanner(System.in);
-	String input;
-	boolean keepPlaying=true;
-	Controller ct;
+	public String getList() {
+		return list;
+	}
 
 	public MoreLess() {
-		this.ct=new Controller();
 		initialize();
-//		setList("oko");
-//		System.out.println(getList());
-		
-//		rules();
-//		play();
 
 	}
 
 	protected void initialize() {
-		setList("1234");
-		ct.controllerKeepPlaying(this, keepPlaying);
-		
+		list = Configuration.getConfiguration().getList();
+		min = Configuration.getConfiguration().getMin();
+		max = Configuration.getConfiguration().getMax();
+		max_attempts = Configuration.getConfiguration().getMax_attempts();
+		ct = new DefenseController();
+		ct.controllerKeepPlaying(this, true);
 	}
+
 	void rules() {
 		System.out.println("Règles du jeu:");
 		System.out.printf("trouver la combinaison de %s chiffres en maximum %s essais!", list.length(), max_attempts);
@@ -44,39 +38,18 @@ public class MoreLess extends Game {
 
 	}
 
-//	void play() {
-//		boolean correct = false;
-//		// game is on until the combination is found or the max_attempts is
-//		// reached
-//		while (!correct && attempts != max_attempts) {
-//
-//			rules();
-//			this.input = sc.nextLine(); // gets the input value
-//			if (checkInput(input)) {
-//				attempts++; // increments the number of attempts
-//				System.out.println("Attempt: " + attempts + " / " + max_attempts);
-//				if (checkResult(input, list)) {
-//					correct = true;
-//				}
-//
-//			}
-//			if (correct) {
-//				finalResult("win");
-//			}
-//			if (attempts == max_attempts) {
-//				finalResult("lose");
-//			}
-//		}
-//		keepPlayingCheck();
-//	}
-
-	// checks that the input is a valid integer within the range
-	boolean checkInput(String input) {
-		if (!CheckInput.checkNotNull(input)) {
-			return false;
+	boolean keepPlayingCheck() {
+		if (attempts != max_attempts) {
+			keepPlaying = false;
+			return true;
 		}
-		if (!CheckInput.isInteger(input)) {
-			return false;
+		return false;
+
+	}
+
+	boolean checkInput(String input) {
+		if (CheckInput.checkValidString(input, "q")) {
+			return true;
 		}
 		if (!CheckInput.checkRange(input, min, max)) {
 			return false;
@@ -110,26 +83,6 @@ public class MoreLess extends Game {
 		System.out.printf("Proposition : %s -> Réponse : %s \n", check, result);
 		return false;
 	}
-	
-	
-	boolean playAgain() {
-
-		String input = null;
-		do {
-			System.out.println("\nDo you want to restart the game? (Y / N)");
-			input = sc.nextLine().toUpperCase();
-		}
-
-		while (!input.equals("Y") && !input.equals("N"));
-		if (input.equals("Y")) {
-			attempts = 0;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-
 
 	void finalResult(String verdict) {
 		if (verdict.equals("win")) {
@@ -141,23 +94,22 @@ public class MoreLess extends Game {
 		}
 	}
 
-	boolean checkValid(String value) {
-		return false;
-	}
-
-	@Override
-	boolean keepPlayingCheck() {
-		if(attempts != max_attempts){
-			keepPlaying=false;
-			return true;
+	boolean playAgain(String input) {
+		String[] valid = { "y", "n" };
+		while (!CheckInput.checkValidString(input, valid)) {
+			askRestart();
 		}
-		return false;
-		
+		if (input.toUpperCase().equals("Y")) {
+			attempts = 0;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	@Override
-	String getList() {
-		return list;
+	void askRestart() {
+		System.out.println("\nDo you want to restart the game? (Y / N)");
+		ct.controllerPlayAgain(this);
 	}
 
 }
