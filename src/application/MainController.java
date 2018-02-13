@@ -1,22 +1,27 @@
 package application;
 
+import java.util.Scanner;
+
 import model.CheckInput;
 
-public class MainController extends OpenScanner {
+public class MainController extends OpenScanner{
+
 
 	public MainController() {
-
+		
 	}
+
+	
 
 	public void menu() {
 		String input = "";
-		String[] choices = { "1", "2", "Q" };
+		String[] choices={"1", "2", "Q"};
 		do {
 			System.out.println("Choisissez votre jeu (taper Q pour quitter)");
 			System.out.println("Moreless - tapez 1");
 			System.out.println("Mastermind - tapez 2");
 			input = controllerGetInput();
-		} while (!CheckInput.checkValidString(input, choices));
+		}while (!CheckInput.checkValidString(input, choices));
 
 		if (input.equals("1")) {
 			controllerCreateGame(1);
@@ -28,21 +33,26 @@ public class MainController extends OpenScanner {
 			quit();
 		}
 	}
-	// public void checkMenuInput(String input){
-	// ch.checkNotNull(input);
-	// }
+//	public void checkMenuInput(String input){
+//		ch.checkNotNull(input);
+//	}
 
 	public void controllerCreateGame(int value) {
+		Game game = null;
 		if (value == 1) {
-			new MoreLess();
+			game = new MoreLess();
 		}
 		if (value == 2) {
-			// game = new Mastermind();
-			System.out.println("mastermind created");
+			game = new Mastermind();
+//			System.out.println("mastermind created");
 		}
 	}
 
-	public void quit() {
+	
+
+	
+
+	public void quit(){
 		System.out.println("Thanks for playing!");
 		closeScanner();
 	}

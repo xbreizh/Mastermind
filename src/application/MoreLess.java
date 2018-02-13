@@ -8,6 +8,12 @@ public class MoreLess extends Game {
 	String input;
 	Scanner sc;
 
+	
+
+	public MoreLess() {
+		initialize();
+
+	}
 	void setList(String list) {
 		this.list = list;
 	}
@@ -15,19 +21,14 @@ public class MoreLess extends Game {
 	public String getList() {
 		return list;
 	}
-
-	public MoreLess() {
-		initialize();
-
-	}
-
 	protected void initialize() {
 		list = Configuration.getConfiguration().getList();
 		min = Configuration.getConfiguration().getMin();
 		max = Configuration.getConfiguration().getMax();
 		max_attempts = Configuration.getConfiguration().getMax_attempts();
 		ct = new DefenseController();
-		ct.controllerKeepPlaying(this, true);
+		rules();
+//		ct.controllerKeepPlaying(this, true);
 	}
 
 	void rules() {
@@ -35,7 +36,6 @@ public class MoreLess extends Game {
 		System.out.printf("trouver la combinaison de %s chiffres en maximum %s essais!", list.length(), max_attempts);
 		System.out.println("(taper Q pour quitter)");
 		ct.controllerCheck(this);
-
 	}
 
 	boolean keepPlayingCheck() {
@@ -48,6 +48,9 @@ public class MoreLess extends Game {
 	}
 
 	boolean checkInput(String input) {
+		if (!CheckInput.checkNotNull(input)) {
+			return false;
+		}
 		if (CheckInput.checkValidString(input, "q")) {
 			return true;
 		}

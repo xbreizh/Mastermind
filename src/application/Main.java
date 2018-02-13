@@ -12,6 +12,32 @@ public class Main {
 	public static void main(String[] args) {
 		new MainController().menu();
 		
+//		String check= "4321";
+//		String good= "1234";
+//		int found=0;
+//		int fine =0;
+//		
+//		for (int i = 0; i < good.length(); i++) {
+//			
+//			for (int j = 0; j < good.length(); j++) {
+//				if(check.charAt(j) == good.charAt(i)){
+//					if(check.charAt(j) == good.charAt(j)){
+//						System.out.println("fine "+good.charAt(j));
+//						fine++;
+//					}else{
+//						System.out.println("found "+good.charAt(j));
+//					found++;
+//					}
+//				}
+//				
+//			}
+//			
+//		}
+//		System.out.println("trouvés: "+found);
+//		System.out.println("bien placés: "+fine);
+		
+		
+		
 //		Game g =new Game();
 //		
 //		g.playAgain();
