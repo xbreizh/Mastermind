@@ -6,7 +6,8 @@ import model.CheckInput;
 
 public class MainController extends OpenScanner{
 
-
+	protected Game game = null;
+	Status status = Status.keepPlaying;
 	public MainController() {
 		
 	}
@@ -38,7 +39,7 @@ public class MainController extends OpenScanner{
 //	}
 
 	public void controllerCreateGame(int value) {
-		Game game = null;
+		
 		if (value == 1) {
 			game = new MoreLess();
 		}

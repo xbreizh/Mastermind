@@ -7,22 +7,26 @@ public class DefenseController extends MainController{
 	public DefenseController() {
 	}
 
-	
-
-	public void controllerKeepPlaying(Game game, boolean keepPlaying) {
-		if (!game.keepPlayingCheck()) {
-			System.out.println("Perdu, vous avez atteint le nombre maximum d'essais possible!");
+	public void controllerKeepPlaying(Game game) {
+		if(status == Status.noMoreTries){
+			game.finalResult(input, status);
 			game.askRestart();
-		} else {
+		}
+		if(status == Status.win){
+			game.askRestart();
+		}
+		if(status == Status.keepPlaying){
 			game.rules();
 		}
-
+		if(status == Status.quit){
+			game.askRestart();
+		}
 	}
 
 	public void controllerCheck(Game game) {
 		input = controllerGetInput();
 		if (!game.checkInput(input)) {
-			game.rules();
+			controllerKeepPlaying(game);
 		} else {
 			controllerResult(game, input);
 		}
@@ -30,15 +34,16 @@ public class DefenseController extends MainController{
 
 	public void controllerResult(Game game, String input) {
 		if(input.toUpperCase().equals("q".toUpperCase())){
-			game.askRestart();
+			status = Status.quit;
 		}
-		else if (game.checkResult(input, game.getList())) {
-			System.out.printf("Proposition : %s -> Bravo, vous avez trouvé la combinaison! en %s essais", input,
-					game.attempts);
-			game.askRestart();
-		} else {
-			controllerKeepPlaying(game, true);
+		else if (game.checkResult(input)) {
+			status = Status.win;
+			game.finalResult(input, status);
+		} else{
+			status = game.keepPlayingCheck();
 		}
+		controllerKeepPlaying(game);
+		
 	}
 
 	public void controllerPlayAgain(Game game) {
@@ -50,8 +55,9 @@ public class DefenseController extends MainController{
 			menu();
 		} else {
 			game.attempts = 0;
-			controllerKeepPlaying(game, true);
+			status= Status.keepPlaying;
 		}
+		controllerKeepPlaying(game);
 
 	}
 	
