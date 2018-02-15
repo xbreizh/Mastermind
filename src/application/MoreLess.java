@@ -3,7 +3,8 @@ package application;
 public class MoreLess extends Game {
 
 	public MoreLess() {
-		super();
+//		super();
+		System.out.println("moreless createdsss");
 
 	}
 
@@ -34,4 +35,5 @@ public class MoreLess extends Game {
 		return false;
 	}
 
+	
 }

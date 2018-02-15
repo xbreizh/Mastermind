@@ -14,7 +14,7 @@ public class CheckInput {
 	public static boolean checkNotNull(String input) {
 		boolean valid = false;
 		if (input.length() == 0) {
-			System.err.println("vous n'avez rien écrit");
+			
 		} else {
 			valid = true;
 		}
@@ -32,7 +32,6 @@ public class CheckInput {
 				return true;
 			}
 		}
-		System.err.println("Entrée invalide! " + input);
 		return false;
 	}
 

@@ -1,5 +1,5 @@
 package application;
 
-public class DebugController extends MainController {
+public class DebugController extends Controller {
 
 }

@@ -10,8 +10,19 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		new MainController().menu();
 		
+//		new Controller().menu();
+//		View.display(Game.menu);
+		Controller controller = new Controller();
+		Menu menu = new Menu();
+		menu.addObserver(controller);
+		controller.setMenu(menu);
+		controller.getInput();
+//		menu.addObserver(controller);
+//		Game.addObserver(controller);
+		
+		
+//		Input.openScanner();
 //		String check= "4321";
 //		String good= "1234";
 //		int found=0;

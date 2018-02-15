@@ -1,6 +1,6 @@
 package application;
 
-public class DefenseController extends MainController{
+public class DefenseController extends Controller{
 
 	String input;
 
@@ -24,7 +24,7 @@ public class DefenseController extends MainController{
 	}
 
 	public void controllerCheck(Game game) {
-		input = controllerGetInput();
+		input = Input.controllerGetInput();
 		if (!game.checkInput(input)) {
 			controllerKeepPlaying(game);
 		} else {
@@ -48,11 +48,12 @@ public class DefenseController extends MainController{
 
 	public void controllerPlayAgain(Game game) {
 
-		input = controllerGetInput();
+		input = Input.controllerGetInput();
 				
 		if (!game.playAgain(input)) {
 			System.out.println("Fin du jeu!");
-			menu();
+//			menu();
+			
 		} else {
 			game.attempts = 0;
 			status= Status.keepPlaying;

@@ -1,5 +1,5 @@
 package application;
 
-public class DualController extends MainController {
+public class DualController extends Controller {
 
 }

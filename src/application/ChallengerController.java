@@ -1,5 +1,5 @@
 package application;
 
-public class ChallengerController extends MainController {
+public class ChallengerController extends Controller {
 
 }

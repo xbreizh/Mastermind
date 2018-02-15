@@ -3,7 +3,8 @@ package application;
 public class Mastermind extends Game {
 
 	Mastermind() {
-		super();
+//		super();
+		System.out.println("Mastermind créé");
 	}
 
 	// Checks if the values are present and at the right place
@@ -67,4 +68,8 @@ public class Mastermind extends Game {
 			System.out.println(answer + fine + " " + placed + ".");
 		}
 	}
+
+
+		
+	
 }
