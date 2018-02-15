@@ -26,7 +26,7 @@ abstract class Game  implements Observable{
 	int attempts = 0;
 	String input;
 	Scanner sc;
-	Status status=Status.keepPlaying;
+	Status status=Status.PLAYING;
 	static Game game;
 
 	Game() {

@@ -15,7 +15,7 @@ public class DefenseController extends Controller{
 		if(status == Status.win){
 			game.askRestart();
 		}
-		if(status == Status.keepPlaying){
+		if(status == Status.PLAYING){
 			game.rules();
 		}
 		if(status == Status.quit){
@@ -56,7 +56,7 @@ public class DefenseController extends Controller{
 			
 		} else {
 			game.attempts = 0;
-			status= Status.keepPlaying;
+			status= Status.PLAYING;
 		}
 		controllerKeepPlaying(game);
 

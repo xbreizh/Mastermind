@@ -7,11 +7,14 @@ import model.CheckInput;
 
 public class Controller implements Observer{
 	Scanner sc;
-	private Status status = Status.keepPlaying;
+	private Status status = Status.SELECTGAME;
 	String input = "";
 	String error="";
-	String[] valid = { "1", "2", "Q" };
+	String[] validGame = { "1", "2", "Q" };
+	String[] validMode = { "1", "2", "3", "4", "Q" };
+	String[] toCheck;
 	String output = "";
+	String inputToTest="";
 	String nothing="vous n'avez rien écrit";
 	String wrongInput="entrée invalide: ";
 	Menu menu;
@@ -24,43 +27,59 @@ public class Controller implements Observer{
 
 
 	public Controller() {
-		
 		sc=Input.openScanner();
-		sendView(Menu.menu);
+		output=Menu.selectGame;
+		sendView(output);
+		toCheck=validGame;
 	}
 
 	
 	public void CheckStatus(){
-		if(status == Status.quit){
+		if(status == Status.QUIT){
 			Input.closeScanner();
+		}
+		if(status == Status.SELECTGAME){
+			getInput();
+			}
+		if(status == Status.SELECTMODE){
+			toCheck=validMode;
+			getInput();
 		}
 	}
 	
 	public void getInput(){
-		checkInput(sc.nextLine());
+		inputToTest =sc.nextLine();
+		checkInput(inputToTest);
 	}
 	
 	public void checkInput(String inputToTest){
 		if(!CheckInput.checkNotNull(inputToTest)){
 			sendError(nothing);
-			sendView(Menu.menu);
+			sendView(output);
 			getInput();
 		}else{
-			if(!CheckInput.checkValidString(inputToTest, valid)){
+			if(!CheckInput.checkValidString(inputToTest, toCheck)){
 				sendError(wrongInput+inputToTest);
-				sendView(Menu.menu);
+				sendView(output);
 				getInput();
 			}else{
 				setInput(inputToTest);
-				menu.checkMenu(input);
+				sendInputModel();
 			}
-			
 			
 		}
 	}
 	
 	public void sendInputModel(){
-		menu.checkMenu(input);
+		if(status == Status.SELECTGAME){
+			menu.checkGame(input);	
+		}
+		if(status == Status.SELECTMODE){
+//			System.out.println(output);
+//			System.out.println("la");
+			menu.checkMode(input);	
+		}
+		
 	}
 	
 	
@@ -86,6 +105,7 @@ public class Controller implements Observer{
 	}
 	private void updateStatus(Status status) {
 		this.status = status;
+		System.out.println("new status: "+status);
 		
 	}
 
@@ -93,9 +113,10 @@ public class Controller implements Observer{
 
 	@Override
 	public void update(Status status, String output) {
-		updateStatus(status);
-		CheckStatus();
+		updateStatus(status);	
+		this.output=output;
 		sendView(output);
+		CheckStatus();
 	}
 
 
