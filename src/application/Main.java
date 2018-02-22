@@ -1,9 +1,12 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
 	public static int min = 0;
 	public static int max = 100;
-	protected static DefenseController ct;
+//	protected static DefenseController ct;
 
 	Main() {
 
@@ -11,21 +14,57 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		new Controller();
+		
+//		AI po = new AI();
+//		
+//		System.out.println(po.toString().);
+////		
+//		String test ="malo";
+//		
+//		System.out.println(test.substring(0,1));
+//		int i=0;
+//		test+=i;
+//		System.out.println(test);
+//		test+=i+1;
+//		System.out.println(test);
+//		test+=i+2;
+//		System.out.println(test);
+//		test="";
+//		test+="1";
+//		test+="2";
+//		test+="3";
+//		test+="4";
+//		System.out.println(test);
+		
+//		ArrayList<String> list = new ArrayList<>();
+//		String proposition="5555";
+//		for (int i = 0; i < proposition.length(); i++) {
+//			list.add(proposition.substring(i));
+//			
+//		}
+//		System.out.println(list.size());
+////		String destring="";
+//		
+//		StringBuilder sb = null;
+//		for(String str:list){
+//		sb.append(str);
+//		}
+//		proposition =sb.toString();
+		
+		
+		
 //		new Controller().menu();
 //		View.display(Game.menu);
-		Controller controller = new Controller();
-		Menu menu = new Menu();
-		menu.addObserver(controller);
-		controller.setMenu(menu);
-		menu.notifyObserver();
+		
 //		controller.setMenu(menu);
 //		controller.getInput();
 //		menu.addObserver(controller);
 //		Game.addObserver(controller);
 		
+//		Scanner sc = new Scanner(System.in);
 		
-//		Input.openScanner();
-//		String check= "4321";
+//		String check= "1231";
 //		String good= "1234";
 //		int found=0;
 //		int fine =0;

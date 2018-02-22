@@ -1,6 +1,9 @@
 package application;
 
 public class MoreLess extends Game {
+	
+	
+	String list="9999";
 
 	public MoreLess() {
 		super();
@@ -8,11 +11,22 @@ public class MoreLess extends Game {
 
 	}
 
-	// returns answer based on each number's position
-	// returns boolean
-	protected boolean checkResult(String check) {
+	@Override
+	String play(String input) {
+		
+		output="well played!";
+		
+		return output;
+	}
+
+	
+	protected String checkResult(String check) {
+		
 		String result = "";
-		this.attempts++;
+		String output="";
+		if(check.toUpperCase().equals("Q")){
+			return output="quit";
+		}
 		if (!check.equals(list)) {
 
 			for (int i = 0; i < list.length(); i++) {
@@ -29,10 +43,11 @@ public class MoreLess extends Game {
 				}
 			}
 		} else {
-			return true;
+			return output="win";
 		}
-		System.out.printf("Proposition : %s -> Réponse : %s \n", check, result);
-		return false;
+//		output="Proposition : "+check+" -> Réponse : "+result;
+		output=result;
+		return output;
 	}
 
 	
