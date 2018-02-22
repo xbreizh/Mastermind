@@ -13,7 +13,7 @@ public class MasterMind extends Game {
 	@Override
 	protected String checkResult(String check) {
 		
-//		String result = "";
+		String result = "";
 		String output="";
 		int found=0;
 		int fine =0;
@@ -42,7 +42,9 @@ public class MasterMind extends Game {
 		} else {
 			return output="win";
 		}
+		result=""+found+fine+"";
 		output="Proposition : "+check+" -> Réponse : "+found+" trouvés, "+fine+" bien placés";
+//		result=""+found+fine+"";
 		return output;
 	}
 

@@ -21,8 +21,18 @@ public class AI implements Player {
 	public String input() {
 
 		// String pl = sc.nextLine();
-		System.out.println("Result is: "+result);
-		proposition = analyse();
+		if (proposition.isEmpty() || result.isEmpty()) {
+			proposition = "5555";
+			System.out.println("here");
+
+		} else{
+			if(result.contains("+")||result.contains("-")||result.contains("=")){
+				System.out.println("Result is: "+result);
+				proposition = analyse();
+			}else{
+				System.out.println(sc.nextLine());
+			}
+		}
 		return proposition;
 
 	}
@@ -36,7 +46,7 @@ public class AI implements Player {
 
 	public String analyse() {
 		newProposition = "";
-		if (proposition.isEmpty() || result.isEmpty()) {
+		if (1==0) {
 			newProposition = "5555";
 			System.out.println("here");
 

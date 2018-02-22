@@ -18,7 +18,7 @@ public class Main {
 		
 //		AI po = new AI();
 //		
-//		System.out.println(po.toString().);
+//		System.out.println(po.toString());
 ////		
 //		String test ="malo";
 //		

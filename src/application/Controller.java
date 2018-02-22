@@ -22,6 +22,8 @@ public class Controller {
 	String wrongInput="Le code à trouver contient " + list.length() + " chiffres!";
 	String askReplay="Voulez-vous rejouer? (O / N)";
 	String result="";
+	String winner="";
+	String name="";
 
 	Controller() {
 		status = Status.GAME_MENU;
@@ -54,8 +56,9 @@ public class Controller {
 			p0.closeScanner();
 			break;
 		case WIN:
-			view.displayOutput("Félicitations, vous avez gagné!");
+			view.displayOutput("Félicitations, "+winner+" wins in "+attempt+" attempts!");
 			result="";
+			attempt=0;
 			playAgain();
 			break;
 		case NO_MORE_TRIES:
@@ -107,6 +110,7 @@ public class Controller {
 		switch (mode) {
 		case CHALLENGER:
 			view.displayOutput("Game: " + game.getClass().getSimpleName() + ". Mode: " + mode);
+			name="Human1";
 			play(p0);
 			break;
 		case DEFENSER:
@@ -115,14 +119,12 @@ public class Controller {
 				System.out.println("creation ai");
 				p1 = new AI();	
 				}
+			name="Computer";
 			play(p1);
 			break;
 		case DUAL:
 			view.displayOutput("Game: " + game + ". Mode: " + mode);
-			if(p2 == null){
-				p2 = new Human();	
-				}
-			play(p0, p2);
+			play(p0, 1);
 			break;
 		default:
 			output = "Invalid MODE";
@@ -148,6 +150,7 @@ public class Controller {
 				player.setResult(result);
 				if (result.equals("win")) {
 					status = Status.WIN;
+					winner=name;
 					player.setResult("");
 				} 
 				else if (result.equals("quit")) {
@@ -166,16 +169,17 @@ public class Controller {
 		} 
 		checkStatus();
 	}
-void play(Player p1, Player p2) {
-		Player player = null;
+void play(Player player, int o) {
+		
 		input="";
-		while (attempt < max_attempts && !result.equals("win") && !result.equals("quit")) {
+		while (attempt < (max_attempts*2) && !result.equals("win") && !result.equals("quit")) {
 			
-			if(player == null){
-				player =p1;
+			if(name.equals("")){
+				name="Human1";
 			}
+			
 			view.displayOutput(rules);
-			view.displayOutput(p1+" playing");
+			view.displayOutput(name+" playing");
 			String input = player.input();
 			if (input.isEmpty()) {
 				view.displayError(nothing);
@@ -188,6 +192,7 @@ void play(Player p1, Player p2) {
 				player.setResult(result);
 				if (result.equals("win")) {
 					status = Status.WIN;
+					winner=name;
 					player.setResult("");
 				} 
 				else if (result.equals("quit")) {
@@ -197,16 +202,18 @@ void play(Player p1, Player p2) {
 				else {
 					view.displayOutput(result);
 					attempt++;
+					if(name.equals("Human1")){
+						name="Human2";
+					}else{
+						name="Human1";
+					}
 				}
-			}
-			if(player == p1){
-				player =p2;
-			}else{
-				player=p1;
+				
 			}
 			
+			
 		}
-		if (attempt == max_attempts) {
+		if (attempt == (max_attempts*2)) {
 			status = Status.NO_MORE_TRIES;
 			player.setResult("");
 		} 
