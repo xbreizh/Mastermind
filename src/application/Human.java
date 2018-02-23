@@ -4,25 +4,24 @@ import java.util.Scanner;
 
 public class Human implements Player {
 	private Scanner sc;
-	
-	
-	Human(){
-//		openScanner();
+
+	Human() {
+		
 	}
 
 	@Override
 	public String input() {
-		String input= sc.nextLine();
-		
+		String input = sc.nextLine();
+
 		return input;
 
 	}
-	
-	public void openScanner(){
-		sc= new Scanner(System.in);
+
+	public void openScanner() {
+		sc = new Scanner(System.in);
 	}
-	
-	public void closeScanner(){
+
+	public void closeScanner() {
 		sc.close();
 		System.out.println("scanner closed");
 	}

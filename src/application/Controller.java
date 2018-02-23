@@ -116,13 +116,12 @@ public class Controller {
 		switch (mode) {
 		case CHALLENGER:
 			view.displayOutput("Game: " + game.getClass().getSimpleName() + ". Mode: " + mode);
-			name = "Human1";
+			name = "Joueur 1";
 			play(p0);
 			break;
 		case DEFENSER:
 			view.displayOutput("Game: " + game + ". Mode: " + mode);
 			if (p1 == null) {
-				System.out.println("creation ai");
 				p1 = new AI();
 			}
 			name = "Computer";
@@ -133,7 +132,7 @@ public class Controller {
 			play(p0, 1);
 			break;
 		default:
-			output = "Invalid MODE";
+			view.displayError("Invalid MODE");
 			break;
 		}
 
@@ -162,8 +161,9 @@ public class Controller {
 					player.setResult("");
 				} else {
 					view.displayOutput(result);
-					attempt++;
+
 				}
+				attempt++;
 			}
 		}
 		if (attempt == max_attempts) {
@@ -179,8 +179,8 @@ public class Controller {
 		input = "";
 		while (attempt < (max_attempts * 2) && !result.equals("win") && !result.equals("quit")) {
 
-			if (name.equals("")) {
-				name = "Human1";
+			if (name.equals("") || name.equals("Computer")) {
+				name = "Joueur 1";
 			}
 
 			view.displayOutput(rules);
@@ -203,10 +203,10 @@ public class Controller {
 				} else {
 					view.displayOutput(result);
 					attempt++;
-					if (name.equals("Human1")) {
-						name = "Human2";
+					if (name.equals("Joueur 1")) {
+						name = "Joueur 2";
 					} else {
-						name = "Human1";
+						name = "Joueur 1";
 					}
 				}
 
