@@ -16,11 +16,10 @@ public class AI implements Player {
 	AI() {
 
 	}
-
+	// Selects the logic according to the input received and uses the right analysis
 	@Override
 	public String input() {
 
-		// String pl = sc.nextLine();
 		if (proposition.isEmpty() || result.isEmpty()) {
 			proposition = "5555";
 			System.out.println("here");
@@ -28,29 +27,18 @@ public class AI implements Player {
 		} else{
 			if(result.contains("+")||result.contains("-")||result.contains("=")){
 				System.out.println("Result is: "+result);
-				proposition = analyse();
+				proposition = analyseMoreLess();
 			}else{
-				System.out.println(sc.nextLine());
+				proposition = analyseMasterMind();
 			}
 		}
 		return proposition;
 
 	}
 	
-//	public String input() {
-//		String input= sc.nextLine();
-//		System.out.println("input length: "+input.length());
-//		return input;
-//
-//	}
-
-	public String analyse() {
+	// Analysis for MoreLess
+	public String analyseMoreLess() {
 		newProposition = "";
-		if (1==0) {
-			newProposition = "5555";
-			System.out.println("here");
-
-		} else {
 			for (int i = 0; i < proposition.length(); i++) {
 				int a = Character.getNumericValue(proposition.charAt(i));
 				if (result.substring(i, i + 1).equals("=")) {
@@ -66,9 +54,15 @@ public class AI implements Player {
 				}
 			}
 
-			System.out.println(newProposition);
-		}
 		return newProposition;
+
+	}
+	// Analysis for MasterMind
+	public String analyseMasterMind() {
+		
+			
+
+		return newProposition="0000";
 
 	}
 

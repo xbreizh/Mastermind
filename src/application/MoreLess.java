@@ -3,7 +3,7 @@ package application;
 public class MoreLess extends Game {
 	
 	
-	String list="9999";
+	
 
 	public MoreLess() {
 		super();
@@ -45,7 +45,6 @@ public class MoreLess extends Game {
 		} else {
 			return output="win";
 		}
-//		output="Proposition : "+check+" -> Réponse : "+result;
 		output=result;
 		return output;
 	}

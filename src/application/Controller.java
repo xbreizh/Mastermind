@@ -2,29 +2,31 @@ package application;
 
 public class Controller {
 
+	static int max_attempts = Configuration.getMax_attempts();
+	static String list = Configuration.getList();
+	static boolean developerMode = Configuration.isDeveloperMode();
+	static String rules = Configuration.getRules();
+	static String nothing = Configuration.getNothing();
+	static String wrongInput = Configuration.getWrongInput();
+	static String askReplay = Configuration.getAskReplay();
+	static String end = Configuration.getEnd();
 	Status status;
 	public Human p0;
 	Player p1;
 	Player p2;
 	Game game;
 	Mode mode;
-	String error;
+	String error = "";
 	String input = "";
 	String output = "";
 	View view;
 	int attempt = 0;
-	int max_attempts = 5;
-	String list = "1234";
-	boolean developerMode = false;
-	String rules = "Trouver la combinaison de " + list.length() + " chiffres en maximum " + max_attempts + " essais!\n"
-			+ "(taper Q pour quitter)";
-	String nothing="Vous n'avez rien écrit!";
-	String wrongInput="Le code à trouver contient " + list.length() + " chiffres!";
-	String askReplay="Voulez-vous rejouer? (O / N)";
-	String result="";
-	String winner="";
-	String name="";
 
+	String result = "";
+	String winner = "";
+	String name = "";
+
+	// Initiates the controller
 	Controller() {
 		status = Status.GAME_MENU;
 
@@ -35,6 +37,7 @@ public class Controller {
 
 	}
 
+	// Checks the status and assigns accordingly
 	void checkStatus() {
 		switch (status) {
 		case GAME_MENU:
@@ -44,11 +47,11 @@ public class Controller {
 			checkMode();
 			break;
 		case PLAY_MENU:
-			result="";
+			result = "";
 			checkPlay();
 			break;
 		case EXIT:
-			view.displayOutput("Jeu terminé!");
+			view.displayOutput(end);
 			playAgain();
 			break;
 		case QUIT:
@@ -56,19 +59,20 @@ public class Controller {
 			p0.closeScanner();
 			break;
 		case WIN:
-			view.displayOutput("Félicitations, "+winner+" wins in "+attempt+" attempts!");
-			result="";
-			attempt=0;
+			view.displayOutput("Félicitations, " + winner + " wins in " + attempt + " attempts!");
+			result = "";
+			attempt = 0;
 			playAgain();
 			break;
 		case NO_MORE_TRIES:
 			view.displayOutput("Perdu! Vous n'avez plus d'essais.");
-			result="";
+			result = "";
 			playAgain();
 			break;
 		}
 	}
 
+	// Asks to chose a Game
 	void checkGame() {
 		String str;
 		do {
@@ -86,6 +90,7 @@ public class Controller {
 
 	}
 
+	// Asks to chose a Mode
 	void checkMode() {
 		String str;
 		do {
@@ -106,20 +111,21 @@ public class Controller {
 
 	}
 
+	// Initiates the game
 	void checkPlay() {
 		switch (mode) {
 		case CHALLENGER:
 			view.displayOutput("Game: " + game.getClass().getSimpleName() + ". Mode: " + mode);
-			name="Human1";
+			name = "Human1";
 			play(p0);
 			break;
 		case DEFENSER:
 			view.displayOutput("Game: " + game + ". Mode: " + mode);
-			if(p1 == null){
+			if (p1 == null) {
 				System.out.println("creation ai");
-				p1 = new AI();	
-				}
-			name="Computer";
+				p1 = new AI();
+			}
+			name = "Computer";
 			play(p1);
 			break;
 		case DUAL:
@@ -133,31 +139,28 @@ public class Controller {
 
 	}
 
+	// Core of the game (single)
 	void play(Player player) {
-		
-		input="";
+
+		input = "";
 		while (attempt < max_attempts && !result.equals("win") && !result.equals("quit")) {
 			view.displayOutput(rules);
 			String input = player.input();
 			if (input.isEmpty()) {
 				view.displayError(nothing);
-			} 
-			else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
+			} else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
 				view.displayError(wrongInput);
-			} 
-			else {
+			} else {
 				result = game.checkResult(input);
 				player.setResult(result);
 				if (result.equals("win")) {
 					status = Status.WIN;
-					winner=name;
+					winner = name;
 					player.setResult("");
-				} 
-				else if (result.equals("quit")) {
+				} else if (result.equals("quit")) {
 					status = Status.EXIT;
 					player.setResult("");
-				} 
-				else {
+				} else {
 					view.displayOutput(result);
 					attempt++;
 				}
@@ -166,193 +169,72 @@ public class Controller {
 		if (attempt == max_attempts) {
 			status = Status.NO_MORE_TRIES;
 			player.setResult("");
-		} 
+		}
 		checkStatus();
 	}
-void play(Player player, int o) {
-		
-		input="";
-		while (attempt < (max_attempts*2) && !result.equals("win") && !result.equals("quit")) {
-			
-			if(name.equals("")){
-				name="Human1";
+
+	// Core of the game (dual)
+	void play(Player player, int o) {
+
+		input = "";
+		while (attempt < (max_attempts * 2) && !result.equals("win") && !result.equals("quit")) {
+
+			if (name.equals("")) {
+				name = "Human1";
 			}
-			
+
 			view.displayOutput(rules);
-			view.displayOutput(name+" playing");
+			view.displayOutput(name + " playing");
 			String input = player.input();
 			if (input.isEmpty()) {
 				view.displayError(nothing);
-			} 
-			else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
+			} else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
 				view.displayError(wrongInput);
-			} 
-			else {
+			} else {
 				result = game.checkResult(input);
 				player.setResult(result);
 				if (result.equals("win")) {
 					status = Status.WIN;
-					winner=name;
+					winner = name;
 					player.setResult("");
-				} 
-				else if (result.equals("quit")) {
+				} else if (result.equals("quit")) {
 					status = Status.EXIT;
 					player.setResult("");
-				} 
-				else {
+				} else {
 					view.displayOutput(result);
 					attempt++;
-					if(name.equals("Human1")){
-						name="Human2";
-					}else{
-						name="Human1";
+					if (name.equals("Human1")) {
+						name = "Human2";
+					} else {
+						name = "Human1";
 					}
 				}
-				
+
 			}
-			
-			
+
 		}
-		if (attempt == (max_attempts*2)) {
+		if (attempt == (max_attempts * 2)) {
 			status = Status.NO_MORE_TRIES;
 			player.setResult("");
-		} 
+		}
 		checkStatus();
 	}
 
+	// Asks the user if he wants to replay or quit
 	void playAgain() {
 		while (!input.toUpperCase().equals("O") && !input.toUpperCase().equals("N")) {
 			view.displayOutput(askReplay);
 			input = p0.input();
 		}
 		if (input.toUpperCase().equals("O")) {
-			attempt=0;
+			attempt = 0;
 			status = Status.GAME_MENU;
-		} if (input.toUpperCase().equals("N")) {
-			attempt=0;
+		}
+		if (input.toUpperCase().equals("N")) {
+			attempt = 0;
 			status = Status.QUIT;
 		}
 		checkStatus();
 	}
-	//
-	// boolean checkInput(String input){
-	// if(input.isEmpty())
-	//
-	// return false;
-	//
-	// }
-
-	// Scanner sc;
-	// protected Status status = Status.SELECTGAME;
-	// String input = "";
-	// String error="";
-	// String[] toCheck;
-	// String output = "";
-	// String inputToTest="";
-	// String nothing="vous n'avez rien écrit";
-	// String wrongInput="entrée invalide: ";
-	// Menu menu;
-	//
-	//
-	//
-	// public void setMenu(Menu menu) {
-	// this.menu = menu;
-	// }
-	//
-	//
-	// public Controller() {
-	// sc=Input.openScanner();
-	// }
-	//
-	//
-	// public void CheckStatus(){
-	// if(status == Status.QUIT){
-	// Input.closeScanner();
-	// }
-	// if(status == Status.SELECTGAME){
-	// getInput();
-	// }
-	// if(status == Status.SELECTMODE){
-	// getInput();
-	// }
-	// }
-	//
-	// public void getInput(){
-	// inputToTest =sc.nextLine();
-	// checkInput(inputToTest);
-	// }
-	//
-	// public void checkInput(String inputToTest){
-	// if(!CheckInput.checkNotNull(inputToTest)){
-	// sendView(output);
-	// sendError(nothing);
-	// getInput();
-	// }else{
-	// if(!CheckInput.checkValidString(inputToTest, toCheck)){
-	// sendView(output);
-	// sendError(wrongInput+inputToTest);
-	// getInput();
-	// }else{
-	// setInput(inputToTest);
-	// sendInputModel();
-	// }
-	//
-	// }
-	// }
-	//
-	// public void sendInputModel(){
-	// if(status == Status.SELECTGAME){
-	// menu.checkGame(input);
-	// }
-	// else if(status == Status.SELECTMODE){
-	// menu.checkMode(input);
-	// }
-	// else if(status == Status.QUIT){
-	// }
-	//
-	// }
-	//
-	//
-	// // sends the message to display
-	// public void sendView(String output) {
-	// View.display(output);
-	//
-	// }
-	//
-	// public void setInput(String input) {
-	// this.input = input;
-	// }
-	//
-	// // sends the error to display
-	// public void sendError(String error) {
-	// View.error(error);
-	//
-	// }
-	//
-	//
-	// public void quit() {
-	// Input.closeScanner();
-	// }
-	// private void updateStatus(Status status) {
-	// this.status = status;
-	// System.out.println("new status: "+status);
-	//
-	// }
-	// private void updateToCheck(String[] toCheck) {
-	// this.toCheck = toCheck;
-	// }
-	//
-	//
-	//
-	// @Override
-	// public void update(Status status, String output, String[] toCheck) {
-	// updateStatus(status);
-	// updateToCheck(toCheck);
-	//
-	// this.output=output;
-	// sendView(output);
-	// CheckStatus();
-	// }
-	//
 
 }

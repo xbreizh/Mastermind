@@ -15,7 +15,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		new Controller();
-		
+//		Configuration.getConfiguration().shout();
 //		AI po = new AI();
 //		
 //		System.out.println(po.toString());

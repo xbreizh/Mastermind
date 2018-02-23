@@ -4,6 +4,8 @@ abstract class Game{
 	
 	String output;
 	
+	protected String list=Configuration.getList();
+	
 	Game(){
 		
 	}
