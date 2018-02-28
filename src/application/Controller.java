@@ -13,7 +13,6 @@ public class Controller {
 	Status status;
 	public Human p0;
 	Player p1;
-	Player p2;
 	Game game;
 	Mode mode;
 	String error = "";
@@ -81,6 +80,7 @@ public class Controller {
 		} while (!str.equals("1") && !str.equals("2"));
 		if (str.equals("1")) {
 			game = new MoreLess();
+			
 		}
 		if (str.equals("2")) {
 			game = new MasterMind();

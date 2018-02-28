@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-abstract class Game{
+public class Test {
+	
 	
 	public static int min = 0;
 	public static int max = 10;
@@ -19,32 +20,33 @@ abstract class Game{
 	int currentResult;
 	int[] currentToFind;
 	int nbDigits=4;
-//	int[][] result=new int[2][2];
-//	int rr=1234;
+	int[][] result=new int[2][2];
+	int rr=1234;
 	int finalResult;
 	String[] verdict=new String[nbDigits];
 	HashMap<Integer, int[]> codeMap=new HashMap<>();
-	protected String output="";
-	
-	Game(){
+	String output="";
+	Test(){
 		
 	}
 	
-	abstract String play(String input);
-	abstract String checkResult(String input);
-	abstract String getVerdict(int[] a, int[] b);
-	
-	
 void setup(){
+		
 		while(statement.equals("init")){
-			for (int i = 0; i < nbActivePlayers; i++) {
-				sendOutput("Enter your code to setup");
-				int input=askForInput();
+			for (int i = 1; i < nbActivePlayers; i++) {
+				System.out.println("Enter your code to setup");
+				int input=sc.nextInt();
 				int[] tab=intToArray(input);
 				codeMap.put(i, tab);
 				switchPlayer();
 			}	
+			
+			System.out.println("code player 1: "+Arrays.toString(codeMap.get(0)));
+			System.out.println("code player 2: "+Arrays.toString(codeMap.get(1)));
 			statement ="play";
+//			readArray();
+//			currentToFind=Arrays.toString(a)
+//			System.out.println("to find now: "+currentToFind);
 		}
 }
 	public int[] intToArray(int code){
@@ -69,20 +71,21 @@ void setup(){
 		while(statement.equals("play")){
 			
 			for (int i = 0; i < nbActivePlayers; i++) {
-				sendOutput("Player "+(i+1)+": enter 4 digits");
-				currentInput=askForInput();
+				System.out.println("Player "+(i+1)+": enter 4 digits");
+				currentInput=sc.nextInt();
 				currentInputArray=intToArray(currentInput);
-				sendOutput(getVerdict(currentToFind, currentInputArray));
+				System.out.println(currentInput);
+				System.out.println(getVerdict(currentInputArray, currentToFind));
 				if(compareArrays(currentToFind,currentInputArray ))	{
 					if(finalResult==0){
 					finalResult=i+1;
-					sendOutput("final result :"+finalResult);
+					System.out.println("final result :"+finalResult);
 					}else{
 						finalResult=3;//3 -> both players win
 					}
 				}
 				switchPlayer();
-			
+				play();			
 			}
 			if(checkFinalResult()){
 				statement="win";
@@ -94,13 +97,21 @@ void setup(){
 	}
 	
 	
+	String getVerdict(int[] a, int[] b){
+		String str="";
+		for (int i = 0; i < a.length; i++) {
+			if(a[i]==b[i]){
+				str+="=";
+			}else if(a[i]<b[i]){
+				str+="-";
+			}else if(a[i]>b[i]){
+				str+="+";
+			}
+		}
+		return str;
+	}
+
 	
-
-
-
-
-
-		
 		void play(){
 //			System.out.println("I play");
 		}
@@ -112,8 +123,6 @@ void setup(){
 			}else{
 				currentToFind = codeMap.get(0);
 			}
-		}else{
-			currentToFind =codeMap.get(0);
 		}
 	}
 		void readArray(){
@@ -121,7 +130,7 @@ void setup(){
 			for (int i = 0; i < currentToFind.length; i++) {
 				str+=currentInputArray[i];
 			}
-//			sendOutput(str);
+//			System.out.println(str);
 		}
 		boolean checkFinalResult(){
 			if(finalResult!=0){
@@ -130,19 +139,11 @@ void setup(){
 		}
 		void analyseResult(){
 			if(finalResult==3){
-				sendOutput("the two players win!");
+				System.out.println("the two players win!");
 			}else if(finalResult==1){
-				sendOutput("Player 1 wins!");
-			}else{sendOutput("Player 2 wins!");}
+				System.out.println("Player 1 wins!");
+			}else{System.out.println("Player 2 wins!");}
 			
 		}
-	int askForInput(){
-		int input= sc.nextInt();
-		return input;
-	}
-	String sendOutput(String output){
-		System.out.println(output);
-		return output;
-	}
-	
+
 }

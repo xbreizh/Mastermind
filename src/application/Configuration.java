@@ -3,7 +3,7 @@ package application;
 public class Configuration {
 	
 	private static Configuration config= null;
-	private static String  list = "1234";
+	private static String  list = "8765";
 	private final static int max_attempts=10;
 	private static boolean developerMode=false;
 	private static String rules = "Trouver la combinaison de " + list.length() + " chiffres en maximum " + max_attempts + " essais!\n"
