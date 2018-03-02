@@ -1,4 +1,4 @@
-package application;
+package view;
 
 public class View {
 	
@@ -10,11 +10,11 @@ public class View {
 	
 	
 	
-	void displayError(String error){
+	public void displayError(String error){
 		System.err.println(error);
 	}
 	
-	void displayOutput(String output){
+	public void displayOutput(String output){
 		System.out.println(output);
 	}
 

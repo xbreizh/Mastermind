@@ -1,4 +1,4 @@
-package application;
+package players;
 
 import java.util.Scanner;
 
@@ -13,12 +13,12 @@ public class AI implements Player {
 		return result;
 	}
 
-	AI() {
+	public AI() {
 
 	}
 	// Selects the logic according to the input received and uses the right analysis
 	@Override
-	public String input() {
+	public int input() {
 
 		if (proposition.isEmpty() || result.isEmpty()) {
 			proposition = "5555";
@@ -32,7 +32,7 @@ public class AI implements Player {
 				proposition = analyseMasterMind();
 			}
 		}
-		return proposition;
+		return Integer.parseInt(proposition);
 
 	}
 	

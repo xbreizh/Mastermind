@@ -1,24 +1,28 @@
-package application;
+package players;
 
 import java.util.Scanner;
 
 public class Human implements Player {
 	private Scanner sc;
 
-	Human() {
-		
+	public Human() {
+		openScanner();
 	}
 
 	@Override
-	public String input() {
-		String input = sc.nextLine();
+	public int input() {
+		int input = sc.nextInt();
 
 		return input;
 
 	}
 
-	public void openScanner() {
-		sc = new Scanner(System.in);
+	public Scanner openScanner() {
+		if(sc==null){
+		return sc = new Scanner(System.in);}
+		else{
+			return sc;
+		}
 	}
 
 	public void closeScanner() {

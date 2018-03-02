@@ -21,15 +21,15 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		 new Controller();
+//		 new Controller();
 		 
 //		Games[] re =Games.values();
 //System.out.println(re[0]);
 		
 //		System.out.println(new Menu().checkGame());
-//		Game t1 = new MoreLess();
-//		t1.setup();
-//		t1.play();
+		Game t1 = new MoreLess();
+		t1.setup();
+		t1.play();
 		//
 		//
 		// int result=1234;

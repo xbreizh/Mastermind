@@ -93,14 +93,7 @@ void setup(){
 		}
 	}
 	
-	
-	
 
-
-
-
-
-		
 		void play(){
 //			System.out.println("I play");
 		}

@@ -1,4 +1,13 @@
-package application;
+package controller;
+
+import javax.swing.text.View;
+
+import game.Configuration;
+import game.MasterMind;
+import game.MoreLess;
+import players.AI;
+import players.Human;
+import players.Player;
 
 public class Controller {
 

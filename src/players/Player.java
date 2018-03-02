@@ -1,10 +1,10 @@
-package application;
+package players;
 
 public interface Player {
 	
 	public void setResult(String result);
 	
-	public String input();
+	public int input();
 	
 	String getResult();
 

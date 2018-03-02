@@ -1,15 +1,11 @@
-package application;
+package game;
 
 public class MasterMind extends Game {
 
-	@Override
-	String play(String input) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	protected String checkResult(String check) {
+
+//	@Override
+//	public String checkResult(String check) {
 
 //		String result = "";
 //		String output = "";
@@ -39,11 +35,16 @@ public class MasterMind extends Game {
 //		}
 //		result = "" + found + fine + "";
 //		output = "Proposition : " + check + " -> Réponse : " + found + " trouvés, " + fine + " bien placés";
-		return output;
+//		return output;
+//	}
+
+	MasterMind(int nbActivePlayers) {
+		super(nbActivePlayers);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	String getVerdict(int[] a, int[] b) {
+	String getResult(int[] a, int[] b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
