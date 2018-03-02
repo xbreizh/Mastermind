@@ -3,11 +3,13 @@ package application;
 import controller.Controller;
 import controller.Mode;
 import controller.Status;
+import game.Game;
 import game.Games;
 
 
 public class Menu {
 	Controller ct;
+	Game[] gameArray=new Game[Games.values().length];
 	public Menu(){
 		
 	}
@@ -56,5 +58,8 @@ public class Menu {
 		this.ct = ct;
 	}
 
+	public Game initGame(Games game){
+		if()
+	}
 
 }
