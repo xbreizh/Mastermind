@@ -1,21 +1,12 @@
 package view;
 
 public class View {
-	
-	
-	
-	public View(){
-		
-	}
-	
-	
-	
-	public void displayError(String error){
-		System.err.println(error);
-	}
-	
-	public void displayOutput(String output){
-		System.out.println(output);
-	}
 
+	
+	public void displayOutput(String str){
+		System.out.println(str);
+	}
+	public void displayError(String str){
+		System.err.println(str);
+	}
 }

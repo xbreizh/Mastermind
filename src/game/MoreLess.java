@@ -1,24 +1,19 @@
-package application;
+package game;
 
-public class MoreLess extends Game {
-	
-	
-	
 
-	public MoreLess() {
-		super();
-		System.out.println("moreless created");
+import player.Player;
 
+public class MoreLess extends Game{
+
+	public MoreLess(Player p1, Player p2) {
+		super(p1, p2);
+		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	String play(String input) {
-		
-//		output="well played!";
-//		
-		return output;
-	}
-	String getVerdict(int[] a, int[] b){
+	
+	
+	public void getVerdict(int n1, int n2){
+		int[] a=intToArray(n1);
+		int[] b=intToArray(n2);
 		String str="";
 		for (int i = 0; i < a.length; i++) {
 			if(a[i]==b[i]){
@@ -29,44 +24,10 @@ public class MoreLess extends Game {
 				str+="+";
 			}
 		}
-		return str;
+		answerToGive=str;
 	}
 
-	@Override
-	String checkResult(String input) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	
-///*	protected String checkResult(String check) {
-//		
-//		String result = "";
-//		String output="";
-//		if(check.toUpperCase().equals("Q")){
-//			return output="quit";
-//		}
-//		if (!check.equals(list)) {
-//
-//			for (int i = 0; i < list.length(); i++) {
-//				int a = Character.getNumericValue(check.charAt(i));
-//				int b = Character.getNumericValue(list.charAt(i));
-//				if (a < b) {
-//					result += ("+");
-//				}
-//				if (a > b) {
-//					result += ("-");
-//				}
-//				if (a == b) {
-//					result += ("=");
-//				}
-//			}
-//		} else {
-//			return output="win";
-//		}
-//		output=result;
-//		return output;
-//	}*/
 
-	
+
 }

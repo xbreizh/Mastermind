@@ -1,249 +1,177 @@
 package controller;
 
-import javax.swing.text.View;
-
-import game.Configuration;
-import game.MasterMind;
-import game.MoreLess;
-import players.AI;
-import players.Human;
-import players.Player;
+import game.Game;
+import game.GameFactory;
+import game.GamesList;
+import game.Status_Game;
+import menu.Status_Menu;
+import player.AI;
+import player.Human;
+import player.Player;
+import view.View;
 
 public class Controller {
-
-	static int max_attempts = Configuration.getMax_attempts();
-	static String list = Configuration.getList();
-	static boolean developerMode = Configuration.isDeveloperMode();
-	static String rules = Configuration.getRules();
-	static String nothing = Configuration.getNothing();
-	static String wrongInput = Configuration.getWrongInput();
-	static String askReplay = Configuration.getAskReplay();
-	static String end = Configuration.getEnd();
-	Status status;
-	public Human p0;
+	Player p0;
 	Player p1;
-	Game game;
-	Mode mode;
-	String error = "";
-	String input = "";
-	String output = "";
+	Player p2;
 	View view;
-	int attempt = 0;
+	Status_Menu stMenu;
+	Status_Game stGame;
+	GamesList gameType;
+	Game game;
+	Game[] gameArray;
+	int dual=0;
 
-	String result = "";
-	String winner = "";
-	String name = "";
-
-	// Initiates the controller
-	Controller() {
-		status = Status.GAME_MENU;
-
-		p0 = new Human();
-		p0.openScanner();
+	public Controller() {
 		view = new View();
-		checkStatus();
+		setP0(new Human());
+		GameFactory gf = new GameFactory();
+		stMenu = Status_Menu.MENU_GAME;
+		checkStatusMenu();
+	}
+
+	public Player getP0() {
+		return p0;
+	}
+
+	public void setP0(Player p0) {
+		this.p0 = p0;
+	}
+
+	public void checkStatusMenu() {
+		switch (stMenu) {
+		case MENU_GAME:
+			view.displayOutput(stMenu.getOutput());
+			p0.input();
+			gameType=GamesList.values()[Integer.parseInt(p0.getInput())-1];
+			stMenu = Status_Menu.MENU_MODE;
+			checkStatusMenu();
+			break;
+		case MENU_MODE:
+			view.displayOutput(stMenu.getOutput());
+			p0.input();
+			if (p0.getInput().equals("1")) {
+				p1 = new AI();
+				p2 = new Human();
+				gameArray=new Game[1];
+				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
+			}
+			if (p0.getInput().equals("2")) {
+				p1 = new Human();
+				p2 = new AI();
+				gameArray=new Game[1];
+				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
+			}
+			if (p0.getInput().equals("3")) {
+				p1 = new Human();
+				p2 = new Human();
+				gameArray=new Game[2];
+				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
+				gameArray[1]=GameFactory.createGame(gameType, p2, p1);
+				dual=2;
+			}
+			for (int i = 0; i < gameArray.length; i++) {
+				game=gameArray[i];
+				setStGame(Status_Game.SETUP);
+				game.setStatus(Status_Game.SETUP);
+				checkStatusGame();
+				dual--;
+			}
+		}
 
 	}
 
-	// Checks the status and assigns accordingly
-	void checkStatus() {
-		switch (status) {
-		case GAME_MENU:
-			checkGame();
+	public void checkStatusGame() {
+		stGame = game.getStatus();
+		switch (stGame) {
+		case SETUP:
+			view.displayOutput(stGame.getOutput());
+			p1.input();
+			p1.setCodeToFind(p1.getInput());
+			game.setInput(p1.getCodeToFind());
+			game.validSetup();
+			checkError();
+			checkStatusGame();
 			break;
-		case MODE_MENU:
-			checkMode();
+		case PLAY:
+			view.displayOutput(stGame.getOutput());
+			p2.tryToGuess();
+			game.setInput(p2.getInput());
+			p1.setInput(p2.getInput());
+			view.displayOutput(p2.getInput());
+			game.validInput();
+			checkError();
+			checkStatusGame();
 			break;
-		case PLAY_MENU:
-			result = "";
-			checkPlay();
+		case ANSWER:
+			view.displayOutput(stGame.getOutput());
+			p1.replyToGuess();
+			game.setAnswer(p1.getInput());
+			game.validAnswer();
+			p2.setAnswer(game.getAnswerToGive());
+			checkError();
+			checkStatusGame();
 			break;
 		case EXIT:
-			view.displayOutput(end);
-			playAgain();
-			break;
-		case QUIT:
-			view.displayOutput("Merci d'avoir joué avec nous!");
-			p0.closeScanner();
-			break;
-		case WIN:
-			view.displayOutput("Félicitations, " + winner + " wins in " + attempt + " attempts!");
-			result = "";
-			attempt = 0;
-			playAgain();
+			if(dual!=2){
+				view.displayOutput(stGame.getOutput());
+				p0.input();
+				if (p0.getInput().toLowerCase().equals("y")) {
+					stMenu = Status_Menu.MENU_GAME;
+					checkStatusMenu();
+				}
+				if (p0.getInput().toLowerCase().equals("n")) {
+					game.setStatus(stGame.END);
+					checkStatusGame();
+				}
+			}else{
+				view.displayOutput("Game "+(dual-1)+" over!");
+				game.setStatus(stGame.SETUP);
+				checkStatusGame();
+			}
+			
 			break;
 		case NO_MORE_TRIES:
-			view.displayOutput("Perdu! Vous n'avez plus d'essais.");
-			result = "";
-			playAgain();
+			view.displayOutput(stGame.getOutput());
+			game.reset();
+			game.setStatus(stGame.EXIT);
+			checkStatusGame();
 			break;
-		}
-	}
-
-	// Asks to chose a Game
-	void checkGame() {
-		String str;
-		do {
-			view.displayOutput("Chose a game: \n 1-MoreLess\n 2-Mastermind");
-			str = p0.input();
-		} while (!str.equals("1") && !str.equals("2"));
-		if (str.equals("1")) {
-			game = new MoreLess();
-			
-		}
-		if (str.equals("2")) {
-			game = new MasterMind();
-		}
-		status = Status.MODE_MENU;
-		checkStatus();
-
-	}
-
-	// Asks to chose a Mode
-	void checkMode() {
-		String str;
-		do {
-			view.displayOutput("Chose a mode: \n 1-Challenger\n 2-Defenser\n 3-Dual");
-			str = p0.input();
-		} while (!str.equals("1") && !str.equals("2") && !str.equals("3"));
-		if (str.equals("1")) {
-			mode = Mode.CHALLENGER;
-		}
-		if (str.equals("2")) {
-			mode = Mode.DEFENSER;
-		}
-		if (str.equals("3")) {
-			mode = Mode.DUAL;
-		}
-		status = Status.PLAY_MENU;
-		checkStatus();
-
-	}
-
-	// Initiates the game
-	void checkPlay() {
-		switch (mode) {
-		case CHALLENGER:
-			view.displayOutput("Game: " + game.getClass().getSimpleName() + ". Mode: " + mode);
-			name = "Joueur 1";
-			play(p0);
+		case WIN:
+			view.displayOutput(game.gameResult(p2, p1));
+			game.reset();
+			game.setStatus(stGame.EXIT);
+			checkStatusGame();
 			break;
-		case DEFENSER:
-			view.displayOutput("Game: " + game + ". Mode: " + mode);
-			if (p1 == null) {
-				p1 = new AI();
-			}
-			name = "Computer";
-			play(p1);
-			break;
-		case DUAL:
-			view.displayOutput("Game: " + game + ". Mode: " + mode);
-			play(p0, 1);
+		case END:
+			view.displayOutput(stGame.getOutput());
 			break;
 		default:
-			view.displayError("Invalid MODE");
 			break;
 		}
-
 	}
 
-	// Core of the game (single)
-	void play(Player player) {
-
-		input = "";
-		while (attempt < max_attempts && !result.equals("win") && !result.equals("quit")) {
-			view.displayOutput(rules);
-			String input = player.input();
-			if (input.isEmpty()) {
-				view.displayError(nothing);
-			} else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
-				view.displayError(wrongInput);
-			} else {
-				result = game.checkResult(input);
-				player.setResult(result);
-				if (result.equals("win")) {
-					status = Status.WIN;
-					winner = name;
-					player.setResult("");
-				} else if (result.equals("quit")) {
-					status = Status.EXIT;
-					player.setResult("");
-				} else {
-					view.displayOutput(result);
-
-				}
-				attempt++;
-			}
-		}
-		if (attempt == max_attempts) {
-			status = Status.NO_MORE_TRIES;
-			player.setResult("");
-		}
-		checkStatus();
+	public Status_Menu getStMenu() {
+		return stMenu;
 	}
 
-	// Core of the game (dual)
-	void play(Player player, int o) {
-
-		input = "";
-		while (attempt < (max_attempts * 2) && !result.equals("win") && !result.equals("quit")) {
-
-			if (name.equals("") || name.equals("Computer")) {
-				name = "Joueur 1";
-			}
-
-			view.displayOutput(rules);
-			view.displayOutput(name + " playing");
-			String input = player.input();
-			if (input.isEmpty()) {
-				view.displayError(nothing);
-			} else if (!input.toUpperCase().equals("Q") && input.length() != list.length()) {
-				view.displayError(wrongInput);
-			} else {
-				result = game.checkResult(input);
-				player.setResult(result);
-				if (result.equals("win")) {
-					status = Status.WIN;
-					winner = name;
-					player.setResult("");
-				} else if (result.equals("quit")) {
-					status = Status.EXIT;
-					player.setResult("");
-				} else {
-					view.displayOutput(result);
-					attempt++;
-					if (name.equals("Joueur 1")) {
-						name = "Joueur 2";
-					} else {
-						name = "Joueur 1";
-					}
-				}
-
-			}
-
-		}
-		if (attempt == (max_attempts * 2)) {
-			status = Status.NO_MORE_TRIES;
-			player.setResult("");
-		}
-		checkStatus();
+	public void setStMenu(Status_Menu stMenu) {
+		this.stMenu = stMenu;
 	}
 
-	// Asks the user if he wants to replay or quit
-	void playAgain() {
-		while (!input.toUpperCase().equals("O") && !input.toUpperCase().equals("N")) {
-			view.displayOutput(askReplay);
-			input = p0.input();
+	public Status_Game getStGame() {
+		return stGame;
+	}
+
+	public void setStGame(Status_Game stGame) {
+		this.stGame = stGame;
+	}
+
+	public void checkError() {
+		String error = game.getError();
+		if (!error.equals("")) {
+			view.displayError(error);
 		}
-		if (input.toUpperCase().equals("O")) {
-			attempt = 0;
-			status = Status.GAME_MENU;
-		}
-		if (input.toUpperCase().equals("N")) {
-			attempt = 0;
-			status = Status.QUIT;
-		}
-		checkStatus();
 	}
 
 }

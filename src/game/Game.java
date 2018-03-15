@@ -1,141 +1,174 @@
-package application;
+package game;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import player.Player;
 
-abstract class Game{
+public abstract class Game {
+	Player p1;
+	Player p2;
+	protected Status_Game status;
+	int secretCode;
+	int[] secretCodeArray;
+	int attempts = 0;
+	Configuration conf = Configuration.getConfiguration();
+	int max_attempts = conf.getMax_attempts();
+	String error = "";
+	String input = "";
+	String answerToGive = "";
+
 	
-	public static int min = 0;
-	public static int max = 10;
-	String statement ="init";
-	Scanner sc= new Scanner(System.in);
-	int nbActivePlayers= 1;
-	int codePlayer0;
-	int codePlayer1;
-	String currentPlayer="Player 0";
-	int currentInput;
-	int[]currentInputArray;
-	int currentResult;
-	int[] currentToFind;
-	int nbDigits=4;
-//	int[][] result=new int[2][2];
-//	int rr=1234;
-	int finalResult;
-	String[] verdict=new String[nbDigits];
-	HashMap<Integer, int[]> codeMap=new HashMap<>();
-	protected String output="";
-	
-	Game(){
-		
+
+	String answer = "";
+
+	// Constructor
+	public Game(Player p1, Player p2) {
+
+		conf.getConfiguration();
+		this.p1 = p1;
+		this.p2 = p2;
 	}
-	
-	abstract String play(String input);
-	abstract String checkResult(String input);
-	abstract String getVerdict(int[] a, int[] b);
-	
-	
-void setup(){
-		while(statement.equals("init")){
-			for (int i = 0; i < nbActivePlayers; i++) {
-				sendOutput("Enter your code to setup");
-				int input=askForInput();
-				int[] tab=intToArray(input);
-				codeMap.put(i, tab);
-				switchPlayer();
-			}	
-			statement ="play";
+
+	// abstracts methods
+	abstract void getVerdict(int a, int b);
+
+	public void validSetup() {
+		if (input.length() == 0) {
+			setError("You haven't typed anything");
+		} else {
+			int i = Integer.parseInt(input);
+			if (i < 1000 || i >= 10000) {
+				setError("The code should contain " + conf.getNbDigits() + " digits");
+			} else {
+				setSecretCode(i);
+				secretCodeArray = intToArray(secretCode); // converts secretCode
+															// into array
+				setStatus(Status_Game.PLAY);
+				setError("");
+			}
+			System.out.println(secretCode);
 		}
-}
-	public int[] intToArray(int code){
-		int[] tab= new int[nbDigits];
-		int s=nbDigits-1;
+	}
+
+	public void validInput() {
+		if (input.length() == 0) {
+			setError("You haven't typed anything");
+		} else {
+			int i = Integer.parseInt(input);
+			if (i < 1000 || i >= 10000) {
+				setError("The code should contain " + conf.getNbDigits() + " digits");
+			} else {
+				setStatus(Status_Game.ANSWER);
+				setError("");
+			}
+		}
+
+	}
+
+	public void validAnswer() {
+		System.out.println("answer: " + answer);
+		getVerdict(secretCode, Integer.parseInt(input));
+		if (!answerToGive.equals(answer)) {
+			setError("Wrong answer!, should be " + answerToGive);
+		} else {
+			setError("");
+			if (Integer.parseInt(input) == (secretCode)) {
+				setStatus(Status_Game.WIN);
+			} else {
+				setStatus(Status_Game.PLAY);
+			}
+		}
+	}
+
+	public int[] intToArray(int code) {
+		int[] tab = new int[conf.getNbDigits()];
+		int s = conf.getNbDigits() - 1;
 		while (code > 0) {
-		    int b=code % 10;
-		    tab[s]=b;
-		    code = code / 10;
-		    s--;
+			int b = code % 10;
+			tab[s] = b;
+			code = code / 10;
+			s--;
 		}
 		return tab;
 	}
-	boolean compareArrays(int[] a,int[]b){
-		if(Arrays.equals(a,b)){
-			return true;
-		}else{
-			return false;
+
+	public void check(String str) {
+		attempts++;
+		System.out.println("attempts: " + attempts);
+		if (Integer.parseInt(str) == (getSecretCode())) {
+			status = Status_Game.WIN;
+		} else {
+			checkAttempts();
 		}
+
 	}
-	void playing(){
-		while(statement.equals("play")){
-			
-			for (int i = 0; i < nbActivePlayers; i++) {
-				sendOutput("Player "+(i+1)+": enter 4 digits");
-				currentInput=askForInput();
-				currentInputArray=intToArray(currentInput);
-				sendOutput(getVerdict(currentToFind, currentInputArray));
-				if(compareArrays(currentToFind,currentInputArray ))	{
-					if(finalResult==0){
-					finalResult=i+1;
-					sendOutput("final result :"+finalResult);
-					}else{
-						finalResult=3;//3 -> both players win
-					}
-				}
-				switchPlayer();
-			
-			}
-			if(checkFinalResult()){
-				statement="win";
-				analyseResult();}
-			else{
-			readArray();
-			}
+
+	public void checkAttempts() {
+		if (attempts == max_attempts) {
+			status = Status_Game.NO_MORE_TRIES;
 		}
 	}
 	
-
-		void play(){
-//			System.out.println("I play");
-		}
+	public String gameResult(Player winner, Player loser){
 		
-		void switchPlayer(){
-		if(nbActivePlayers>1){
-			if(currentToFind == codeMap.get(0)){
-				currentToFind = codeMap.get(1);
-			}else{
-				currentToFind = codeMap.get(0);
-			}
-		}else{
-			currentToFind =codeMap.get(0);
-		}
+		String str=winner.getClass().getSimpleName()+" wins!  "+
+		loser.getClass().getSimpleName()+" loses!";
+		return str;
 	}
-		void readArray(){
-			String str="";
-			for (int i = 0; i < currentToFind.length; i++) {
-				str+=currentInputArray[i];
-			}
-//			sendOutput(str);
-		}
-		boolean checkFinalResult(){
-			if(finalResult!=0){
-				return true;
-			}return false;
-		}
-		void analyseResult(){
-			if(finalResult==3){
-				sendOutput("the two players win!");
-			}else if(finalResult==1){
-				sendOutput("Player 1 wins!");
-			}else{sendOutput("Player 2 wins!");}
-			
-		}
-	int askForInput(){
-		int input= sc.nextInt();
+
+	// resets the game attempts
+	public void reset() {
+		this.status = status.PLAY;
+		attempts = 0;
+
+	}
+
+	// Getters and Setters
+
+	public String getAnswerToGive() {
+		return answerToGive;
+	}
+
+	public void setAnswerToGive(String answerToGive) {
+		this.answerToGive = answerToGive;
+	}
+	public void setStatus(Status_Game status) {
+		this.status = status;
+	}
+
+	public String getInput() {
 		return input;
 	}
-	String sendOutput(String output){
-		System.out.println(output);
-		return output;
+
+	public void setInput(String input) {
+		this.input = input;
 	}
-	
+
+	public String getError() {
+		return error;
+	}
+
+	public void setSecretCodeArray() {
+		intToArray(secretCode);
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	public Status_Game getStatus() {
+		return status;
+	}
+
+	public int getSecretCode() {
+		return secretCode;
+	}
+
+	public void setSecretCode(int secretCode) {
+		this.secretCode = secretCode;
+	}
+
+	public void setAnswer(String str) {
+		this.answer = str;
+
+	}
+
 }
