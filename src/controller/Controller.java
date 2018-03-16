@@ -1,9 +1,11 @@
 package controller;
 
+import game.Check;
 import game.Game;
 import game.GameFactory;
 import game.GamesList;
 import game.Status_Game;
+import menu.Menu;
 import menu.Status_Menu;
 import player.AI;
 import player.Human;
@@ -21,12 +23,16 @@ public class Controller {
 	Game game;
 	Game[] gameArray;
 	int dual=0;
+	Check ch;
+	Menu menu;
 
 	public Controller() {
 		view = new View();
 		setP0(new Human());
 		GameFactory gf = new GameFactory();
 		stMenu = Status_Menu.MENU_GAME;
+		menu=new Menu();
+		ch= new Check();
 		checkStatusMenu();
 	}
 
@@ -43,24 +49,37 @@ public class Controller {
 		case MENU_GAME:
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
+			ch.setInput(p0.getInput());
+			menu.initValidGameList();
+			if(ch.isInList(menu.getValidList())){
 			gameType=GamesList.values()[Integer.parseInt(p0.getInput())-1];
 			stMenu = Status_Menu.MENU_MODE;
+			}else{
+				view.displayError(ch.getOutput());
+			}
 			checkStatusMenu();
 			break;
 		case MENU_MODE:
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
+			ch.setInput(p0.getInput());
+			menu.initValidModeList();
+			if(ch.isInList(menu.getValidList())){
 			if (p0.getInput().equals("1")) {
 				p1 = new AI();
 				p2 = new Human();
 				gameArray=new Game[1];
 				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
+				p1.setGame(gameType);
+				p2.setGame(gameType);
 			}
 			if (p0.getInput().equals("2")) {
 				p1 = new Human();
 				p2 = new AI();
 				gameArray=new Game[1];
 				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
+				p1.setGame(gameType);
+				p2.setGame(gameType);
 			}
 			if (p0.getInput().equals("3")) {
 				p1 = new Human();
@@ -77,8 +96,13 @@ public class Controller {
 				checkStatusGame();
 				dual--;
 			}
+		
+		}else{
+			view.displayError(ch.getOutput());
 		}
-
+		
+		checkStatusMenu();
+		}
 	}
 
 	public void checkStatusGame() {
@@ -108,7 +132,8 @@ public class Controller {
 			p1.replyToGuess();
 			game.setAnswer(p1.getInput());
 			game.validAnswer();
-			p2.setAnswer(game.getAnswerToGive());
+			view.displayOutput(game.getOutput());
+			p2.setAnswer(game.getOutput());
 			checkError();
 			checkStatusGame();
 			break;

@@ -1,18 +1,15 @@
 package application;
 
+import controller.Controller;
 import game.Check;
+import menu.Menu;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-//		Controller ct = new Controller();
-		
-		Check ch = new Check();
-		
-		ch.setInput("");
-		ch.checkInteger();
-		System.err.println(ch.getOutput());
+		Controller ct = new Controller();
+	
 
 	}
 

@@ -14,6 +14,9 @@ public abstract class Game {
 	String error = "";
 	String input = "";
 	String answerToGive = "";
+	String output="";
+
+	
 
 	
 
@@ -64,7 +67,6 @@ public abstract class Game {
 	}
 
 	public void validAnswer() {
-		System.out.println("answer: " + answer);
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
@@ -169,6 +171,9 @@ public abstract class Game {
 	public void setAnswer(String str) {
 		this.answer = str;
 
+	}
+	public String getOutput() {
+		return output;
 	}
 
 }

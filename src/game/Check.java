@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Check {
 	
 	String input="";
@@ -13,12 +16,11 @@ public class Check {
 	
 	
 	
-	public void checkInteger(){
-		if(!isEmpty()){
-			if(isInteger()){
-				isInRange();
-			}
-		}
+	public boolean checkInteger(){
+		if(isEmpty())return false;
+		if(!isInteger())return false;
+//		if(!isInList)
+		return true;
 		
 	}
 	
@@ -30,7 +32,7 @@ public class Check {
 		return false;
 	}
 	
-	boolean isInteger(){
+	public boolean isInteger(){
 	        try {
 	         Integer.parseInt(this.input);
 	        } catch (NumberFormatException e) {
@@ -46,6 +48,17 @@ public class Check {
        }
        return true;
 }
+	public boolean isInList(ArrayList<Integer> list){
+		for (int j = 0; j < list.size(); j++) {
+			if(Integer.parseInt(input)==(list.get(j))){
+				return true;
+			}
+			
+		}
+		output="Invalid!";
+		return false;
+		
+	}
 	
 	
 	
