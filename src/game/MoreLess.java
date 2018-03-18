@@ -29,6 +29,7 @@ public class MoreLess extends Game{
 
 
 	public  void validAnswer() {
+		
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
@@ -40,6 +41,7 @@ public class MoreLess extends Game{
 				setStatus(Status_Game.PLAY);
 			}
 		}
+		
 	}
 
 }

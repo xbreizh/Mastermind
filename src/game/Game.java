@@ -78,6 +78,7 @@ public abstract class Game {
 				setStatus(Status_Game.PLAY);
 			}
 		}
+		checkAttempts();
 	}
 
 	public int[] intToArray(int code) {
@@ -92,18 +93,24 @@ public abstract class Game {
 		return tab;
 	}
 
-	public void check(String str) {
-		attempts++;
-		System.out.println("attempts: " + attempts);
-		if (Integer.parseInt(str) == (getSecretCode())) {
-			status = Status_Game.WIN;
-		} else {
-			checkAttempts();
-		}
-
-	}
+//	public void check(String str) {
+//		attempts++;
+//		System.out.println("attempts: " + attempts);
+//		System.out.println(max_attempts);
+//		if (Integer.parseInt(str) == (getSecretCode())) {
+//			status = Status_Game.WIN;
+//		} else {
+//			checkAttempts();
+//			System.out.println("truc");
+//			status = Status_Game.NO_MORE_TRIES;
+//		}
+//		
+//
+//	}
 
 	public void checkAttempts() {
+		attempts++;
+		System.out.println("Attempts: "+attempts+"/"+max_attempts);
 		if (attempts == max_attempts) {
 			status = Status_Game.NO_MORE_TRIES;
 		}

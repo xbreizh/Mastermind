@@ -134,6 +134,7 @@ public class Controller {
 			game.validAnswer();
 			view.displayOutput(game.getOutput());
 			p2.setAnswer(game.getOutput());
+			game.checkAttempts();
 			checkError();
 			checkStatusGame();
 			break;
@@ -158,6 +159,7 @@ public class Controller {
 			break;
 		case NO_MORE_TRIES:
 			view.displayOutput(stGame.getOutput());
+			view.displayOutput(game.gameResult(p2, p1));
 			game.reset();
 			game.setStatus(stGame.EXIT);
 			checkStatusGame();
