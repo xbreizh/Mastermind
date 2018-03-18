@@ -2,7 +2,7 @@ package game;
 
 import player.Player;
 
-public abstract class Game {
+public abstract class Game extends Check{
 	Player p1;
 	Player p2;
 	protected Status_Game status;

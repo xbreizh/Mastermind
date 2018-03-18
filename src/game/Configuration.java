@@ -5,10 +5,10 @@ public class Configuration {
 	//Singleton pattern
 	
 	private static Configuration conf;
-	private int max_attempts=5;
-	private int nbDigits=4;
+	private static int max_attempts=5;
+	private static int nbDigits=4;
 	
-	public int getNbDigits() {
+	public static int getNbDigits() {
 		return nbDigits;
 	}
 

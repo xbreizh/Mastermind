@@ -4,6 +4,7 @@ import game.Check;
 import game.Game;
 import game.GameFactory;
 import game.GamesList;
+import game.InputStatus;
 import game.Status_Game;
 import menu.Menu;
 import menu.Status_Menu;
@@ -49,9 +50,10 @@ public class Controller {
 		case MENU_GAME:
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
+			ch.setNbChar(1);
 			ch.setInput(p0.getInput());
 			menu.initValidGameList();
-			if(ch.isInList(menu.getValidList())){
+			if(ch.getCheckStatus()==InputStatus.VALID){
 			gameType=GamesList.values()[Integer.parseInt(p0.getInput())-1];
 			stMenu = Status_Menu.MENU_MODE;
 			}else{
@@ -63,8 +65,9 @@ public class Controller {
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
 			ch.setInput(p0.getInput());
+			ch.isValidInteger();
 			menu.initValidModeList();
-			if(ch.isInList(menu.getValidList())){
+			if(ch.getCheckStatus()==InputStatus.VALID){
 			if (p0.getInput().equals("1")) {
 				p1 = new AI();
 				p2 = new Human();
