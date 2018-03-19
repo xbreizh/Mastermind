@@ -1,19 +1,42 @@
-package game;
+package check;
+
+import game.Configuration;
 
 public class Check {
 
-	String input = "";
+	protected String input = "";
 	String output = "";
 	int nbChar = Configuration.getNbDigits();
-	public void setNbChar(int nbChar) {
-		this.nbChar = nbChar;
-	}
-
 	String[] symbols = { "+", "-", "=" };
 	InputStatus status = InputStatus.VALID;
+	
+
+	int test=1324;
+	protected String[] valid;
+
+	
 
 	public Check() {
 
+	}
+	
+	public boolean checkIfInArray(){
+		for (int i = 0; i < input.length(); i++) {
+			int ok=0;
+			for (int j = 0; j < symbols.length-1; j++) {
+				if(String.valueOf(input.charAt(i)).equals(valid[j])){
+					ok++;
+				}
+			}
+			if(ok==0){
+				status = InputStatus.WRONGCHARACTER;
+				output = status.getOutput();
+				return false;
+			}
+			
+		}
+		return true;
+		
 	}
 
 	public boolean checkSymbol() {
@@ -82,6 +105,15 @@ public class Check {
 	}
 
 	// Setters and Getters
+	
+	
+	public void setValid(String[] valid) {
+		this.valid = valid;
+	}
+	
+	public void setNbChar(int nbChar) {
+		this.nbChar = nbChar;
+	}
 
 	public String getOutput() {
 		return output;

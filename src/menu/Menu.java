@@ -1,34 +1,66 @@
 package menu;
 
-import java.util.ArrayList;
-
+import check.Check;
 import game.GamesList;
-import game.Status_Game;
 
-public class Menu {
+public class Menu extends Check{
+
+	String[] validList;
+	Status_Menu status;
+	GamesList game;
 	
-	ArrayList<Integer> validList=new ArrayList<>();
-	
-	public Menu(){
-		
-	}
-	
-public	void initValidGameList(){
-		
-	for (int j = 1; j <= 2; j++) {
-		validList.add(j);
-	}	
-}
-	
-public void initValidModeList(){
-		
-	for (int j = 1; j <= 3; j++) {
-		validList.add(j);
-	}
+
+	public GamesList getGame() {
+		return game;
 	}
 
-public ArrayList<Integer> getValidList() {
-	return validList;
-}
+	public Menu() {
+
+	}
+	
+	public boolean validGame(){
+		setNbChar(1);
+		initValidGameList();
+		valid=validList;
+		if(isEmpty())return false;
+		if(!isValidInteger())return false;
+		if(!hasCorrectNbDigits())return false;
+		if(!checkIfInArray())return false;
+		game=GamesList.values()[Integer.valueOf(input)-1];
+		return true;
+		
+	}
+	
+	public boolean validMode(){
+		initValidModeList();
+		valid=validList;
+		if(isEmpty())return false;
+		if(!isValidInteger())return false;
+		if(!hasCorrectNbDigits())return false;	
+		if(!checkIfInArray())return false;
+		return true;
+		
+	}
+
+	public void initValidGameList() {
+		int listLength = GamesList.values().length;
+		validList = new String[listLength];
+		for (int j = 0; j < listLength; j++) {
+			validList[j] = String.valueOf(j + 1);
+		}
+	}
+
+	public void initValidModeList() {
+
+		int listLength = ModeList.values().length;
+		validList = new String[listLength];
+		for (int j = 0; j < listLength; j++) {
+			validList[j] = String.valueOf(j + 1);
+		}
+	}
+
+	public String[] getValidList() {
+		return validList;
+	}
 
 }

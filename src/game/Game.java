@@ -1,5 +1,6 @@
 package game;
 
+import check.Check;
 import player.Player;
 
 public abstract class Game extends Check{
@@ -15,6 +16,7 @@ public abstract class Game extends Check{
 	String input = "";
 	String answerToGive = "";
 	String output="";
+	Check ch;
 
 	
 
@@ -28,6 +30,7 @@ public abstract class Game extends Check{
 		conf.getConfiguration();
 		this.p1 = p1;
 		this.p2 = p2;
+		ch=new Check();
 	}
 
 	// abstracts methods

@@ -1,10 +1,9 @@
 package controller;
 
-import game.Check;
+import check.Check;
 import game.Game;
 import game.GameFactory;
 import game.GamesList;
-import game.InputStatus;
 import game.Status_Game;
 import menu.Menu;
 import menu.Status_Menu;
@@ -23,7 +22,7 @@ public class Controller {
 	GamesList gameType;
 	Game game;
 	Game[] gameArray;
-	int dual=0;
+	int dual = 0;
 	Check ch;
 	Menu menu;
 
@@ -32,8 +31,7 @@ public class Controller {
 		setP0(new Human());
 		GameFactory gf = new GameFactory();
 		stMenu = Status_Menu.MENU_GAME;
-		menu=new Menu();
-		ch= new Check();
+		menu = new Menu();
 		checkStatusMenu();
 	}
 
@@ -50,61 +48,57 @@ public class Controller {
 		case MENU_GAME:
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
-			ch.setNbChar(1);
-			ch.setInput(p0.getInput());
-			menu.initValidGameList();
-			if(ch.getCheckStatus()==InputStatus.VALID){
-			gameType=GamesList.values()[Integer.parseInt(p0.getInput())-1];
-			stMenu = Status_Menu.MENU_MODE;
-			}else{
-				view.displayError(ch.getOutput());
+			menu.setInput(p0.getInput());
+			if (menu.validGame()) {
+				stMenu = stMenu.MENU_MODE;
+				gameType = menu.getGame();
+			} else {
+				view.displayError(menu.getOutput());
 			}
 			checkStatusMenu();
 			break;
 		case MENU_MODE:
 			view.displayOutput(stMenu.getOutput());
 			p0.input();
-			ch.setInput(p0.getInput());
-			ch.isValidInteger();
-			menu.initValidModeList();
-			if(ch.getCheckStatus()==InputStatus.VALID){
-			if (p0.getInput().equals("1")) {
-				p1 = new AI();
-				p2 = new Human();
-				gameArray=new Game[1];
-				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
-				p1.setGame(gameType);
-				p2.setGame(gameType);
+			menu.setInput(p0.getInput());
+			if (menu.validMode()) {
+				if (p0.getInput().equals("1")) {
+					p1 = new AI();
+					p2 = new Human();
+					gameArray = new Game[1];
+					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+					p1.setGame(gameType);
+					p2.setGame(gameType);
+				}
+				if (p0.getInput().equals("2")) {
+					p1 = new Human();
+					p2 = new AI();
+					gameArray = new Game[1];
+					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+					p1.setGame(gameType);
+					p2.setGame(gameType);
+				}
+				if (p0.getInput().equals("3")) {
+					p1 = new Human();
+					p2 = new Human();
+					gameArray = new Game[2];
+					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+					gameArray[1] = GameFactory.createGame(gameType, p2, p1);
+					dual = 2;
+				}
+				for (int i = 0; i < gameArray.length; i++) {
+					game = gameArray[i];
+					setStGame(Status_Game.SETUP);
+					game.setStatus(Status_Game.SETUP);
+					checkStatusGame();
+					dual--;
+				}
+
+			} else {
+				view.displayError(menu.getOutput());
 			}
-			if (p0.getInput().equals("2")) {
-				p1 = new Human();
-				p2 = new AI();
-				gameArray=new Game[1];
-				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
-				p1.setGame(gameType);
-				p2.setGame(gameType);
-			}
-			if (p0.getInput().equals("3")) {
-				p1 = new Human();
-				p2 = new Human();
-				gameArray=new Game[2];
-				gameArray[0]=GameFactory.createGame(gameType, p1, p2);
-				gameArray[1]=GameFactory.createGame(gameType, p2, p1);
-				dual=2;
-			}
-			for (int i = 0; i < gameArray.length; i++) {
-				game=gameArray[i];
-				setStGame(Status_Game.SETUP);
-				game.setStatus(Status_Game.SETUP);
-				checkStatusGame();
-				dual--;
-			}
-		
-		}else{
-			view.displayError(ch.getOutput());
-		}
-		
-		checkStatusMenu();
+
+			checkStatusMenu();
 		}
 	}
 
@@ -142,7 +136,7 @@ public class Controller {
 			checkStatusGame();
 			break;
 		case EXIT:
-			if(dual!=2){
+			if (dual != 2) {
 				view.displayOutput(stGame.getOutput());
 				p0.input();
 				if (p0.getInput().toLowerCase().equals("y")) {
@@ -153,12 +147,12 @@ public class Controller {
 					game.setStatus(stGame.END);
 					checkStatusGame();
 				}
-			}else{
-				view.displayOutput("Game "+(dual-1)+" over!");
+			} else {
+				view.displayOutput("Game " + (dual - 1) + " over!");
 				game.setStatus(stGame.SETUP);
 				checkStatusGame();
 			}
-			
+
 			break;
 		case NO_MORE_TRIES:
 			view.displayOutput(stGame.getOutput());
@@ -195,6 +189,13 @@ public class Controller {
 
 	public void setStGame(Status_Game stGame) {
 		this.stGame = stGame;
+	}
+
+	public void checkMenuError() {
+		String error = menu.getOutput();
+		if (!error.equals("")) {
+			view.displayError(error);
+		}
 	}
 
 	public void checkError() {
