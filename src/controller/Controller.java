@@ -1,5 +1,7 @@
 package controller;
 
+import org.apache.log4j.Logger;
+
 import check.Check;
 import game.Game;
 import game.GameFactory;
@@ -11,9 +13,11 @@ import menu.Status_Menu;
 import player.AI;
 import player.Human;
 import player.Player;
+import test.pack.Log4J;
 import view.View;
 
 public class Controller {
+	private static final Logger log =Logger.getLogger(Log4J.class);
 	Player p0;
 	Player p1;
 	Player p2;
@@ -33,6 +37,7 @@ public class Controller {
 		GameFactory gf = new GameFactory();
 		stMenu = Status_Menu.MENU_GAME;
 		menu = new Menu();
+		log.info("Menu Created");
 		checkStatusMenu();
 	}
 
@@ -53,8 +58,10 @@ public class Controller {
 			if (menu.validGame()) {
 				stMenu = stMenu.MENU_MODE;
 				gameType = menu.getGame();
+				log.info("Game selected:"+gameType);
 			} else {
 				view.displayError(menu.getOutput());
+				log.error(menu.getOutput());
 			}
 			checkStatusMenu();
 			break;
@@ -64,6 +71,7 @@ public class Controller {
 			menu.setInput(p0.getInput());
 			if (menu.validMode()) {
 				stMenu = stMenu.GAME;
+				log.info("Mode selected:"+stMenu);
 			} else {
 				view.displayError(menu.getOutput());
 			}
@@ -165,6 +173,10 @@ public class Controller {
 			p2 = new Human();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			log.info("Number of games:"+gameArray.length+"\n"
+					+"P1:"+p1+"\n"
+					+ "P2:"+p2+
+					"Game:"+gameType);
 			
 		}
 		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].geti()))) {
@@ -172,6 +184,10 @@ public class Controller {
 			p2 = new AI();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			log.info("Number of games:"+gameArray.length+"\n"
+					+"P1:"+p1+"\n"
+					+ "P2:"+p2+
+					"Game:"+gameType);
 		}
 		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].geti()))) {
 			p1 = new Human();
@@ -180,6 +196,10 @@ public class Controller {
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
 			dual = 2;
+			log.info("Number of games:"+gameArray.length+"\n"
+					+"P1:"+p1+"\n"
+					+ "P2:"+p2+
+					"Game:"+gameType);
 		}
 		p1.setGame(gameType);
 		p2.setGame(gameType);

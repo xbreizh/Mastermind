@@ -4,10 +4,10 @@ public enum InputStatus {
 	
 	
 	
-	VALID("Input is valid"),
-	EMPTY("You haven't typed anything"),
-	NOTINTEGER("You haven't typed a valid integer"),
-	OUTOFRANGE("Your input is out of range"),
+	VALID("Input valid"),
+	EMPTY("Nothing entered"),
+	NOTINTEGER("Not an Integer"),
+	OUTOFRANGE("Out of range"),
 	WRONGCHARACTER("Invalid Character");
 	
 	private String output;
