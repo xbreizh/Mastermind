@@ -31,6 +31,12 @@ public class Menu extends Check{
 		
 	}
 	
+	public void readArray(){
+		for (int i = 0; i < valid.length; i++) {
+			System.out.println(valid[i]);
+		}
+	}
+	
 	public boolean validMode(){
 		initValidModeList();
 		valid=validList;

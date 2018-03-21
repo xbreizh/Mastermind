@@ -6,6 +6,7 @@ import game.GameFactory;
 import game.GamesList;
 import game.Status_Game;
 import menu.Menu;
+import menu.ModeList;
 import menu.Status_Menu;
 import player.AI;
 import player.Human;
@@ -62,45 +63,28 @@ public class Controller {
 			p0.input();
 			menu.setInput(p0.getInput());
 			if (menu.validMode()) {
-				if (p0.getInput().equals("1")) {
-					p1 = new AI();
-					p2 = new Human();
-					gameArray = new Game[1];
-					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-					p1.setGame(gameType);
-					p2.setGame(gameType);
-				}
-				if (p0.getInput().equals("2")) {
-					p1 = new Human();
-					p2 = new AI();
-					gameArray = new Game[1];
-					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-					p1.setGame(gameType);
-					p2.setGame(gameType);
-				}
-				if (p0.getInput().equals("3")) {
-					p1 = new Human();
-					p2 = new Human();
-					gameArray = new Game[2];
-					gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-					gameArray[1] = GameFactory.createGame(gameType, p2, p1);
-					dual = 2;
-				}
-				for (int i = 0; i < gameArray.length; i++) {
-					game = gameArray[i];
-					setStGame(Status_Game.SETUP);
-					game.setStatus(Status_Game.SETUP);
-					checkStatusGame();
-					dual--;
-				}
-
+				stMenu = stMenu.GAME;
 			} else {
 				view.displayError(menu.getOutput());
 			}
 
 			checkStatusMenu();
+		case GAME:
+			initGame();
+			for (int i = 0; i < gameArray.length; i++) {
+				game = gameArray[i];
+				setStGame(Status_Game.SETUP);
+				game.setStatus(Status_Game.SETUP);
+				
+				System.out.println("dual: "+dual);
+				checkStatusGame();
+				dual--;
+				
+			}
 		}
 	}
+
+
 
 	public void checkStatusGame() {
 		stGame = game.getStatus();
@@ -173,6 +157,33 @@ public class Controller {
 		default:
 			break;
 		}
+	}
+	
+	protected void initGame() {
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].geti()))) {
+			p1 = new AI();
+			p2 = new Human();
+			gameArray = new Game[1];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			
+		}
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].geti()))) {
+			p1 = new Human();
+			p2 = new AI();
+			gameArray = new Game[1];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+		}
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].geti()))) {
+			p1 = new Human();
+			p2 = new Human();
+			gameArray = new Game[2];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
+			dual = 2;
+		}
+		p1.setGame(gameType);
+		p2.setGame(gameType);
+		
 	}
 
 	public Status_Menu getStMenu() {

@@ -1,15 +1,31 @@
 package application;
 
+import java.util.Scanner;
+
 import controller.Controller;
-import game.GamesList;
+import menu.Menu;
 
 public class Main {
 
 	public static void main(String[] args) {
 
 		 Controller ct = new Controller();
+//		
+		 
+//		 Menu menu = new Menu();
+//		 menu.initValidModeList();
+//		 
+//		 Scanner sc= new Scanner(System.in);
+//		 String str;
+//		 while(1>0){
+//			 str=sc.nextLine();
+//		 menu.setInput(str);
+//		 
+//		 System.out.println(menu.validMode());
+//		 menu.readArray();
+//		 }
 		
-//		System.out.println(GamesList.values()[1]);
+//		 ModeList.values()[1]
 
 //		Check ch = new Check();
 //		Scanner sc = new Scanner(System.in);

@@ -23,7 +23,7 @@ public class Check {
 	public boolean checkIfInArray(){
 		for (int i = 0; i < input.length(); i++) {
 			int ok=0;
-			for (int j = 0; j < symbols.length-1; j++) {
+			for (int j = 0; j < valid.length; j++) {
 				if(String.valueOf(input.charAt(i)).equals(valid[j])){
 					ok++;
 				}
