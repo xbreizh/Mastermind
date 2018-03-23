@@ -7,7 +7,6 @@ public class MoreLess extends Game{
 
 	public MoreLess(Player p1, Player p2) {
 		super(p1, p2);
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -25,9 +24,24 @@ public class MoreLess extends Game{
 			}
 		}
 		answerToGive=str;
+		output=answerToGive;
 	}
 
 
-
+	public  void validAnswer() {
+		
+		getVerdict(secretCode, Integer.parseInt(input));
+		if (!answerToGive.equals(answer)) {
+			setError("Wrong answer!, should be " + answerToGive);
+		} else {
+			setError("");
+			if (Integer.parseInt(input) == (secretCode)) {
+				setStatus(Status_Game.WIN);
+			} else {
+				setStatus(Status_Game.PLAY);
+			}
+		}
+		
+	}
 
 }

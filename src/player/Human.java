@@ -14,15 +14,28 @@ public class Human extends Player{
 		}
 		return this.input=str;
 	}
+	
 
 	@Override
-	public void tryToGuess() {
+	public void guessMoreless() {
 		input();
 		
 	}
 
 	@Override
-	public void replyToGuess() {
+	public void replyMoreless() {
+		input();
+		
+	}
+
+	@Override
+	public void guessMasterMind() {
+		input();
+		
+	}
+
+	@Override
+	public void replyMasterMind() {
 		input();
 		
 	}

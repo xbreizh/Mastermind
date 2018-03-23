@@ -1,8 +1,10 @@
 package game;
 
+import check.Check;
+import check.InputStatus;
 import player.Player;
 
-public abstract class Game {
+public abstract class Game extends Check{
 	Player p1;
 	Player p2;
 	protected Status_Game status;
@@ -14,6 +16,10 @@ public abstract class Game {
 	String error = "";
 	String input = "";
 	String answerToGive = "";
+	String output="";
+	Check ch;
+
+	
 
 	
 
@@ -25,6 +31,7 @@ public abstract class Game {
 		conf.getConfiguration();
 		this.p1 = p1;
 		this.p2 = p2;
+		ch=new Check();
 	}
 
 	// abstracts methods
@@ -64,7 +71,6 @@ public abstract class Game {
 	}
 
 	public void validAnswer() {
-		System.out.println("answer: " + answer);
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
@@ -76,6 +82,7 @@ public abstract class Game {
 				setStatus(Status_Game.PLAY);
 			}
 		}
+		checkAttempts();
 	}
 
 	public int[] intToArray(int code) {
@@ -90,18 +97,24 @@ public abstract class Game {
 		return tab;
 	}
 
-	public void check(String str) {
-		attempts++;
-		System.out.println("attempts: " + attempts);
-		if (Integer.parseInt(str) == (getSecretCode())) {
-			status = Status_Game.WIN;
-		} else {
-			checkAttempts();
-		}
-
-	}
+//	public void check(String str) {
+//		attempts++;
+//		System.out.println("attempts: " + attempts);
+//		System.out.println(max_attempts);
+//		if (Integer.parseInt(str) == (getSecretCode())) {
+//			status = Status_Game.WIN;
+//		} else {
+//			checkAttempts();
+//			System.out.println("truc");
+//			status = Status_Game.NO_MORE_TRIES;
+//		}
+//		
+//
+//	}
 
 	public void checkAttempts() {
+		attempts++;
+		System.out.println("Attempts: "+attempts+"/"+max_attempts);
 		if (attempts == max_attempts) {
 			status = Status_Game.NO_MORE_TRIES;
 		}
@@ -119,6 +132,21 @@ public abstract class Game {
 		this.status = status.PLAY;
 		attempts = 0;
 
+	}
+	public void validPlayAgain() {
+		if(input.equalsIgnoreCase("y")){
+			System.out.println("here");
+			reset();
+			output="There you go again!";
+			status=Status_Game.SETUP;
+		}
+		else if(input.equalsIgnoreCase("n")){
+			reset();
+			status=Status_Game.EXIT;
+		}else{
+			error=InputStatus.WRONGCHARACTER.getOutput();
+		}
+		
 	}
 
 	// Getters and Setters
@@ -170,5 +198,10 @@ public abstract class Game {
 		this.answer = str;
 
 	}
+	public String getOutput() {
+		return output;
+	}
+
+	
 
 }

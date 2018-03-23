@@ -6,6 +6,7 @@ public enum Status_Game {
 	ANSWER("Answer:"),
 	EXIT("End of the game!\nDo you want to play again?"),
 	WIN("Congratulations, You won!"),
+	REPLAY("Do you want to restart the game?( Y / N )"),
 	NO_MORE_TRIES("you don't have anymore tries!"),
 	END("Thanks for playing!");
 	
