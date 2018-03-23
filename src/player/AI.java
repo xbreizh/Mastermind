@@ -3,12 +3,12 @@ package player;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import game.Configuration;
+import application.Configuration;
 
 public class AI extends Player {
 
 	private String newProposition = "";
-	Configuration conf = Configuration.getConfiguration();
+//	Settings conf = Settings.getConfiguration();
 
 	@Override
 	public String input() {
@@ -93,6 +93,8 @@ public class AI extends Player {
 
 	@Override
 	public void replyMoreless() {
+		System.out.println(codeToFind);
+		System.out.println(input);
 		int[] a = intToArray(Integer.parseInt(codeToFind));
 		int[] b = intToArray(Integer.parseInt(input));
 		String str = "";

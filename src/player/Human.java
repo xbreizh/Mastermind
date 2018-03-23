@@ -9,9 +9,9 @@ public class Human extends Player{
 	
 	public String input(){
 		String str=sc.nextLine();
-		if(str.equals(null)){
-			str="1234";
-		}
+//		if(str.equals(null)){
+//			str="1234";
+//		}
 		return this.input=str;
 	}
 	

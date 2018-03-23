@@ -1,5 +1,7 @@
 package game;
 
+import application.Configuration;
+
 public enum Status_Game {
 	SETUP("Enter the secret code! ( "+Configuration.nbDigits+" digits)"),
 	PLAY("Find the code!"),

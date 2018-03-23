@@ -1,5 +1,6 @@
 package game;
 
+import application.Configuration;
 import check.Check;
 import check.InputStatus;
 import player.Player;
@@ -11,7 +12,7 @@ public abstract class Game extends Check {
 	int secretCode;
 	int[] secretCodeArray;
 	int attempts = 0;
-	Configuration conf = Configuration.getConfiguration();
+//	Settings conf = Settings.getConfiguration();
 	int max_attempts = Configuration.max_attempts;
 	String error = "";
 	String answerToGive = "";
@@ -22,10 +23,9 @@ public abstract class Game extends Check {
 	// Constructor
 	public Game(Player p1, Player p2) {
 
-		conf.getConfiguration();
+		
 		this.p1 = p1;
 		this.p2 = p2;
-		ch = new Check();
 	}
 
 	// abstracts methods
@@ -73,20 +73,20 @@ public abstract class Game extends Check {
 	}
 
 	public void validAnswer() {
-		checkAttempts();
-		System.out.println("Status here: "+status);
-		getVerdict(secretCode, Integer.parseInt(input));
-		if (!answerToGive.equals(answer)) {
-			setError("Wrong answer!, should be " + answerToGive);
-		} else {
-			setError("");
-			
-			if (Integer.parseInt(input) == (secretCode)) {
-				setStatus(Status_Game.WIN);
-			} else {
-				setStatus(Status_Game.PLAY);
-			}
-		}
+//		checkAttempts();
+//		System.out.println("Status here: "+status);
+//		getVerdict(secretCode, Integer.parseInt(input));
+//		if (!answerToGive.equals(answer)) {
+//			setError("Wrong answer!, should be " + answerToGive);
+//		} else {
+//			setError("");
+//			
+//			if (Integer.parseInt(input) == (secretCode)) {
+//				setStatus(Status_Game.WIN);
+//			} else {
+//				setStatus(Status_Game.PLAY);
+//			}
+//		}
 		
 		
 	}
@@ -138,7 +138,6 @@ public abstract class Game extends Check {
 
 	// resets the game attempts
 	public void reset() {
-		this.status = status.PLAY;
 		output = "";
 		input = "";
 		attempts = 0;
@@ -147,13 +146,12 @@ public abstract class Game extends Check {
 
 	public void validPlayAgain() {
 		if (input.equalsIgnoreCase("y")) {
-			System.out.println("here");
 			reset();
 			output = "There you go again!";
 			status = Status_Game.SETUP;
 		} else if (input.equalsIgnoreCase("n")) {
 			reset();
-			status = Status_Game.EXIT;
+			status = Status_Game.END;
 		} else {
 			error = InputStatus.WRONGCHARACTER.getOutput();
 		}

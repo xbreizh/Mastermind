@@ -1,2 +1,15 @@
-14:55:31 Line 40  INFO [main] - <init> - Menu Created
-14:55:31 Line 53  INFO [main] - checkStatusMenu - MENU_GAME
+00:57:48 Line 46  INFO [main] - switchMenu - MENU_GAME
+00:57:48 Line 74  INFO [main] - checkStatusMenu - MENU_GAME
+00:57:49 Line 83  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
+00:57:49 Line 74  INFO [main] - checkStatusMenu - MENU_MODE
+00:57:50 Line 94  INFO [main] - checkStatusMenu - CHALLENGER
+00:57:50 Line 74  INFO [main] - checkStatusMenu - GAME
+00:57:50 Line 232  INFO [main] - initGame - player.AI
+00:57:50 Line 233  INFO [main] - initGame - player.Human
+00:57:50 Line 234  INFO [main] - initGame - MoreLess
+00:57:50 Line 57  INFO [main] - switchGame - SETUP
+00:57:50 Line 118  INFO [main] - checkStatusGame - SETUP
+00:57:50 Line 118  INFO [main] - checkStatusGame - PLAY
+00:57:53 Line 118  INFO [main] - checkStatusGame - ANSWER
+00:57:53 Line 118  INFO [main] - checkStatusGame - WIN
+00:57:53 Line 118  INFO [main] - checkStatusGame - REPLAY
