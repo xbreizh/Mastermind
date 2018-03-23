@@ -1,7 +1,7 @@
 package game;
 
 public enum Status_Game {
-	SETUP("Enter the secret code!"),
+	SETUP("Enter the secret code! ( "+Configuration.nbDigits+" digits)"),
 	PLAY("Find the code!"),
 	ANSWER("Answer:"),
 	EXIT("End of the game!\nDo you want to play again?"),
@@ -11,6 +11,7 @@ public enum Status_Game {
 	END("Thanks for playing!");
 	
 	private String output;
+	
 	
 	Status_Game(String output){
 		this.output=output;

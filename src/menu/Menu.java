@@ -23,9 +23,8 @@ public class Menu extends Check{
 		initValidGameList();
 		valid=validList;
 		if(isEmpty())return false;
-		if(!isValidInteger())return false;
-		if(!hasCorrectNbDigits())return false;
-		if(!checkIfInArray())return false;
+		if(!isInteger())return false;
+		if(!checkIfInArrayNumber())return false;
 		game=GamesList.values()[Integer.valueOf(input)-1];
 		return true;
 		
@@ -41,9 +40,8 @@ public class Menu extends Check{
 		initValidModeList();
 		valid=validList;
 		if(isEmpty())return false;
-		if(!isValidInteger())return false;
-		if(!hasCorrectNbDigits())return false;	
-		if(!checkIfInArray())return false;
+		if(!isInteger())return false;	
+		if(!checkIfInArrayNumber())return false;
 		return true;
 		
 	}

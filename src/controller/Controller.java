@@ -17,7 +17,7 @@ import player.Player;
 import view.View;
 
 public class Controller {
-	public static final Logger log =Logger.getLogger(Log4J.class);
+	public static final Logger log = Logger.getLogger(Log4J.class);
 	Player p0;
 	Player p1;
 	Player p2;
@@ -59,9 +59,9 @@ public class Controller {
 			if (menu.validGame()) {
 				stMenu = stMenu.MENU_MODE;
 				gameType = menu.getGame();
-				log.info(stMenu+" "+gameType);
+				log.info(stMenu + " " + gameType);
 			} else {
-				view.displayError(menu.getOutput());
+				checkMenuError();
 			}
 			checkStatusMenu();
 			break;
@@ -71,9 +71,9 @@ public class Controller {
 			menu.setInput(p0.getInput());
 			if (menu.validMode()) {
 				log.info(ModeList.values()[Integer.parseInt(p0.getInput())]);
-				stMenu = stMenu.GAME;	
+				stMenu = stMenu.GAME;
 			} else {
-				view.displayError(menu.getOutput());
+				checkMenuError();
 			}
 
 			checkStatusMenu();
@@ -82,16 +82,14 @@ public class Controller {
 			for (int i = 0; i < gameArray.length; i++) {
 				game = gameArray[i];
 				setStGame(Status_Game.SETUP);
-				game.setStatus(Status_Game.SETUP);			
-				System.out.println("dual: "+dual);
+				game.setStatus(Status_Game.SETUP);
+				System.out.println("dual: " + dual);
 				checkStatusGame();
 				dual--;
-				
+
 			}
 		}
 	}
-
-
 
 	public void checkStatusGame() {
 		stGame = game.getStatus();
@@ -117,14 +115,16 @@ public class Controller {
 			checkStatusGame();
 			break;
 		case ANSWER:
+			game.checkAttempts();
 			view.displayOutput(stGame.getOutput());
+			view.displayOutput("Code to find: "+p1.getCodeToFind());
 			p1.replyToGuess();
 			game.setAnswer(p1.getInput());
 			game.validAnswer();
 			view.displayOutput(game.getOutput());
 			p2.setAnswer(game.getOutput());
-			game.checkAttempts();
 			checkError();
+			System.out.println("status: "+stGame);
 			checkStatusGame();
 			break;
 		case REPLAY:
@@ -174,28 +174,20 @@ public class Controller {
 			break;
 		}
 	}
-	
+
 	protected void initGame() {
 		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].geti()))) {
 			p1 = new AI();
 			p2 = new Human();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
-			
+
 		}
 		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].geti()))) {
 			p1 = new Human();
 			p2 = new AI();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
 		}
 		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].geti()))) {
 			p1 = new Human();
@@ -204,14 +196,13 @@ public class Controller {
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
 			dual = 2;
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
 		}
+		log.info(p1.getClass().getName());
+		log.info(p2.getClass().getName());
+		log.info(gameType);
 		p1.setGame(gameType);
 		p2.setGame(gameType);
-		
+
 	}
 
 	public Status_Menu getStMenu() {
@@ -233,6 +224,7 @@ public class Controller {
 	public void checkMenuError() {
 		String error = menu.getOutput();
 		if (!error.equals("")) {
+			log.warn(error);
 			view.displayError(error);
 		}
 	}
@@ -240,8 +232,8 @@ public class Controller {
 	public void checkError() {
 		String error = game.getError();
 		if (!error.equals("")) {
+			log.warn(error);
 			view.displayError(error);
-			log.error(error);
 		}
 	}
 

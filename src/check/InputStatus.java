@@ -8,7 +8,7 @@ public enum InputStatus {
 	EMPTY("Nothing entered"),
 	NOTINTEGER("Not an Integer"),
 	OUTOFRANGE("Out of range"),
-	WRONGCHARACTER("Invalid Character");
+	WRONGCHARACTER("Invalid Input");
 	
 	private String output;
 	

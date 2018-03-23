@@ -50,8 +50,8 @@ public class AI extends Player {
 //	}
 
 	public int[] intToArray(int code) {
-		int[] tab = new int[conf.getNbDigits()];
-		int s = conf.getNbDigits() - 1;
+		int[] tab = new int[Configuration.nbDigits];
+		int s = Configuration.nbDigits - 1;
 		while (code > 0) {
 			int b = code % 10;
 			tab[s] = b;

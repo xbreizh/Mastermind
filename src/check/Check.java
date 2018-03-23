@@ -6,10 +6,10 @@ import game.Configuration;
 public class Check {
 
 	protected String input = "";
-	String output = "";
-	int nbChar = Configuration.getNbDigits();
+	protected String output = "";
+	int nbChar = Configuration.nbDigits;
 	String[] symbols = { "+", "-", "=" };
-	InputStatus status = InputStatus.VALID;
+	protected InputStatus IStatus = InputStatus.VALID;
 	
 
 	int test=1324;
@@ -21,6 +21,20 @@ public class Check {
 
 	}
 	
+	public boolean checkIfInArrayNumber(){
+		
+		for (int i = 0; i < valid.length; i++) {
+			if(input.equals(valid[i])){
+				return true;
+			}
+		}
+		IStatus = InputStatus.WRONGCHARACTER;
+		output = IStatus.getOutput();
+		return false;
+		
+		
+	}
+	
 	public boolean checkIfInArray(){
 		for (int i = 0; i < input.length(); i++) {
 			int ok=0;
@@ -30,8 +44,8 @@ public class Check {
 				}
 			}
 			if(ok==0){
-				status = InputStatus.WRONGCHARACTER;
-				output = status.getOutput();
+				IStatus = InputStatus.WRONGCHARACTER;
+				output = IStatus.getOutput();
 				return false;
 			}
 			
@@ -46,8 +60,8 @@ public class Check {
 
 				if ((!input.substring(i, i + 1).equals(symbols[0])) && (!input.substring(i, i + 1).equals(symbols[1]))
 						&& (!input.substring(i, i + 1).equals(symbols[2]))) {
-					status = InputStatus.WRONGCHARACTER;
-					output = status.getOutput();
+					IStatus = InputStatus.WRONGCHARACTER;
+					output = IStatus.getOutput();
 					return false;
 				}
 			}
@@ -57,7 +71,7 @@ public class Check {
 	}
 
 	public InputStatus getCheckStatus() {
-		return status;
+		return IStatus;
 	}
 
 	public boolean isValidInteger(){
@@ -72,8 +86,8 @@ public class Check {
 	public boolean hasCorrectNbDigits() {
 		if(!isEmpty()){
 			if (input.length() != nbChar) {
-				status = InputStatus.OUTOFRANGE;
-				output = status.getOutput();
+				IStatus = InputStatus.WRONGCHARACTER;
+				output = IStatus.getOutput();
 				return false;
 			}
 		}
@@ -85,8 +99,8 @@ public class Check {
 	public boolean isEmpty() {
 		output = "";
 		if (input.length() == 0) {
-			status = InputStatus.EMPTY;
-			output = status.getOutput();
+			IStatus = InputStatus.EMPTY;
+			output = IStatus.getOutput();
 			return true;
 		}
 		return false;
@@ -98,8 +112,8 @@ public class Check {
 		try {
 			Integer.parseInt(this.input);
 		} catch (NumberFormatException e) {
-			status = InputStatus.NOTINTEGER;
-			output = status.getOutput();
+			IStatus = InputStatus.NOTINTEGER;
+			output = IStatus.getOutput();
 			return false;
 		}
 		return true;
