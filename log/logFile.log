@@ -1,6 +1,0 @@
-2018-03-21 20:24:56,321 Line 40  INFO [main] - test.pack.Log4J.<init> - Menu Created
-2018-03-21 20:24:57,990 Line 61  INFO [main] - test.pack.Log4J.checkStatusMenu - Game selected:MoreLess
-2018-03-21 20:24:58,437 Line 74  INFO [main] - test.pack.Log4J.checkStatusMenu - Mode selected:GAME
-2018-03-21 20:24:58,438 Line 176  INFO [main] - test.pack.Log4J.initGame - Number of games:1
-P1:player.AI@6acbcfc0
-P2:player.Human@5f184fc6Game:MoreLess

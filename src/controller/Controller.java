@@ -2,6 +2,7 @@ package controller;
 
 import org.apache.log4j.Logger;
 
+import application.Log4J;
 import check.Check;
 import game.Game;
 import game.GameFactory;
@@ -13,11 +14,10 @@ import menu.Status_Menu;
 import player.AI;
 import player.Human;
 import player.Player;
-import test.pack.Log4J;
 import view.View;
 
 public class Controller {
-	private static final Logger log =Logger.getLogger(Log4J.class);
+	public static final Logger log =Logger.getLogger(Log4J.class);
 	Player p0;
 	Player p1;
 	Player p2;
@@ -50,6 +50,7 @@ public class Controller {
 	}
 
 	public void checkStatusMenu() {
+		log.info(stMenu);
 		switch (stMenu) {
 		case MENU_GAME:
 			view.displayOutput(stMenu.getOutput());
@@ -58,10 +59,9 @@ public class Controller {
 			if (menu.validGame()) {
 				stMenu = stMenu.MENU_MODE;
 				gameType = menu.getGame();
-				log.info("Game selected:"+gameType);
+				log.info(stMenu+" "+gameType);
 			} else {
 				view.displayError(menu.getOutput());
-				log.error(menu.getOutput());
 			}
 			checkStatusMenu();
 			break;
@@ -70,8 +70,8 @@ public class Controller {
 			p0.input();
 			menu.setInput(p0.getInput());
 			if (menu.validMode()) {
-				stMenu = stMenu.GAME;
-				log.info("Mode selected:"+stMenu);
+				log.info(ModeList.values()[Integer.parseInt(p0.getInput())]);
+				stMenu = stMenu.GAME;	
 			} else {
 				view.displayError(menu.getOutput());
 			}
@@ -82,8 +82,7 @@ public class Controller {
 			for (int i = 0; i < gameArray.length; i++) {
 				game = gameArray[i];
 				setStGame(Status_Game.SETUP);
-				game.setStatus(Status_Game.SETUP);
-				
+				game.setStatus(Status_Game.SETUP);			
 				System.out.println("dual: "+dual);
 				checkStatusGame();
 				dual--;
@@ -96,6 +95,7 @@ public class Controller {
 
 	public void checkStatusGame() {
 		stGame = game.getStatus();
+		log.info(stGame);
 		switch (stGame) {
 		case SETUP:
 			view.displayOutput(stGame.getOutput());
@@ -127,6 +127,14 @@ public class Controller {
 			checkError();
 			checkStatusGame();
 			break;
+		case REPLAY:
+			view.displayOutput(stGame.getOutput());
+			p0.input();
+			game.setInput(p0.getInput());
+			game.validPlayAgain();
+			checkError();
+			checkStatusGame();
+			break;
 		case EXIT:
 			if (dual != 2) {
 				view.displayOutput(stGame.getOutput());
@@ -150,13 +158,13 @@ public class Controller {
 			view.displayOutput(stGame.getOutput());
 			view.displayOutput(game.gameResult(p2, p1));
 			game.reset();
-			game.setStatus(stGame.EXIT);
+			game.setStatus(stGame.REPLAY);
 			checkStatusGame();
 			break;
 		case WIN:
 			view.displayOutput(game.gameResult(p2, p1));
 			game.reset();
-			game.setStatus(stGame.EXIT);
+			game.setStatus(stGame.REPLAY);
 			checkStatusGame();
 			break;
 		case END:
@@ -233,6 +241,7 @@ public class Controller {
 		String error = game.getError();
 		if (!error.equals("")) {
 			view.displayError(error);
+			log.error(error);
 		}
 	}
 

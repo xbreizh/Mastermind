@@ -1,5 +1,6 @@
 package check;
 
+import controller.Controller;
 import game.Configuration;
 
 public class Check {

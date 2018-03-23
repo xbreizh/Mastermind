@@ -1,6 +1,7 @@
 package game;
 
 import check.Check;
+import check.InputStatus;
 import player.Player;
 
 public abstract class Game extends Check{
@@ -132,6 +133,21 @@ public abstract class Game extends Check{
 		attempts = 0;
 
 	}
+	public void validPlayAgain() {
+		if(input.equalsIgnoreCase("y")){
+			System.out.println("here");
+			reset();
+			output="There you go again!";
+			status=Status_Game.SETUP;
+		}
+		else if(input.equalsIgnoreCase("n")){
+			reset();
+			status=Status_Game.EXIT;
+		}else{
+			error=InputStatus.WRONGCHARACTER.getOutput();
+		}
+		
+	}
 
 	// Getters and Setters
 
@@ -185,5 +201,7 @@ public abstract class Game extends Check{
 	public String getOutput() {
 		return output;
 	}
+
+	
 
 }
