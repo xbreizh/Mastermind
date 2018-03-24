@@ -1,18 +1,18 @@
 package player;
 
-import java.util.Scanner;
-
-import game.Game;
-import game.GamesList;
+import menu.GamesList;
 
 public abstract class Player {
-	Scanner sc = new Scanner(System.in);
-	String input = "";
-	String wrong = "wrong answer";
-	String feedBack = "";
-	String codeToFind;
-	String answerToGive = "";
-	GamesList game;
+	
+	protected String input = "";
+	protected String wrong = "wrong answer";
+	protected String feedBack = "";
+	protected String codeToFind;
+	protected String answerToGive = "";
+	protected GamesList game;
+	protected String name;
+
+	
 
 	// Abstract methods
 	public abstract String input();
@@ -46,6 +46,13 @@ public abstract class Player {
 	}
 
 	// getters & setters
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	public void setInput(String input) {
 		this.input = input;
 	}

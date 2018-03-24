@@ -31,25 +31,9 @@ public class AI extends Player {
 		}
 	}
 
-	// public void giveFeedback() {
-	// int[] a = intToArray(Integer.parseInt(codeToFind));
-	// int[] b = intToArray(Integer.parseInt(input));
-	// String str = "";
-	// for (int i = 0; i < a.length; i++) {
-	// if (a[i] == b[i]) {
-	// str += "=";
-	// } else if (a[i] < b[i]) {
-	// str += "-";
-	// } else if (a[i] > b[i]) {
-	// str += "+";
-	// }
-	// }
-	// input = str;
-	// }
-
 	public int[] intToArray(int code) {
-		int[] tab = new int[Configuration.nbDigits];
-		int s = Configuration.nbDigits - 1;
+		int[] tab = new int[Configuration.getNbDigits()];
+		int s = Configuration.getNbDigits() - 1;
 		while (code > 0) {
 			int b = code % 10;
 			tab[s] = b;
@@ -90,8 +74,6 @@ public class AI extends Player {
 
 	@Override
 	public void replyMoreless() {
-		System.out.println(codeToFind);
-		System.out.println(input);
 		int[] a = intToArray(Integer.parseInt(codeToFind));
 		int[] b = intToArray(Integer.parseInt(input));
 		String str = "";

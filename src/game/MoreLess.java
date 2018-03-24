@@ -26,17 +26,16 @@ public class MoreLess extends Game {
 	}
 
 	public void validAnswer() {
-		checkAttempts();
-		System.out.println("here");
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
 		} else {
 			setError("");
 			if (Integer.parseInt(input) == (secretCode)) {
-				setStatus(Status_Game.WIN);
+				setStatus(Status_Game.FOUND);
 			} else {
 				setStatus(Status_Game.PLAY);
+				checkAttempts();
 			}
 		}
 

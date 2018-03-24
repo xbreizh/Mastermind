@@ -6,19 +6,22 @@ import check.InputStatus;
 import player.Player;
 
 public abstract class Game extends Check {
-	Player p1;
-	Player p2;
-	protected Status_Game status;
-	int secretCode;
-	int[] secretCodeArray;
-	int attempts = 0;
-	// Settings conf = Settings.getConfiguration();
-	int max_attempts = Configuration.max_attempts;
-	String error = "";
-	String answerToGive = "";
-	Check ch;
+	protected Player p1;
+	
 
-	String answer = "";
+	protected Player p2;
+	protected Status_Game status;
+	protected int secretCode;
+	protected int[] secretCodeArray;
+	protected int attempts = 0;
+
+	protected int max_attempts = Configuration.getMax_attempts();
+	protected String error = "";
+	protected String answerToGive = "";
+	protected Check ch;
+
+	protected String answer = "";
+	protected String verdict = "";
 
 	// Constructor
 	public Game(Player p1, Player p2) {
@@ -49,7 +52,7 @@ public abstract class Game extends Check {
 		} else {
 			error = IStatus.getOutput();
 		}
-
+		incrementAttempt();
 	}
 
 	public void validInput() {
@@ -72,26 +75,13 @@ public abstract class Game extends Check {
 	}
 
 	public void validAnswer() {
-		// checkAttempts();
-		// System.out.println("Status here: "+status);
-		// getVerdict(secretCode, Integer.parseInt(input));
-		// if (!answerToGive.equals(answer)) {
-		// setError("Wrong answer!, should be " + answerToGive);
-		// } else {
-		// setError("");
-		//
-		// if (Integer.parseInt(input) == (secretCode)) {
-		// setStatus(Status_Game.WIN);
-		// } else {
-		// setStatus(Status_Game.PLAY);
-		// }
-		// }
+		attempts++;
 
 	}
 
-	public int[] intToArray(int code) {
-		int[] tab = new int[Configuration.nbDigits];
-		int s = Configuration.nbDigits - 1;
+	protected int[] intToArray(int code) {
+		int[] tab = new int[Configuration.getNbDigits()];
+		int s = Configuration.getNbDigits() - 1;
 		while (code > 0) {
 			int b = code % 10;
 			tab[s] = b;
@@ -101,25 +91,8 @@ public abstract class Game extends Check {
 		return tab;
 	}
 
-	// public void check(String str) {
-	// attempts++;
-	// System.out.println("attempts: " + attempts);
-	// System.out.println(max_attempts);
-	// if (Integer.parseInt(str) == (getSecretCode())) {
-	// status = Status_Game.WIN;
-	// } else {
-	// checkAttempts();
-	// System.out.println("truc");
-	// status = Status_Game.NO_MORE_TRIES;
-	// }
-	//
-	//
-	// }
-
 	public void checkAttempts() {
-		System.out.println("Attempts: " + attempts + "/" + max_attempts);
 		if (attempts == max_attempts) {
-			System.out.println("here");
 			setStatus(Status_Game.NO_MORE_TRIES);
 		}
 	}
@@ -130,8 +103,8 @@ public abstract class Game extends Check {
 
 	public String gameResult(Player winner, Player loser) {
 
-		String str = winner.getClass().getSimpleName() + " wins!  " + loser.getClass().getSimpleName() + " loses!";
-		return str;
+		verdict = winner.getName() + " wins!  " + loser.getName() + " loses!";
+		return verdict;
 	}
 
 	// resets the game attempts
@@ -157,6 +130,25 @@ public abstract class Game extends Check {
 	}
 
 	// Getters and Setters
+	public void setP1(Player p1) {
+		this.p1 = p1;
+	}
+
+	public void setP2(Player p2) {
+		this.p2 = p2;
+	}
+
+	public Player getP1() {
+		return p1;
+	}
+
+	public Player getP2() {
+		return p2;
+	}
+
+	public int getAttempts() {
+		return attempts;
+	}
 
 	public String getAnswerToGive() {
 		return answerToGive;
@@ -208,7 +200,13 @@ public abstract class Game extends Check {
 	}
 
 	public String getOutput() {
+		output = p1.getName() + " answer: " + output;
+
 		return output;
+	}
+
+	public String getVerdict() {
+		return verdict;
 	}
 
 }

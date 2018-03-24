@@ -1,13 +1,12 @@
 package check;
 
 import application.Configuration;
-import controller.Controller;
 
 public class Check {
 
 	protected String input = "";
 	protected String output = "";
-	int nbChar = Configuration.nbDigits;
+	int nbChar = Configuration.getNbDigits();
 	String[] symbols = { "+", "-", "=" };
 	protected InputStatus IStatus = InputStatus.VALID;
 

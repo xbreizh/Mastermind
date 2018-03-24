@@ -8,8 +8,9 @@ import java.util.Properties;
 public class Configuration {
 
 	private static Properties prop = new Properties();
-	public static int max_attempts;
-	public static int nbDigits;
+	private static int max_attempts;
+	private static int nbDigits;
+	private String error="";
 
 	static FileInputStream fs;
 
@@ -17,7 +18,7 @@ public class Configuration {
 		loadConfiguration();
 	}
 
-	public static void loadConfiguration() {
+	private static void loadConfiguration() {
 
 		try {
 			fs = new FileInputStream(System.getProperty("user.dir") + "/Files/config.properties");
@@ -30,17 +31,19 @@ public class Configuration {
 			System.err.println(e);
 		}
 	}
+	
+	// Getters and Setters
+	
+	public static int getMax_attempts() {
+		return max_attempts;
+	}
 
-	// public static int getNbDigits() {
-	// return nbDigits;
-	// }
+	public static int getNbDigits() {
+		return nbDigits;
+	}
 
-	// public int getMax_attempts() {
-	// return max_attempts;
-	// }
-	//
-	//
-
-	//
+	public String getError() {
+		return error;
+	}
 
 }

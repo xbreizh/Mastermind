@@ -1,15 +1,46 @@
-00:57:48 Line 46  INFO [main] - switchMenu - MENU_GAME
-00:57:48 Line 74  INFO [main] - checkStatusMenu - MENU_GAME
-00:57:49 Line 83  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
-00:57:49 Line 74  INFO [main] - checkStatusMenu - MENU_MODE
-00:57:50 Line 94  INFO [main] - checkStatusMenu - CHALLENGER
-00:57:50 Line 74  INFO [main] - checkStatusMenu - GAME
-00:57:50 Line 232  INFO [main] - initGame - player.AI
-00:57:50 Line 233  INFO [main] - initGame - player.Human
-00:57:50 Line 234  INFO [main] - initGame - MoreLess
-00:57:50 Line 57  INFO [main] - switchGame - SETUP
-00:57:50 Line 118  INFO [main] - checkStatusGame - SETUP
-00:57:50 Line 118  INFO [main] - checkStatusGame - PLAY
-00:57:53 Line 118  INFO [main] - checkStatusGame - ANSWER
-00:57:53 Line 118  INFO [main] - checkStatusGame - WIN
-00:57:53 Line 118  INFO [main] - checkStatusGame - REPLAY
+21:45:31 Line 40  INFO [main] - switchMenu - MENU_GAME
+21:45:31 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
+21:45:32 Line 280  WARN [main] - checkMenuError - Nothing entered
+21:45:32 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
+21:45:34 Line 280  WARN [main] - checkMenuError - Invalid Input
+21:45:34 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
+21:45:36 Line 125  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
+21:45:36 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
+21:45:38 Line 280  WARN [main] - checkMenuError - Nothing entered
+21:45:38 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
+21:45:39 Line 280  WARN [main] - checkMenuError - Not an Integer
+21:45:39 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
+21:45:43 Line 133  INFO [main] - checkStatusMenu - DUAL
+21:45:43 Line 116  INFO [main] - checkStatusMenu - GAME
+21:45:43 Line 255  INFO [main] - initGame - player.Human
+21:45:43 Line 256  INFO [main] - initGame - player.Human
+21:45:43 Line 257  INFO [main] - initGame - MoreLess
+21:45:43 Line 258  INFO [main] - initGame - Number of games: 2
+21:45:43 Line 58  INFO [main] - play - SETUP
+21:45:43 Line 145  INFO [main] - checkStatusGame - SETUP
+21:45:45 Line 153  INFO [main] - checkStatusGame - Secret Code: s
+21:45:45 Line 288  WARN [main] - checkError - Not an Integer
+21:45:45 Line 145  INFO [main] - checkStatusGame - SETUP
+21:45:48 Line 153  INFO [main] - checkStatusGame - Secret Code: 3
+21:45:48 Line 288  WARN [main] - checkError - Invalid Input
+21:45:48 Line 145  INFO [main] - checkStatusGame - SETUP
+21:45:51 Line 153  INFO [main] - checkStatusGame - Secret Code: 1212
+21:45:51 Line 145  INFO [main] - checkStatusGame - PLAY
+21:45:53 Line 145  INFO [main] - checkStatusGame - ANSWER
+21:45:53 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
+21:45:55 Line 288  WARN [main] - checkError - Wrong answer!, should be ====
+21:45:55 Line 145  INFO [main] - checkStatusGame - ANSWER
+21:45:55 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
+21:45:58 Line 145  INFO [main] - checkStatusGame - FOUND
+21:45:58 Line 58  INFO [main] - play - SETUP
+21:45:58 Line 145  INFO [main] - checkStatusGame - SETUP
+21:46:00 Line 153  INFO [main] - checkStatusGame - Secret Code: 1212
+21:46:00 Line 145  INFO [main] - checkStatusGame - PLAY
+21:46:01 Line 145  INFO [main] - checkStatusGame - ANSWER
+21:46:01 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
+21:46:03 Line 145  INFO [main] - checkStatusGame - FOUND
+21:46:03 Line 145  INFO [main] - checkStatusGame - REPLAY
+21:46:05 Line 288  WARN [main] - checkError - Invalid Input
+21:46:05 Line 288  WARN [main] - checkError - Invalid Input
+21:46:05 Line 58  INFO [main] - play - SETUP
+21:46:05 Line 145  INFO [main] - checkStatusGame - SETUP

@@ -53,9 +53,10 @@ public class MasterMind extends Game {
 		} else {
 			setError("");
 			if (answerToGive.equals("04")) {
-				setStatus(Status_Game.WIN);
+				setStatus(Status_Game.FOUND);
 			} else {
 				setStatus(Status_Game.PLAY);
+				checkAttempts();
 
 			}
 		}

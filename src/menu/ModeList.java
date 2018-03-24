@@ -4,19 +4,17 @@ public enum ModeList {
 
 	CHALLENGER(1), DEFENDER(2), DUAL(3);
 
-	int i;
+	int reference;
 
-	ModeList(int i) {
-		this.i = i;
+	ModeList(int reference) {
+		this.reference = reference;
 	}
 
-	private String output;
-
-	public int geti() {
-		return i;
+	public int getReference() {
+		return reference;
 	}
 
-	public void seti(int i) {
-		this.i = i;
+	public void setReference(int reference) {
+		this.reference = reference;
 	}
 }

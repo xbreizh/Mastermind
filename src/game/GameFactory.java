@@ -1,5 +1,6 @@
 package game;
 
+import menu.GamesList;
 import player.Player;
 
 public class GameFactory {

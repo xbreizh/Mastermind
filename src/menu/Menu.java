@@ -1,7 +1,6 @@
 package menu;
 
 import check.Check;
-import game.GamesList;
 
 public class Menu extends Check {
 
