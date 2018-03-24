@@ -1,34 +1,31 @@
 package game;
 
-
 import player.Player;
 
-public class MoreLess extends Game{
+public class MoreLess extends Game {
 
 	public MoreLess(Player p1, Player p2) {
 		super(p1, p2);
 	}
-	
-	
-	public void getVerdict(int n1, int n2){
-		int[] a=intToArray(n1);
-		int[] b=intToArray(n2);
-		String str="";
+
+	public void getVerdict(int n1, int n2) {
+		int[] a = intToArray(n1);
+		int[] b = intToArray(n2);
+		String str = "";
 		for (int i = 0; i < a.length; i++) {
-			if(a[i]==b[i]){
-				str+="=";
-			}else if(a[i]<b[i]){
-				str+="-";
-			}else if(a[i]>b[i]){
-				str+="+";
+			if (a[i] == b[i]) {
+				str += "=";
+			} else if (a[i] < b[i]) {
+				str += "-";
+			} else if (a[i] > b[i]) {
+				str += "+";
 			}
 		}
-		answerToGive=str;
-		output=answerToGive;
+		answerToGive = str;
+		output = answerToGive;
 	}
 
-
-	public  void validAnswer() {
+	public void validAnswer() {
 		checkAttempts();
 		System.out.println("here");
 		getVerdict(secretCode, Integer.parseInt(input));
@@ -42,7 +39,7 @@ public class MoreLess extends Game{
 				setStatus(Status_Game.PLAY);
 			}
 		}
-		
+
 	}
 
 }

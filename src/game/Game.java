@@ -12,7 +12,7 @@ public abstract class Game extends Check {
 	int secretCode;
 	int[] secretCodeArray;
 	int attempts = 0;
-//	Settings conf = Settings.getConfiguration();
+	// Settings conf = Settings.getConfiguration();
 	int max_attempts = Configuration.max_attempts;
 	String error = "";
 	String answerToGive = "";
@@ -23,7 +23,6 @@ public abstract class Game extends Check {
 	// Constructor
 	public Game(Player p1, Player p2) {
 
-		
 		this.p1 = p1;
 		this.p2 = p2;
 	}
@@ -73,22 +72,21 @@ public abstract class Game extends Check {
 	}
 
 	public void validAnswer() {
-//		checkAttempts();
-//		System.out.println("Status here: "+status);
-//		getVerdict(secretCode, Integer.parseInt(input));
-//		if (!answerToGive.equals(answer)) {
-//			setError("Wrong answer!, should be " + answerToGive);
-//		} else {
-//			setError("");
-//			
-//			if (Integer.parseInt(input) == (secretCode)) {
-//				setStatus(Status_Game.WIN);
-//			} else {
-//				setStatus(Status_Game.PLAY);
-//			}
-//		}
-		
-		
+		// checkAttempts();
+		// System.out.println("Status here: "+status);
+		// getVerdict(secretCode, Integer.parseInt(input));
+		// if (!answerToGive.equals(answer)) {
+		// setError("Wrong answer!, should be " + answerToGive);
+		// } else {
+		// setError("");
+		//
+		// if (Integer.parseInt(input) == (secretCode)) {
+		// setStatus(Status_Game.WIN);
+		// } else {
+		// setStatus(Status_Game.PLAY);
+		// }
+		// }
+
 	}
 
 	public int[] intToArray(int code) {
@@ -151,7 +149,7 @@ public abstract class Game extends Check {
 			status = Status_Game.SETUP;
 		} else if (input.equalsIgnoreCase("n")) {
 			reset();
-			status = Status_Game.END;
+			status = Status_Game.EXIT;
 		} else {
 			error = InputStatus.WRONGCHARACTER.getOutput();
 		}

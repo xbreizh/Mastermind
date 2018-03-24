@@ -3,12 +3,11 @@ package menu;
 import check.Check;
 import game.GamesList;
 
-public class Menu extends Check{
+public class Menu extends Check {
 
 	String[] validList;
 	Status_Menu status;
 	GamesList game;
-	
 
 	public GamesList getGame() {
 		return game;
@@ -17,33 +16,39 @@ public class Menu extends Check{
 	public Menu() {
 
 	}
-	
-	public boolean validGame(){
+
+	public boolean validGame() {
 		setNbChar(1);
 		initValidGameList();
-		valid=validList;
-		if(isEmpty())return false;
-		if(!isInteger())return false;
-		if(!checkIfInArrayNumber())return false;
-		game=GamesList.values()[Integer.valueOf(input)-1];
+		valid = validList;
+		if (isEmpty())
+			return false;
+		if (!isInteger())
+			return false;
+		if (!checkIfInArrayNumber())
+			return false;
+		game = GamesList.values()[Integer.valueOf(input) - 1];
 		return true;
-		
+
 	}
-	
-	public void readArray(){
+
+	public void readArray() {
 		for (int i = 0; i < valid.length; i++) {
 			System.out.println(valid[i]);
 		}
 	}
-	
-	public boolean validMode(){
+
+	public boolean validMode() {
 		initValidModeList();
-		valid=validList;
-		if(isEmpty())return false;
-		if(!isInteger())return false;	
-		if(!checkIfInArrayNumber())return false;
+		valid = validList;
+		if (isEmpty())
+			return false;
+		if (!isInteger())
+			return false;
+		if (!checkIfInArrayNumber())
+			return false;
 		return true;
-		
+
 	}
 
 	public void initValidGameList() {

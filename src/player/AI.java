@@ -8,7 +8,7 @@ import application.Configuration;
 public class AI extends Player {
 
 	private String newProposition = "";
-//	Settings conf = Settings.getConfiguration();
+	// Settings conf = Settings.getConfiguration();
 
 	@Override
 	public String input() {
@@ -18,12 +18,11 @@ public class AI extends Player {
 	@Override
 	public void guessMasterMind() {
 		input = Integer.toString(ThreadLocalRandom.current().nextInt(1000, 9999));
-		
+
 		waiting();
-		
+
 	}
 
-	
 	protected void waiting() {
 		try {
 			Thread.sleep(1000);
@@ -32,22 +31,21 @@ public class AI extends Player {
 		}
 	}
 
-
-//	public void giveFeedback() {
-//		int[] a = intToArray(Integer.parseInt(codeToFind));
-//		int[] b = intToArray(Integer.parseInt(input));
-//		String str = "";
-//		for (int i = 0; i < a.length; i++) {
-//			if (a[i] == b[i]) {
-//				str += "=";
-//			} else if (a[i] < b[i]) {
-//				str += "-";
-//			} else if (a[i] > b[i]) {
-//				str += "+";
-//			}
-//		}
-//		input = str;
-//	}
+	// public void giveFeedback() {
+	// int[] a = intToArray(Integer.parseInt(codeToFind));
+	// int[] b = intToArray(Integer.parseInt(input));
+	// String str = "";
+	// for (int i = 0; i < a.length; i++) {
+	// if (a[i] == b[i]) {
+	// str += "=";
+	// } else if (a[i] < b[i]) {
+	// str += "-";
+	// } else if (a[i] > b[i]) {
+	// str += "+";
+	// }
+	// }
+	// input = str;
+	// }
 
 	public int[] intToArray(int code) {
 		int[] tab = new int[Configuration.nbDigits];
@@ -60,7 +58,6 @@ public class AI extends Player {
 		}
 		return tab;
 	}
-
 
 	public String getNewProposition() {
 		return newProposition;
@@ -88,7 +85,7 @@ public class AI extends Player {
 			input = newInput;
 			waiting();
 		}
-		
+
 	}
 
 	@Override
@@ -108,49 +105,47 @@ public class AI extends Player {
 			}
 		}
 		input = str;
-		
-	}
 
-	
+	}
 
 	@Override
 	public void replyMasterMind() {
 		int[] a = intToArray((Integer.parseInt(codeToFind)));
 		int[] b = intToArray(Integer.parseInt(input));
-		
-		ArrayList<Integer> aa=new ArrayList<>();
-		ArrayList<Integer> bb=new ArrayList<>();
-		int found=0;
-		int	placed=0;
-		
+
+		ArrayList<Integer> aa = new ArrayList<>();
+		ArrayList<Integer> bb = new ArrayList<>();
+		int found = 0;
+		int placed = 0;
+
 		arrayToList(a, aa);
 		arrayToList(b, bb);
-		
+
 		for (int i = 0; i < bb.size(); i++) {
-			if(aa.get(i)==bb.get(i)){
-				bb.set(i,i*10);
+			if (aa.get(i) == bb.get(i)) {
+				bb.set(i, i * 10);
 				placed++;
 			}
 			for (int j = 0; j < bb.size(); j++) {
-				
-				if(aa.get(j)==bb.get(i)){
-					bb.set(i,i*10);
+
+				if (aa.get(j) == bb.get(i)) {
+					bb.set(i, i * 10);
 					found++;
-					
+
 				}
-				
+
 			}
-			
-			
+
 		}
-		input=found+""+placed;
-		
+		input = found + "" + placed;
+
 	}
-	void arrayToList(int[] array, ArrayList<Integer> aList){
+
+	void arrayToList(int[] array, ArrayList<Integer> aList) {
 		for (int i = 0; i < array.length; i++) {
 			aList.add(array[i]);
 		}
-		
+
 	}
 
 }

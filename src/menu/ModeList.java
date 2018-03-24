@@ -1,19 +1,17 @@
 package menu;
 
 public enum ModeList {
-	
+
 	CHALLENGER(1), DEFENDER(2), DUAL(3);
-	
+
 	int i;
-	
-	ModeList(int i){
-		this.i=i;
+
+	ModeList(int i) {
+		this.i = i;
 	}
 
-	
-	
-private String output;
-	
+	private String output;
+
 	public int geti() {
 		return i;
 	}
