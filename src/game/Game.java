@@ -117,7 +117,11 @@ public abstract class Game extends Check {
 	}
 
 	public void validPlayAgain() {
-		if (input.equalsIgnoreCase("y")) {
+		error="";
+		System.out.println("Input: "+input);
+		if(isEmpty()){
+			error = IStatus.getOutput();
+		}else if (input.equalsIgnoreCase("y")) {
 			reset();
 			status = Status_Game.SETUP;
 		} else if (input.equalsIgnoreCase("n")) {
@@ -127,6 +131,22 @@ public abstract class Game extends Check {
 			error = InputStatus.WRONGCHARACTER.getOutput();
 		}
 
+	}
+	public void validExit(){
+		error="";
+		System.out.println("Input: "+input);
+		if(input.isEmpty()){
+			error = IStatus.getOutput();
+		}else if (input.equalsIgnoreCase("y")) {
+			reset();
+			status = null;
+		} else if (input.equalsIgnoreCase("n")) {
+			reset();
+			status = Status_Game.END;
+		} else {
+			error = InputStatus.WRONGCHARACTER.getOutput();
+		}
+		
 	}
 
 	// Getters and Setters

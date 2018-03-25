@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import application.Configuration;
 import application.Log4J;
-import check.InputStatus;
 import game.Game;
 import game.GameFactory;
 import game.Status_Game;
@@ -87,13 +86,6 @@ public class Controller {
 		while(stGame==Status_Game.EXIT){
 			checkStatusGame();
 			}
-//			view.displayOutput(stGame.getOutput());
-//			p0.input();
-//			if(p0.getInput().equalsIgnoreCase("y")){
-//				stMenu = Status_Menu.MENU_GAME;
-//				updateStatusGame(null);
-//				switchMenu();
-//			}
 			if(stGame==null){
 				stMenu = Status_Menu.MENU_GAME;
 				switchMenu();
@@ -101,7 +93,6 @@ public class Controller {
 			else {
 				checkStatusGame();
 			}
-//		}
 	}
 
 	private void checkStatusMenu() {
@@ -139,7 +130,6 @@ public class Controller {
 		view.displayOutput(stGame.getOutput());
 		switch (stGame) {
 		case SETUP:
-//			view.displayOutput("Game "+dual+"\n"+p1.getName()+" - "+stGame.getOutput());
 			view.displayOutput(p1.getName());
 			p1.input();
 			p1.setCodeToFind(p1.getInput());
@@ -148,8 +138,6 @@ public class Controller {
 			log.info("Secret Code: " + game.getInput());
 			break;
 		case PLAY:
-//			view.displayOutput(p2.getName()+" - "+stGame.getOutput()+
-//					" Attempt: "+Integer.toString(game.getAttempts())+"/"+Configuration.getMax_attempts());
 			view.displayOutput(p2.getName()+" Attempt: "+Integer.toString(game.getAttempts())+"/"+Configuration.getMax_attempts());
 			p2.tryToGuess();
 			game.setInput(p2.getInput());
@@ -162,52 +150,34 @@ public class Controller {
 			p1.replyToGuess();
 			game.setAnswer(p1.getInput());
 			game.validAnswer();
-//			view.displayOutput(game.getOutput());
 			p2.setAnswer(game.getOutput());
 			break;
 		case NO_MORE_TRIES:
-//			view.displayOutput(stGame.getOutput());
-//			game.reset();
-			
 			game.gameResult(p1, p2);
 			updateStatusGame(Status_Game.VERDICT);
 			System.out.println("verdict");
 			break;
 		case FOUND:
-//			view.displayOutput(stGame.getOutput());
-//			game.reset();
 			game.gameResult(p2, p1);
 			updateStatusGame(Status_Game.VERDICT);
 			stGame=game.getStatus();
 		case VERDICT:
-//			checkError();
-//			view.displayOutput(stGame.getOutput());
 			updateStatusGame(game.getStatus());
 			round++;
 			break;
 		case REPLAY:
-			
-//			view.displayOutput(stGame.getOutput());
 			p0.input();
 			game.setInput(p0.getInput());
 			game.validPlayAgain();
 			updateStatusGame(game.getStatus());
 			break;
 		case EXIT:
-//			view.displayOutput(stGame.getOutput());
 			p0.input();
-			if(p0.getInput().equalsIgnoreCase("y")){
-//				stMenu = Status_Menu.MENU_GAME;
-				updateStatusGame(null);
-//				switchMenu();
-			}
-			else if(p0.getInput().equalsIgnoreCase("n")){
-				updateStatusGame(Status_Game.END);
-//				view.displayOutput(stGame.getOutput());
-			}
+			game.setInput(p0.getInput());
+			game.validExit();
+			updateStatusGame(game.getStatus());
 			break;
 		case END:
-//			view.displayOutput(stGame.getOutput());
 			break;
 		default:
 			break;
