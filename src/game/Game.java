@@ -78,6 +78,7 @@ public abstract class Game extends Check {
 		attempts++;
 
 	}
+	
 
 	protected int[] intToArray(int code) {
 		int[] tab = new int[Configuration.getNbDigits()];
@@ -118,7 +119,6 @@ public abstract class Game extends Check {
 	public void validPlayAgain() {
 		if (input.equalsIgnoreCase("y")) {
 			reset();
-			output = "There you go again!";
 			status = Status_Game.SETUP;
 		} else if (input.equalsIgnoreCase("n")) {
 			reset();

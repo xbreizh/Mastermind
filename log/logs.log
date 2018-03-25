@@ -1,46 +1,118 @@
-21:45:31 Line 40  INFO [main] - switchMenu - MENU_GAME
-21:45:31 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
-21:45:32 Line 280  WARN [main] - checkMenuError - Nothing entered
-21:45:32 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
-21:45:34 Line 280  WARN [main] - checkMenuError - Invalid Input
-21:45:34 Line 116  INFO [main] - checkStatusMenu - MENU_GAME
-21:45:36 Line 125  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
-21:45:36 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
-21:45:38 Line 280  WARN [main] - checkMenuError - Nothing entered
-21:45:38 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
-21:45:39 Line 280  WARN [main] - checkMenuError - Not an Integer
-21:45:39 Line 116  INFO [main] - checkStatusMenu - MENU_MODE
-21:45:43 Line 133  INFO [main] - checkStatusMenu - DUAL
-21:45:43 Line 116  INFO [main] - checkStatusMenu - GAME
-21:45:43 Line 255  INFO [main] - initGame - player.Human
-21:45:43 Line 256  INFO [main] - initGame - player.Human
-21:45:43 Line 257  INFO [main] - initGame - MoreLess
-21:45:43 Line 258  INFO [main] - initGame - Number of games: 2
-21:45:43 Line 58  INFO [main] - play - SETUP
-21:45:43 Line 145  INFO [main] - checkStatusGame - SETUP
-21:45:45 Line 153  INFO [main] - checkStatusGame - Secret Code: s
-21:45:45 Line 288  WARN [main] - checkError - Not an Integer
-21:45:45 Line 145  INFO [main] - checkStatusGame - SETUP
-21:45:48 Line 153  INFO [main] - checkStatusGame - Secret Code: 3
-21:45:48 Line 288  WARN [main] - checkError - Invalid Input
-21:45:48 Line 145  INFO [main] - checkStatusGame - SETUP
-21:45:51 Line 153  INFO [main] - checkStatusGame - Secret Code: 1212
-21:45:51 Line 145  INFO [main] - checkStatusGame - PLAY
-21:45:53 Line 145  INFO [main] - checkStatusGame - ANSWER
-21:45:53 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
-21:45:55 Line 288  WARN [main] - checkError - Wrong answer!, should be ====
-21:45:55 Line 145  INFO [main] - checkStatusGame - ANSWER
-21:45:55 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
-21:45:58 Line 145  INFO [main] - checkStatusGame - FOUND
-21:45:58 Line 58  INFO [main] - play - SETUP
-21:45:58 Line 145  INFO [main] - checkStatusGame - SETUP
-21:46:00 Line 153  INFO [main] - checkStatusGame - Secret Code: 1212
-21:46:00 Line 145  INFO [main] - checkStatusGame - PLAY
-21:46:01 Line 145  INFO [main] - checkStatusGame - ANSWER
-21:46:01 Line 165  INFO [main] - checkStatusGame - Code to find: 1212
-21:46:03 Line 145  INFO [main] - checkStatusGame - FOUND
-21:46:03 Line 145  INFO [main] - checkStatusGame - REPLAY
-21:46:05 Line 288  WARN [main] - checkError - Invalid Input
-21:46:05 Line 288  WARN [main] - checkError - Invalid Input
-21:46:05 Line 58  INFO [main] - play - SETUP
-21:46:05 Line 145  INFO [main] - checkStatusGame - SETUP
+19:12:03 Line 41  INFO [main] - switchMenu - MENU_GAME
+19:12:03 Line 108  INFO [main] - checkStatusMenu - MENU_GAME
+19:12:04 Line 117  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
+19:12:04 Line 108  INFO [main] - checkStatusMenu - MENU_MODE
+19:12:04 Line 125  INFO [main] - checkStatusMenu - CHALLENGER
+19:12:05 Line 108  INFO [main] - checkStatusMenu - GAME
+19:12:05 Line 248  INFO [main] - initGame - player.AI
+19:12:05 Line 249  INFO [main] - initGame - player.Human
+19:12:05 Line 250  INFO [main] - initGame - MoreLess
+19:12:05 Line 251  INFO [main] - initGame - Number of games: 1
+19:12:05 Line 59  INFO [main] - play - SETUP
+19:12:05 Line 137  INFO [main] - checkStatusGame - SETUP
+19:12:05 Line 148  INFO [main] - checkStatusGame - Secret Code: 6217
+19:12:05 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:09 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:09 Line 161  INFO [main] - checkStatusGame - Code to find: 6217
+19:12:09 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:10 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:10 Line 161  INFO [main] - checkStatusGame - Code to find: 6217
+19:12:10 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:11 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:11 Line 161  INFO [main] - checkStatusGame - Code to find: 6217
+19:12:11 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:14 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:14 Line 161  INFO [main] - checkStatusGame - Code to find: 6217
+19:12:14 Line 137  INFO [main] - checkStatusGame - NO_MORE_TRIES
+19:12:14 Line 137  INFO [main] - checkStatusGame - REPLAY
+19:12:18 Line 59  INFO [main] - play - SETUP
+19:12:18 Line 137  INFO [main] - checkStatusGame - SETUP
+19:12:18 Line 148  INFO [main] - checkStatusGame - Secret Code: 1844
+19:12:18 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:20 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:20 Line 161  INFO [main] - checkStatusGame - Code to find: 1844
+19:12:20 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:20 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:20 Line 161  INFO [main] - checkStatusGame - Code to find: 1844
+19:12:20 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:21 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:21 Line 161  INFO [main] - checkStatusGame - Code to find: 1844
+19:12:21 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:22 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:22 Line 161  INFO [main] - checkStatusGame - Code to find: 1844
+19:12:22 Line 137  INFO [main] - checkStatusGame - NO_MORE_TRIES
+19:12:22 Line 137  INFO [main] - checkStatusGame - REPLAY
+19:12:26 Line 137  INFO [main] - checkStatusGame - EXIT
+19:12:27 Line 41  INFO [main] - switchMenu - MENU_GAME
+19:12:27 Line 108  INFO [main] - checkStatusMenu - MENU_GAME
+19:12:29 Line 117  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
+19:12:29 Line 108  INFO [main] - checkStatusMenu - MENU_MODE
+19:12:30 Line 125  INFO [main] - checkStatusMenu - DUAL
+19:12:30 Line 108  INFO [main] - checkStatusMenu - GAME
+19:12:30 Line 248  INFO [main] - initGame - player.Human
+19:12:30 Line 249  INFO [main] - initGame - player.Human
+19:12:30 Line 250  INFO [main] - initGame - MoreLess
+19:12:30 Line 251  INFO [main] - initGame - Number of games: 2
+19:12:30 Line 59  INFO [main] - play - SETUP
+19:12:30 Line 137  INFO [main] - checkStatusGame - SETUP
+19:12:32 Line 148  INFO [main] - checkStatusGame - Secret Code: 1212
+19:12:32 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:33 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:33 Line 161  INFO [main] - checkStatusGame - Code to find: 1212
+19:12:36 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:36 Line 282  WARN [main] - checkError - Wrong answer!, should be ====
+19:12:36 Line 161  INFO [main] - checkStatusGame - Code to find: 1212
+19:12:38 Line 137  INFO [main] - checkStatusGame - FOUND
+19:12:38 Line 59  INFO [main] - play - SETUP
+19:12:38 Line 137  INFO [main] - checkStatusGame - SETUP
+19:12:40 Line 148  INFO [main] - checkStatusGame - Secret Code: 1212
+19:12:40 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:41 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:41 Line 161  INFO [main] - checkStatusGame - Code to find: 1212
+19:12:42 Line 137  INFO [main] - checkStatusGame - FOUND
+19:12:42 Line 137  INFO [main] - checkStatusGame - REPLAY
+19:12:51 Line 59  INFO [main] - play - SETUP
+19:12:51 Line 137  INFO [main] - checkStatusGame - SETUP
+19:12:54 Line 148  INFO [main] - checkStatusGame - Secret Code: 1212
+19:12:54 Line 137  INFO [main] - checkStatusGame - PLAY
+19:12:56 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:12:56 Line 161  INFO [main] - checkStatusGame - Code to find: 1212
+19:12:58 Line 137  INFO [main] - checkStatusGame - FOUND
+19:12:58 Line 59  INFO [main] - play - SETUP
+19:12:58 Line 137  INFO [main] - checkStatusGame - SETUP
+19:13:00 Line 148  INFO [main] - checkStatusGame - Secret Code: 1212
+19:13:00 Line 137  INFO [main] - checkStatusGame - PLAY
+19:13:01 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:13:01 Line 161  INFO [main] - checkStatusGame - Code to find: 1212
+19:13:02 Line 137  INFO [main] - checkStatusGame - FOUND
+19:13:02 Line 137  INFO [main] - checkStatusGame - REPLAY
+19:13:05 Line 137  INFO [main] - checkStatusGame - EXIT
+19:13:08 Line 41  INFO [main] - switchMenu - MENU_GAME
+19:13:08 Line 108  INFO [main] - checkStatusMenu - MENU_GAME
+19:13:09 Line 117  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
+19:13:09 Line 108  INFO [main] - checkStatusMenu - MENU_MODE
+19:13:09 Line 125  INFO [main] - checkStatusMenu - CHALLENGER
+19:13:09 Line 108  INFO [main] - checkStatusMenu - GAME
+19:13:09 Line 248  INFO [main] - initGame - player.AI
+19:13:09 Line 249  INFO [main] - initGame - player.Human
+19:13:09 Line 250  INFO [main] - initGame - MoreLess
+19:13:09 Line 251  INFO [main] - initGame - Number of games: 1
+19:13:09 Line 59  INFO [main] - play - SETUP
+19:13:09 Line 137  INFO [main] - checkStatusGame - SETUP
+19:13:09 Line 148  INFO [main] - checkStatusGame - Secret Code: 4404
+19:13:09 Line 137  INFO [main] - checkStatusGame - PLAY
+19:13:11 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:13:11 Line 161  INFO [main] - checkStatusGame - Code to find: 4404
+19:13:11 Line 137  INFO [main] - checkStatusGame - PLAY
+19:13:11 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:13:11 Line 161  INFO [main] - checkStatusGame - Code to find: 4404
+19:13:11 Line 137  INFO [main] - checkStatusGame - PLAY
+19:13:12 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:13:12 Line 161  INFO [main] - checkStatusGame - Code to find: 4404
+19:13:12 Line 137  INFO [main] - checkStatusGame - PLAY
+19:13:13 Line 137  INFO [main] - checkStatusGame - ANSWER
+19:13:13 Line 161  INFO [main] - checkStatusGame - Code to find: 4404
+19:13:13 Line 137  INFO [main] - checkStatusGame - NO_MORE_TRIES
+19:13:13 Line 137  INFO [main] - checkStatusGame - REPLAY
+19:13:15 Line 137  INFO [main] - checkStatusGame - EXIT
+19:13:17 Line 137  INFO [main] - checkStatusGame - END

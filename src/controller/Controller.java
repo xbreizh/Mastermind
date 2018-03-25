@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import application.Configuration;
 import application.Log4J;
+import check.InputStatus;
 import game.Game;
 import game.GameFactory;
 import game.Status_Game;
@@ -49,68 +50,59 @@ public class Controller {
 	}
 	
 	private void play(){
-		for (int i=0; i < gameArray.length; i++) {
+		round=0;
+		for (int i=round; i < gameArray.length; i++) {
 			System.out.println("Array: "+gameArray.length);
 			game=gameArray[i];
 			p1=gameArray[i].getP1();
 			p2=gameArray[i].getP2();
-//			checkError();
 			log.info(stGame);
-//			stGame = game.getStatus();
 			while (stGame != Status_Game.VERDICT) {
-				checkError();
-				stGame = game.getStatus();
+				
+				checkStatusGame();
+				updateStatusGame(game.getStatus());
+			}
+			System.out.println("round: "+round);
+			view.displayOutput(game.getVerdict());
+			updateStatusGame(Status_Game.SETUP);
+		}	
+		
+		updateStatusGame(Status_Game.REPLAY);
+		checkStatusGame();
+		checkKeepPlaying();
+	}
+	
+	private void checkKeepPlaying(){
+		while(stGame==Status_Game.REPLAY){
+			checkStatusGame();
+		}
+		if(stGame==Status_Game.SETUP){
+			play();
+		}else{
+		endGame();
+		}
+	}
+	
+	private void endGame(){
+		while(stGame==Status_Game.EXIT){
+			checkStatusGame();
+			}
+//			view.displayOutput(stGame.getOutput());
+//			p0.input();
+//			if(p0.getInput().equalsIgnoreCase("y")){
+//				stMenu = Status_Menu.MENU_GAME;
+//				updateStatusGame(null);
+//				switchMenu();
+//			}
+			if(stGame==null){
+				stMenu = Status_Menu.MENU_GAME;
+				switchMenu();
+			}
+			else {
 				checkStatusGame();
 			}
-			game.setStatus(Status_Game.SETUP);
-			stGame = game.getStatus();
-			System.out.println("here");
-		}
-		stGame=Status_Game.REPLAY;
-//		checkStatusGame();
-		endGame();
-	}
-	private void endGame(){
-		checkStatusGame();
-		checkError();
-		while(stMenu != Status_Menu.MENU_GAME && stGame!=Status_Game.END ){
-			checkError();
-			stGame=game.getStatus();
-			if(stGame==Status_Game.SETUP){
-				round=0;
-				play();
-			}
-			checkStatusGame();
-			
-		}
-		if(stMenu == Status_Menu.MENU_GAME){
-			switchMenu();
-		}else if(stGame==Status_Game.END){
-			checkStatusGame();
-		}
-	}
-
-//	private void switchGame() {	
-//		
-//			
-//		
-//		checkError();
-//		log.info(stGame);
-//		stGame = game.getStatus();
-//		while (stGame != Status_Game.END && stMenu != Status_Menu.MENU_GAME) {
-//			checkError();
-//			stGame = game.getStatus();
-//			checkStatusGame();
-//
 //		}
-//		if (stMenu == Status_Menu.MENU_GAME) {
-//			switchMenu();
-//		} else {
-//			view.displayOutput(stGame.getOutput());
-//		}
-//
-//
-//	}
+	}
 
 	private void checkStatusMenu() {
 		log.info(stMenu);
@@ -143,9 +135,12 @@ public class Controller {
 
 	private void checkStatusGame() {
 		log.info(stGame);
+		checkError();
+		view.displayOutput(stGame.getOutput());
 		switch (stGame) {
 		case SETUP:
-			view.displayOutput("Game "+dual+"\n"+p1.getName()+" - "+stGame.getOutput());
+//			view.displayOutput("Game "+dual+"\n"+p1.getName()+" - "+stGame.getOutput());
+			view.displayOutput(p1.getName());
 			p1.input();
 			p1.setCodeToFind(p1.getInput());
 			game.setInput(p1.getCodeToFind());
@@ -153,8 +148,9 @@ public class Controller {
 			log.info("Secret Code: " + game.getInput());
 			break;
 		case PLAY:
-			view.displayOutput(p2.getName()+" - "+stGame.getOutput()+
-					" Attempt: "+Integer.toString(game.getAttempts())+"/"+Configuration.getMax_attempts());
+//			view.displayOutput(p2.getName()+" - "+stGame.getOutput()+
+//					" Attempt: "+Integer.toString(game.getAttempts())+"/"+Configuration.getMax_attempts());
+			view.displayOutput(p2.getName()+" Attempt: "+Integer.toString(game.getAttempts())+"/"+Configuration.getMax_attempts());
 			p2.tryToGuess();
 			game.setInput(p2.getInput());
 			p1.setInput(p2.getInput());
@@ -166,56 +162,54 @@ public class Controller {
 			p1.replyToGuess();
 			game.setAnswer(p1.getInput());
 			game.validAnswer();
-			view.displayOutput(game.getOutput());
+//			view.displayOutput(game.getOutput());
 			p2.setAnswer(game.getOutput());
 			break;
 		case NO_MORE_TRIES:
-			view.displayOutput(stGame.getOutput());
+//			view.displayOutput(stGame.getOutput());
 //			game.reset();
 			
 			game.gameResult(p1, p2);
-			game.setStatus(Status_Game.VERDICT);
+			updateStatusGame(Status_Game.VERDICT);
+			System.out.println("verdict");
 			break;
 		case FOUND:
-			view.displayOutput(stGame.getOutput());
+//			view.displayOutput(stGame.getOutput());
 //			game.reset();
 			game.gameResult(p2, p1);
-			game.setStatus(Status_Game.VERDICT);
+			updateStatusGame(Status_Game.VERDICT);
 			stGame=game.getStatus();
 		case VERDICT:
-			view.displayOutput(game.getVerdict());
-//			game.setStatus(Status_Game.REPLAY);
-//			game.reset();
-			round=0;
+//			checkError();
+//			view.displayOutput(stGame.getOutput());
+			updateStatusGame(game.getStatus());
+			round++;
 			break;
 		case REPLAY:
-//			if (dual != 2) {
-			game.reset();
-				view.displayOutput(stGame.getOutput());
-				p0.input();
-				game.setInput(p0.getInput());
-				game.validPlayAgain();
-				
-//				endGame();
-				
-//			} else {
-//				view.displayOutput("Game " + (dual - 1) + " over!");
-//				dual--;
-//				game.setStatus(Status_Game.SETUP);
-//			}
+			
+//			view.displayOutput(stGame.getOutput());
+			p0.input();
+			game.setInput(p0.getInput());
+			game.validPlayAgain();
+			updateStatusGame(game.getStatus());
 			break;
 		case EXIT:
-			view.displayOutput(stGame.getOutput());
+//			view.displayOutput(stGame.getOutput());
 			p0.input();
 			if(p0.getInput().equalsIgnoreCase("y")){
-				stMenu = Status_Menu.MENU_GAME;
+//				stMenu = Status_Menu.MENU_GAME;
+				updateStatusGame(null);
+//				switchMenu();
 			}
-			if(p0.getInput().equalsIgnoreCase("n")){
-				stGame = Status_Game.END;
+			else if(p0.getInput().equalsIgnoreCase("n")){
+				updateStatusGame(Status_Game.END);
+//				view.displayOutput(stGame.getOutput());
 			}
 			break;
 		case END:
-			view.displayOutput(stGame.getOutput());
+//			view.displayOutput(stGame.getOutput());
+			break;
+		default:
 			break;
 
 		}
@@ -246,10 +240,9 @@ public class Controller {
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 		game = gameArray[i];
-		stGame = Status_Game.SETUP;
-		game.setStatus(stGame);
-//		round++;
-//		System.out.println("Round: "+round);
+		updateStatusGame(Status_Game.SETUP);
+//		stGame = Status_Game.SETUP;
+//		game.setStatus(stGame);
 	}
 		dual=gameArray.length;
 		log.info(p1.getClass().getName());
@@ -262,6 +255,7 @@ public class Controller {
 
 	}
 	private void setNames(){
+		System.out.println("Set Names!!");
 		if(p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)){
 			p1.setName("Paul");
 			p2.setName("John");
@@ -289,6 +283,14 @@ public class Controller {
 			view.displayError(error);
 		}
 	}
+	private void updateStatusGame(Status_Game status){
+		this.stGame=status;
+		game.setStatus(status);
+	}
+//	private void updateStatusMenu(Status_Menu status){
+//		this.stMenu=status;
+//		menu.setStatus(status);
+//	}
 
 	// Getters and Setters
 

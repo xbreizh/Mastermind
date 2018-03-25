@@ -5,7 +5,7 @@ import check.Check;
 public class Menu extends Check {
 
 	String[] validList;
-	Status_Menu status;
+//	Status_Menu status;
 	GamesList game;
 
 	public GamesList getGame() {

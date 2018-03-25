@@ -7,7 +7,7 @@ public enum Status_Game {
 	PLAY("Find the code! ( "+Configuration.getNbDigits()+" digits)"),
 	ANSWER("Answer:"),
 	EXIT("End of the game!\nDo you want to play again?( Y / N )"),
-	VERDICT("Congratulations, You won!"),
+	VERDICT(""),
 	REPLAY("Do you want to restart the game?( Y / N )"),
 	NO_MORE_TRIES("No more tries available!"),
 	END("Thanks for playing!"), 
