@@ -17,21 +17,21 @@ public abstract class Player {
 	// Abstract methods
 	public abstract String input();
 
-	public abstract void guessMoreless();
+	public abstract void tryToGuessMoreless();
 
 	public abstract void replyMoreless();
 
-	public abstract void guessMasterMind();
+	public abstract void tryToGuessMasterMind();
 
 	public abstract void replyMasterMind();
 
 	// Trying to guess the result
 	public void tryToGuess() {
 		if (game.equals(GamesList.MoreLess)) {
-			guessMoreless();
+			tryToGuessMoreless();
 		}
 		if (game.equals(GamesList.MasterMind)) {
-			guessMasterMind();
+			tryToGuessMasterMind();
 		}
 	}
 

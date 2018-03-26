@@ -16,7 +16,31 @@ public class AI extends Player {
 	}
 
 	@Override
-	public void guessMasterMind() {
+	public void tryToGuessMoreless() {
+		if (input.length() == 0) {
+			input = "5555";
+		} else {
+			String newInput = "";
+			for (int i = 0; i < input.length(); i++) {
+				int a = Character.getNumericValue(input.charAt(i));
+				if (feedBack.substring(i, i + 1).equals("=")) {
+					newInput += a;
+				}
+				if (feedBack.substring(i, i + 1).equals("-")) {
+					newInput += (a - 1);
+
+				}
+				if (feedBack.substring(i, i + 1).equals("+")) {
+					newInput += (a + 1);
+				}
+			}
+			input = newInput;
+			waiting();
+		}
+
+	}
+	@Override
+	public void tryToGuessMasterMind() {
 		input = Integer.toString(ThreadLocalRandom.current().nextInt(1000, 9999));
 
 		waiting();
@@ -47,30 +71,7 @@ public class AI extends Player {
 		return newProposition;
 	}
 
-	@Override
-	public void guessMoreless() {
-		if (input.length() == 0) {
-			input = "5555";
-		} else {
-			String newInput = "";
-			for (int i = 0; i < input.length(); i++) {
-				int a = Character.getNumericValue(input.charAt(i));
-				if (feedBack.substring(i, i + 1).equals("=")) {
-					newInput += a;
-				}
-				if (feedBack.substring(i, i + 1).equals("-")) {
-					newInput += (a - 1);
-
-				}
-				if (feedBack.substring(i, i + 1).equals("+")) {
-					newInput += (a + 1);
-				}
-			}
-			input = newInput;
-			waiting();
-		}
-
-	}
+	
 
 	@Override
 	public void replyMoreless() {

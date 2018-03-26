@@ -4,6 +4,7 @@ import controller.Controller;
 import game.GameFactory;
 import menu.Menu;
 import player.Human;
+import player.Player;
 import view.View;
 
 public class Main {
@@ -16,7 +17,9 @@ public class Main {
 		View view = new View();
 		Controller ct = new Controller();
 		Menu menu = new Menu();
-		ct.setP0(new Human());
+		Player player =new Human();
+		ct.setP0(player);
+		menu.setPlayer(player);
 		ct.setMenu(menu);
 		ct.setView(view);
 		ct.switchMenu();

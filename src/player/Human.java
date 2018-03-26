@@ -11,7 +11,7 @@ public class Human extends Player {
 	}
 
 	@Override
-	public void guessMoreless() {
+	public void tryToGuessMoreless() {
 		input();
 
 	}
@@ -23,7 +23,7 @@ public class Human extends Player {
 	}
 
 	@Override
-	public void guessMasterMind() {
+	public void tryToGuessMasterMind() {
 		input();
 
 	}

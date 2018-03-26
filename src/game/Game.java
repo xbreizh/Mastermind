@@ -3,6 +3,7 @@ package game;
 import application.Configuration;
 import check.Check;
 import check.InputStatus;
+import menu.GamesList;
 import player.Player;
 
 public abstract class Game extends Check {
@@ -22,6 +23,7 @@ public abstract class Game extends Check {
 
 	protected String answer = "";
 	protected String verdict = "";
+	protected String[] yesOrNo={"y", "n"};
 
 	// Constructor
 	public Game(Player p1, Player p2) {
@@ -34,13 +36,16 @@ public abstract class Game extends Check {
 	abstract void getVerdict(int a, int b);
 
 	public void validSetup() {
+		// Gets input from Player 1
+//		p1.input();
+		input=p1.input();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
 					setSecretCode(Integer.parseInt(input));
-					secretCodeArray = intToArray(secretCode); // converts
-																// secretCode
-																// into array
+					// converts secretCode into array
+					secretCodeArray = intToArray(secretCode); 
+					p1.setCodeToFind(input);
 					setStatus(Status_Game.PLAY);
 					setError("");
 				} else {
@@ -55,17 +60,17 @@ public abstract class Game extends Check {
 		incrementAttempt();
 	}
 
-	public void validInput() {
+	public void validPlay() {
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
 					setStatus(Status_Game.ANSWER);
 					incrementAttempt();
 					setError("");
-				} else {
+				}else {
 					error = IStatus.getOutput();
 				}
-			} else {
+			}else {
 				error = IStatus.getOutput();
 			}
 		} else {
@@ -74,9 +79,43 @@ public abstract class Game extends Check {
 
 	}
 
+	// overwritten in game subclasses(Mastermind / MoreLess)
 	public void validAnswer() {
-		attempts++;
+		
 
+	}
+	
+	public String gameVerdict(Player winner, Player loser) {
+
+		verdict = winner.getName() + " wins!  " + loser.getName() + " loses!";
+		return verdict;
+	}
+	
+	public void validPlayAgain() {
+		checkYesOrNo(Status_Game.SETUP, Status_Game.EXIT);
+
+	}
+
+	
+	
+	public void validExit(){
+		checkYesOrNo(null, Status_Game.END);
+		
+	}
+	
+	protected void checkYesOrNo(Status_Game yes, Status_Game no) {
+		error="";
+		if(isEmpty()){
+			error = IStatus.getOutput();
+		}else if (input.equalsIgnoreCase("y")) {
+			reset();
+			status = yes;
+		} else if (input.equalsIgnoreCase("n")) {
+			reset();
+			status = no;
+		} else {
+			error = InputStatus.WRONGCHARACTER.getOutput();
+		}
 	}
 	
 
@@ -102,11 +141,7 @@ public abstract class Game extends Check {
 		attempts++;
 	}
 
-	public String gameResult(Player winner, Player loser) {
-
-		verdict = winner.getName() + " wins!  " + loser.getName() + " loses!";
-		return verdict;
-	}
+	
 
 	// resets the game attempts
 	public void reset() {
@@ -116,37 +151,12 @@ public abstract class Game extends Check {
 
 	}
 
-	public void validPlayAgain() {
-		error="";
-		System.out.println("Input: "+input);
-		if(isEmpty()){
-			error = IStatus.getOutput();
-		}else if (input.equalsIgnoreCase("y")) {
-			reset();
-			status = Status_Game.SETUP;
-		} else if (input.equalsIgnoreCase("n")) {
-			reset();
-			status = Status_Game.EXIT;
-		} else {
-			error = InputStatus.WRONGCHARACTER.getOutput();
-		}
 
-	}
-	public void validExit(){
-		error="";
-		System.out.println("Input: "+input);
-		if(input.isEmpty()){
-			error = IStatus.getOutput();
-		}else if (input.equalsIgnoreCase("y")) {
-			reset();
-			status = null;
-		} else if (input.equalsIgnoreCase("n")) {
-			reset();
-			status = Status_Game.END;
-		} else {
-			error = InputStatus.WRONGCHARACTER.getOutput();
-		}
-		
+	
+	public String getOutput() {
+		output = p1.getName() + " answer: " + output;
+
+		return output;
 	}
 
 	// Getters and Setters
@@ -217,12 +227,6 @@ public abstract class Game extends Check {
 	public void setAnswer(String str) {
 		this.answer = str;
 
-	}
-
-	public String getOutput() {
-		output = p1.getName() + " answer: " + output;
-
-		return output;
 	}
 
 	public String getVerdict() {

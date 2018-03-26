@@ -15,7 +15,7 @@
 	    		</layout>
 	    		
                <filter class="org.apache.log4j.varia.LevelMatchFilter">
-                        <param name="LevelToMatch" value="warn" />
+                        <param name="LevelToMatch" value="info" />
                         <param name="AcceptOnMatch" value="true"/>
                 </filter>
                 

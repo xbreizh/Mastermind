@@ -1,12 +1,17 @@
 package menu;
 
 import check.Check;
+import player.Player;
 
 public class Menu extends Check {
 
 	String[] validList;
-//	Status_Menu status;
 	GamesList game;
+	Player player;
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
 	public GamesList getGame() {
 		return game;
@@ -17,9 +22,9 @@ public class Menu extends Check {
 	}
 
 	public boolean validGame() {
+		input=player.input();
 		setNbChar(1);
 		initValidGameList();
-		valid = validList;
 		if (isEmpty())
 			return false;
 		if (!isInteger())
@@ -38,8 +43,9 @@ public class Menu extends Check {
 	}
 
 	public boolean validMode() {
+		input=player.input();
 		initValidModeList();
-		valid = validList;
+//		valid = validList;
 		if (isEmpty())
 			return false;
 		if (!isInteger())
@@ -51,20 +57,20 @@ public class Menu extends Check {
 	}
 
 	public void initValidGameList() {
-		int listLength = GamesList.values().length;
-		validList = new String[listLength];
-		for (int j = 0; j < listLength; j++) {
-			validList[j] = String.valueOf(j + 1);
-		}
+		initValidList(GamesList.values().length);
 	}
 
 	public void initValidModeList() {
 
-		int listLength = ModeList.values().length;
+		initValidList(ModeList.values().length);
+	}
+
+	private void initValidList(int listLength) {
 		validList = new String[listLength];
 		for (int j = 0; j < listLength; j++) {
 			validList[j] = String.valueOf(j + 1);
 		}
+		valid=validList;
 	}
 
 	public String[] getValidList() {

@@ -30,7 +30,7 @@ public class Check {
 
 	}
 
-	public boolean checkIfInArray() {
+	public boolean checkIfInArray(String[] valid) {
 		for (int i = 0; i < input.length(); i++) {
 			int ok = 0;
 			for (int j = 0; j < valid.length; j++) {
