@@ -33,24 +33,42 @@ public abstract class Game extends Check {
 	public Game(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
-		setNames();
+//		setNames();
 	}
 	
-	private void setNames() {
-		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-			nameP1="Paul";
-			nameP2="John";
-		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-			nameP1="Human";
-			nameP2="AI";
-		} else {
-			nameP1="AI";
-			nameP2="Human";
-		}
-	}
+//	private void setNames() {
+//		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
+//			nameP1="Paul";
+//			nameP2="John";
+//		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
+//			nameP1="Human";
+//			nameP2="AI";
+//		} else {
+//			nameP1="AI";
+//			nameP2="Human";
+//		}
+//	}
 
 	// abstracts methods
 	abstract void getVerdict(int a, int b);
+	 
+	public void play(){
+		
+		p2.tryToGuess();
+		
+		setInput(p2.getInput());
+		p1.setInput(p2.getInput());
+		validPlay();
+	}
+	
+	public void answer(){
+		
+		p1.replyToGuess();
+		
+		setAnswer(p1.getInput());
+		validAnswer();
+		p2.setAnswer(output);
+	}
 
 	public void validSetup() {
 		// Gets input from Player 1
@@ -98,7 +116,6 @@ public abstract class Game extends Check {
 
 	// overwritten in game subclasses(Mastermind / MoreLess)
 	public void validAnswer() {
-
 	}
 
 	public String gameVerdict(Player winner, Player loser) {

@@ -45,7 +45,6 @@ public class MasterMind extends Game {
 	}
 
 	public void validAnswer() {
-
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);

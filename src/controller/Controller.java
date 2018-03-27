@@ -11,8 +11,6 @@ import menu.GamesList;
 import menu.Menu;
 import menu.ModeList;
 import menu.Status_Menu;
-import player.AI;
-import player.Human;
 import player.Player;
 import view.View;
 
@@ -27,9 +25,10 @@ public class Controller {
 	private GamesList gameType;
 	private Game game;
 	private Game[] gameArray;
-	private int dual = 0;
+//	private int dual = 0;
 	private Menu menu;
 	private int round = 0;
+	ModeList mode;
 
 	public Controller() {
 		stGame = null;
@@ -58,70 +57,76 @@ public class Controller {
 			log.debug(stMenu + " " + gameType);
 			break;
 		case MENU_MODE:
-//			view.displayOutput(stMenu.getOutput());
 			stMenu = menu.selectAndValidMode(stMenu);
 			if(stMenu == Status_Menu.GAME){
 			gameType = menu.getGame();
+			mode=menu.getMode();
 			log.debug(ModeList.values()[Integer.parseInt(menu.getInput()) - 1]);
 			}
 			break;
 		case GAME:
-			initGame();
+			initGames(gameType,mode );
 			break;
 
 		}
 	}
 	
-	private void initGame() {
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].getReference()))) {
-			p1 = new AI();
-			p2 = new Human();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-
-		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].getReference()))) {
-			p1 = new Human();
-			p2 = new AI();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].getReference()))) {
-			p1 = new Human();
-			p2 = new Human();
-			gameArray = new Game[2];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
-		}
+	private void initGames(GamesList gameType, ModeList mode) {
+//		if (mode.equals(Integer.toString(ModeList.values()[0].getReference()))) {
+//			p1 = new AI();
+//			p2 = new Human();
+//			gameArray = new Game[1];
+//			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+//
+//		}
+//		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].getReference()))) {
+//			p1 = new Human();
+//			p2 = new AI();
+//			gameArray = new Game[1];
+//			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+//		}
+//		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].getReference()))) {
+//			p1 = new Human();
+//			p2 = new Human();
+//			gameArray = new Game[2];
+//			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+//			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
+//		}
+		System.out.println("mode: "+mode);
+		gameArray=GameFactory.createGameArray(gameType, mode);
+		
 
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			game = gameArray[i];
 			updateStatusGame(Status_Game.SETUP);
 		}
-		dual = gameArray.length;
-		log.debug(p1.getClass().getName());
-		log.debug(p2.getClass().getName());
-		log.debug(gameType);
-		log.debug("Number of games: " + dual);
-		p1.setGame(gameType);
-		p2.setGame(gameType);
-		setNames();
+		
+//		dual = gameArray.length;
+//		log.debug(p1.getClass().getName());
+//		log.debug(p2.getClass().getName());
+//		log.debug(gameType);
+//		log.debug("Number of games: " + dual);
+//		p1.setGame(gameType);
+//		p2.setGame(gameType);
+//		setNames();
+//		p1=game.getP1();
+//		p2=game.getP2();
 
 	}
 	
-	private void setNames() {
-		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-			p1.setName("Paul");
-			p2.setName("John");
-		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-			p1.setName("Human");
-			p2.setName("AI");
-		} else {
-			p1.setName("AI");
-			p2.setName("Human");
-		}
-	}
+//	private void setNames() {
+//		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
+//			p1.setName("Paul");
+//			p2.setName("John");
+//		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
+//			p1.setName("Human");
+//			p2.setName("AI");
+//		} else {
+//			p1.setName("AI");
+//			p2.setName("Human");
+//		}
+//	}
 
 	private void play() {
 		round = 0;
@@ -135,7 +140,7 @@ public class Controller {
 				checkStatusGame();
 				updateStatusGame(game.getStatus());
 			}
-			System.out.println("round: " + round);
+//			System.out.println("round: " + round);
 			view.displayOutput(game.getVerdict());
 			updateStatusGame(Status_Game.SETUP);
 		}
@@ -181,18 +186,20 @@ public class Controller {
 		case PLAY:
 			view.displayOutput(p2.getName() + " Attempt: " + Integer.toString(game.getAttempts()) + "/"
 					+ Configuration.getMax_attempts());
-			p2.tryToGuess();
-			game.setInput(p2.getInput());
-			p1.setInput(p2.getInput());
-			game.validPlay();
-			view.displayOutput(p2.getInput());
+			game.play();
+//			p2.tryToGuess();
+//			game.setInput(p2.getInput());
+//			p1.setInput(p2.getInput());
+//			game.validPlay();
+			view.displayOutput(game.getInput());
 			break;
 		case ANSWER:
-			log.debug("Code to find: " + p1.getCodeToFind());
-			p1.replyToGuess();
-			game.setAnswer(p1.getInput());
-			game.validAnswer();
-			p2.setAnswer(game.getOutput());
+//			log.debug("Code to find: " + p1.getCodeToFind());
+			game.answer();
+//			p1.replyToGuess();
+//			game.setAnswer(p1.getInput());
+//			game.validAnswer();
+//			p2.setAnswer(game.getOutput());
 			view.displayOutput(game.getAnswerToGive());
 			break;
 		case NO_MORE_TRIES:
