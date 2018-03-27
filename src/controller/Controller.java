@@ -48,6 +48,81 @@ public class Controller {
 
 	}
 
+	private void checkStatusMenu() {
+		log.debug(stMenu);
+		view.displayOutput(stMenu.getOutput());
+		switch (stMenu) {
+		case MENU_GAME:
+			stMenu = menu.selectAndValidGame(stMenu);
+			gameType = menu.getGame();
+			log.debug(stMenu + " " + gameType);
+			break;
+		case MENU_MODE:
+//			view.displayOutput(stMenu.getOutput());
+			stMenu = menu.selectAndValidMode(stMenu);
+			if(stMenu == Status_Menu.GAME){
+			gameType = menu.getGame();
+			log.debug(ModeList.values()[Integer.parseInt(menu.getInput()) - 1]);
+			}
+			break;
+		case GAME:
+			initGame();
+			break;
+
+		}
+	}
+	
+	private void initGame() {
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].getReference()))) {
+			p1 = new AI();
+			p2 = new Human();
+			gameArray = new Game[1];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+
+		}
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].getReference()))) {
+			p1 = new Human();
+			p2 = new AI();
+			gameArray = new Game[1];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+		}
+		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].getReference()))) {
+			p1 = new Human();
+			p2 = new Human();
+			gameArray = new Game[2];
+			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
+		}
+
+		// Fills the gameArray with the games created
+		for (int i = 0; i < gameArray.length; i++) {
+			game = gameArray[i];
+			updateStatusGame(Status_Game.SETUP);
+		}
+		dual = gameArray.length;
+		log.debug(p1.getClass().getName());
+		log.debug(p2.getClass().getName());
+		log.debug(gameType);
+		log.debug("Number of games: " + dual);
+		p1.setGame(gameType);
+		p2.setGame(gameType);
+		setNames();
+
+	}
+	
+	private void setNames() {
+		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
+			p1.setName("Paul");
+			p2.setName("John");
+		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
+			p1.setName("Human");
+			p2.setName("AI");
+		} else {
+			p1.setName("AI");
+			p2.setName("Human");
+		}
+	}
+
 	private void play() {
 		round = 0;
 		for (int i = round; i < gameArray.length; i++) {
@@ -90,31 +165,6 @@ public class Controller {
 			switchMenu();
 		} else {
 			checkStatusGame();
-		}
-	}
-
-	private void checkStatusMenu() {
-		log.debug(stMenu);
-		switch (stMenu) {
-		case MENU_GAME:
-			view.displayOutput(stMenu.getOutput());
-			if (menu.validGame()) {
-				stMenu = Status_Menu.MENU_MODE;
-				gameType = menu.getGame();
-				log.debug(stMenu + " " + gameType);
-			}
-			break;
-		case MENU_MODE:
-			view.displayOutput(stMenu.getOutput());
-			if (menu.validMode()) {
-				log.debug(ModeList.values()[Integer.parseInt(menu.getInput()) - 1]);
-				stMenu = Status_Menu.GAME;
-			}
-			break;
-		case GAME:
-			initGame();
-			break;
-
 		}
 	}
 
@@ -174,56 +224,8 @@ public class Controller {
 		}
 	}
 
-	private void initGame() {
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].getReference()))) {
-			p1 = new AI();
-			p2 = new Human();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-
-		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].getReference()))) {
-			p1 = new Human();
-			p2 = new AI();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].getReference()))) {
-			p1 = new Human();
-			p2 = new Human();
-			gameArray = new Game[2];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
-		}
-
-		// Fills the gameArray with the games created
-		for (int i = 0; i < gameArray.length; i++) {
-			game = gameArray[i];
-			updateStatusGame(Status_Game.SETUP);
-		}
-		dual = gameArray.length;
-		log.debug(p1.getClass().getName());
-		log.debug(p2.getClass().getName());
-		log.debug(gameType);
-		log.debug("Number of games: " + dual);
-		p1.setGame(gameType);
-		p2.setGame(gameType);
-		setNames();
-
-	}
-
-	private void setNames() {
-		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-			p1.setName("Paul");
-			p2.setName("John");
-		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-			p1.setName("Human");
-			p2.setName("AI");
-		} else {
-			p1.setName("AI");
-			p2.setName("Human");
-		}
-	}
+	
+	
 
 	private void checkMenuError() {
 		String error = menu.getOutput();

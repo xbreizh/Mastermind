@@ -27,6 +27,7 @@ public abstract class Player {
 
 	// Trying to guess the result
 	public void tryToGuess() {
+		System.out.println("Game: "+game);
 		if (game.equals(GamesList.MoreLess)) {
 			tryToGuessMoreless();
 		}

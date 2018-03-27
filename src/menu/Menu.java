@@ -5,54 +5,46 @@ import player.Player;
 
 public class Menu extends Check {
 
-	String[] validList;
-	GamesList game;
-	Player player;
+	private String[] validList;
+	private GamesList game;
+	private Player player;
+	private ModeList mode;
 
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+	
 
-	public GamesList getGame() {
-		return game;
-	}
+	
 
 	public Menu() {
 
 	}
 
-	public boolean validGame() {
+	public Status_Menu selectAndValidGame(Status_Menu status) {
 		input=player.input();
 		setNbChar(1);
 		initValidGameList();
 		if (isEmpty())
-			return false;
+			return status;
 		if (!isInteger())
-			return false;
+			return status;
 		if (!checkIfInArrayNumber())
-			return false;
+			return status;
 		game = GamesList.values()[Integer.valueOf(input) - 1];
-		return true;
+		return Status_Menu.MENU_MODE;
 
 	}
 
-	public void readArray() {
-		for (int i = 0; i < valid.length; i++) {
-			System.out.println(valid[i]);
-		}
-	}
 
-	public boolean validMode() {
+	public Status_Menu selectAndValidMode(Status_Menu status) {
 		input=player.input();
 		initValidModeList();
-//		valid = validList;
 		if (isEmpty())
-			return false;
+			return status;
 		if (!isInteger())
-			return false;
+			return status;
 		if (!checkIfInArrayNumber())
-			return false;
-		return true;
+			return status;
+		mode=ModeList.values()[Integer.parseInt(input )-1];
+		return Status_Menu.GAME;
 
 	}
 
@@ -73,8 +65,22 @@ public class Menu extends Check {
 		valid=validList;
 	}
 
+	
+//	Getters and Setters
+	
 	public String[] getValidList() {
 		return validList;
 	}
 
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public GamesList getGame() {
+		return game;
+	}
+	public ModeList getMode() {
+		return mode;
+	}
+	
 }

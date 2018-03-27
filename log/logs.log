@@ -1,65 +1,12 @@
-21:38:53 Line 41  INFO [main] - switchMenu - MENU_GAME
-21:38:53 Line 100  INFO [main] - checkStatusMenu - MENU_GAME
-21:38:54 Line 109  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
-21:38:54 Line 100  INFO [main] - checkStatusMenu - MENU_MODE
-21:38:54 Line 117  INFO [main] - checkStatusMenu - CHALLENGER
-21:38:54 Line 100  INFO [main] - checkStatusMenu - GAME
-21:38:54 Line 234  INFO [main] - initGame - player.AI
-21:38:54 Line 235  INFO [main] - initGame - player.Human
-21:38:54 Line 236  INFO [main] - initGame - MoreLess
-21:38:54 Line 237  INFO [main] - initGame - Number of games: 1
-21:38:54 Line 59  INFO [main] - play - SETUP
-21:38:54 Line 129  INFO [main] - checkStatusGame - SETUP
-21:38:54 Line 140  INFO [main] - checkStatusGame - Secret Code: 8145
-21:38:54 Line 129  INFO [main] - checkStatusGame - PLAY
-21:38:55 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:38:55 Line 153  INFO [main] - checkStatusGame - Code to find: 8145
-21:38:55 Line 129  INFO [main] - checkStatusGame - PLAY
-21:38:56 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:38:56 Line 153  INFO [main] - checkStatusGame - Code to find: 8145
-21:38:56 Line 129  INFO [main] - checkStatusGame - PLAY
-21:38:57 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:38:57 Line 153  INFO [main] - checkStatusGame - Code to find: 8145
-21:38:57 Line 129  INFO [main] - checkStatusGame - PLAY
-21:38:58 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:38:58 Line 153  INFO [main] - checkStatusGame - Code to find: 8145
-21:38:58 Line 129  INFO [main] - checkStatusGame - NO_MORE_TRIES
-21:38:58 Line 129  INFO [main] - checkStatusGame - REPLAY
-21:39:02 Line 129  INFO [main] - checkStatusGame - REPLAY
-21:39:02 Line 268  WARN [main] - checkError - Invalid Input
-21:39:04 Line 129  INFO [main] - checkStatusGame - REPLAY
-21:39:04 Line 268  WARN [main] - checkError - Nothing entered
-21:39:10 Line 129  INFO [main] - checkStatusGame - EXIT
-21:39:14 Line 129  INFO [main] - checkStatusGame - EXIT
-21:39:14 Line 268  WARN [main] - checkError - Nothing entered
-21:39:19 Line 129  INFO [main] - checkStatusGame - EXIT
-21:39:19 Line 268  WARN [main] - checkError - Invalid Input
-21:39:24 Line 41  INFO [main] - switchMenu - MENU_GAME
-21:39:24 Line 100  INFO [main] - checkStatusMenu - MENU_GAME
-21:39:28 Line 109  INFO [main] - checkStatusMenu - MENU_MODE MoreLess
-21:39:28 Line 100  INFO [main] - checkStatusMenu - MENU_MODE
-21:39:28 Line 117  INFO [main] - checkStatusMenu - CHALLENGER
-21:39:28 Line 100  INFO [main] - checkStatusMenu - GAME
-21:39:28 Line 234  INFO [main] - initGame - player.AI
-21:39:28 Line 235  INFO [main] - initGame - player.Human
-21:39:28 Line 236  INFO [main] - initGame - MoreLess
-21:39:28 Line 237  INFO [main] - initGame - Number of games: 1
-21:39:28 Line 59  INFO [main] - play - SETUP
-21:39:28 Line 129  INFO [main] - checkStatusGame - SETUP
-21:39:28 Line 140  INFO [main] - checkStatusGame - Secret Code: 8738
-21:39:28 Line 129  INFO [main] - checkStatusGame - PLAY
-21:39:29 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:39:29 Line 153  INFO [main] - checkStatusGame - Code to find: 8738
-21:39:29 Line 129  INFO [main] - checkStatusGame - PLAY
-21:39:30 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:39:30 Line 153  INFO [main] - checkStatusGame - Code to find: 8738
-21:39:30 Line 129  INFO [main] - checkStatusGame - PLAY
-21:39:31 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:39:31 Line 153  INFO [main] - checkStatusGame - Code to find: 8738
-21:39:31 Line 129  INFO [main] - checkStatusGame - PLAY
-21:39:34 Line 129  INFO [main] - checkStatusGame - ANSWER
-21:39:34 Line 153  INFO [main] - checkStatusGame - Code to find: 8738
-21:39:34 Line 129  INFO [main] - checkStatusGame - NO_MORE_TRIES
-21:39:34 Line 129  INFO [main] - checkStatusGame - REPLAY
-21:39:37 Line 129  INFO [main] - checkStatusGame - EXIT
-21:39:40 Line 129  INFO [main] - checkStatusGame - END
+19:22:26 Line 172  INFO [main] - checkStatusGame - SETUP
+19:22:29 Line 179  INFO [main] - checkStatusGame - Secret Code: 1212
+19:22:29 Line 172  INFO [main] - checkStatusGame - PLAY
+19:22:31 Line 172  INFO [main] - checkStatusGame - ANSWER
+19:22:34 Line 172  INFO [main] - checkStatusGame - FOUND
+19:22:34 Line 172  INFO [main] - checkStatusGame - SETUP
+19:22:36 Line 179  INFO [main] - checkStatusGame - Secret Code: 1212
+19:22:36 Line 172  INFO [main] - checkStatusGame - PLAY
+19:22:37 Line 172  INFO [main] - checkStatusGame - ANSWER
+19:22:40 Line 172  INFO [main] - checkStatusGame - FOUND
+19:22:40 Line 172  INFO [main] - checkStatusGame - REPLAY
+19:22:42 Line 172  INFO [main] - checkStatusGame - SETUP
