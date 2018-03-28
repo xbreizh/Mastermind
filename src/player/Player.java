@@ -1,5 +1,6 @@
 package player;
 
+import game.Game;
 import menu.GamesList;
 
 public abstract class Player {
@@ -7,10 +8,13 @@ public abstract class Player {
 	protected String input = "";
 	protected String wrong = "wrong answer";
 	protected String feedBack = "";
-	protected String codeToFind;
+//	protected String codeToFind;
 	protected String answerToGive = "";
-	protected GamesList game;
+//	protected GamesList gameType;
 	protected String name;
+	protected Game game;
+
+	
 
 	
 
@@ -27,26 +31,28 @@ public abstract class Player {
 
 	// Trying to guess the result
 	public void tryToGuess() {
-		System.out.println("Game: "+game);
-		if (game.equals(GamesList.MoreLess)) {
+		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
 			tryToGuessMoreless();
 		}
-		if (game.equals(GamesList.MasterMind)) {
+		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
 			tryToGuessMasterMind();
 		}
 	}
 
 	// Provides feedback on other player's input
 	public void replyToGuess() {
-		if (game.equals(GamesList.MoreLess)) {
+		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
 			replyMoreless();
 		}
-		if (game.equals(GamesList.MasterMind)) {
+		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
 			replyMasterMind();
 		}
 	}
 
 	// getters & setters
+	public void setGame(Game game) {
+		this.game = game;
+	}
 	public String getName() {
 		return name;
 	}
@@ -70,19 +76,19 @@ public abstract class Player {
 		return input;
 	}
 
-	public String getCodeToFind() {
-		return codeToFind;
-	}
+//	public String getCodeToFind() {
+//		return codeToFind;
+//	}
+//
+//	public void setCodeToFind(String codeToFind) {
+//		this.codeToFind = codeToFind;
+//	}
 
-	public void setCodeToFind(String codeToFind) {
-		this.codeToFind = codeToFind;
-	}
-
-	public GamesList getGame() {
-		return game;
-	}
-
-	public void setGame(GamesList game) {
-		this.game = game;
-	}
+//	public GamesList getGame() {
+//		return gameType;
+//	}
+//
+//	public void setGame(GamesList game) {
+//		this.gameType = game;
+//	}
 }

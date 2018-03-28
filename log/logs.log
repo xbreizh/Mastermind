@@ -1,12 +1,5 @@
-19:22:26 Line 172  INFO [main] - checkStatusGame - SETUP
-19:22:29 Line 179  INFO [main] - checkStatusGame - Secret Code: 1212
-19:22:29 Line 172  INFO [main] - checkStatusGame - PLAY
-19:22:31 Line 172  INFO [main] - checkStatusGame - ANSWER
-19:22:34 Line 172  INFO [main] - checkStatusGame - FOUND
-19:22:34 Line 172  INFO [main] - checkStatusGame - SETUP
-19:22:36 Line 179  INFO [main] - checkStatusGame - Secret Code: 1212
-19:22:36 Line 172  INFO [main] - checkStatusGame - PLAY
-19:22:37 Line 172  INFO [main] - checkStatusGame - ANSWER
-19:22:40 Line 172  INFO [main] - checkStatusGame - FOUND
-19:22:40 Line 172  INFO [main] - checkStatusGame - REPLAY
-19:22:42 Line 172  INFO [main] - checkStatusGame - SETUP
+15:24:04 Line 77  INFO [main] - initGames - CHALLENGER
+15:24:04 Line 144  INFO [main] - checkStatusGame - Secret Code: 4015
+15:24:09 Line 144  INFO [main] - checkStatusGame - Secret Code: 4272
+15:24:17 Line 77  INFO [main] - initGames - CHALLENGER
+15:24:17 Line 144  INFO [main] - checkStatusGame - Secret Code: 5259

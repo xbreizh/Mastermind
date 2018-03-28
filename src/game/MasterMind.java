@@ -44,18 +44,22 @@ public class MasterMind extends Game {
 		answerToGive = found + "" + placed;
 	}
 
-	public void validAnswer() {
+	public Status_Game validAnswer( Status_Game status) {
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
-			setStatus(Status_Game.ANSWER);
+//			setStatus(Status_Game.ANSWER);
+			return Status_Game.ANSWER;
 		} else {
 			setError("");
 			if (answerToGive.equals("04")) {
-				setStatus(Status_Game.FOUND);
+//				setStatus(Status_Game.FOUND);
+				return Status_Game.FOUND;
 			} else {
-				setStatus(Status_Game.PLAY);
-				checkAttempts();
+//				setStatus(Status_Game.PLAY);
+				status=Status_Game.PLAY;
+				status=checkAttempts(status);
+				return status;
 
 			}
 		}

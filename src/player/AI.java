@@ -75,8 +75,8 @@ public class AI extends Player {
 
 	@Override
 	public void replyMoreless() {
-		int[] a = intToArray(Integer.parseInt(codeToFind));
-		int[] b = intToArray(Integer.parseInt(input));
+		int[] a = game.getSecretCodeArray();
+		int[] b = intToArray(Integer.parseInt(game.getInput()));
 		String str = "";
 		for (int i = 0; i < a.length; i++) {
 			if (a[i] == b[i]) {
@@ -93,7 +93,7 @@ public class AI extends Player {
 
 	@Override
 	public void replyMasterMind() {
-		int[] a = intToArray((Integer.parseInt(codeToFind)));
+		int[] a = game.getSecretCodeArray();
 		int[] b = intToArray(Integer.parseInt(input));
 
 		ArrayList<Integer> aa = new ArrayList<>();

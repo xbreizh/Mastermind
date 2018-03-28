@@ -8,25 +8,11 @@ import player.Player;
 
 public class GameFactory {
 
-	private static Game game;
-//	static Game[] gameArray;
 
 	public GameFactory() {
 
 	}
 
-	private static Game createGame(GamesList gameType, Player p1, Player p2) {
-		switch (gameType.getReference()) {
-		case 1:
-			return new MoreLess(p1, p2);
-		case 2:
-			return new MasterMind(p1, p2);
-		default:
-			return null;
-
-		}
-	}
-	
 	public static Game[] createGameArray(GamesList gameType, ModeList mode){
 		Player p1 = null;
 		Player p2 = null;
@@ -54,15 +40,26 @@ public class GameFactory {
 		
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
-			game = gameArray[i];
-			p1.setGame(gameType);
-			p2.setGame(gameType);
+//			p1.setGame(gameType);
+//			p2.setGame(gameType);
 			setNames(p1, p2);
-//			updateStatusGame(Status_Game.SETUP);
 		}
 		return gameArray;
 		
 	}
+	
+	private static Game createGame(GamesList gameType, Player p1, Player p2) {
+		switch (gameType.getReference()) {
+		case 1:
+			return new MoreLess(p1, p2);
+		case 2:
+			return new MasterMind(p1, p2);
+		default:
+			return null;
+
+		}
+	}
+	
 	private static void setNames(Player p1, Player p2) {
 		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
 			p1.setName("Paul");

@@ -25,20 +25,21 @@ public class MoreLess extends Game {
 		output = answerToGive;
 	}
 
-	public void validAnswer() {
+	public Status_Game validAnswer(Status_Game status) {
 		getVerdict(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
+			return status;
 		} else {
 			setError("");
 			if (Integer.parseInt(input) == (secretCode)) {
-				setStatus(Status_Game.FOUND);
+				return Status_Game.FOUND;
 			} else {
-				setStatus(Status_Game.PLAY);
-				checkAttempts();
+				status=Status_Game.PLAY;
+				status=checkAttempts(status);
+				return status;
 			}
 		}
-
 	}
 
 }

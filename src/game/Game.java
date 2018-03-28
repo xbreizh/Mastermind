@@ -3,8 +3,6 @@ package game;
 import application.Configuration;
 import check.Check;
 import check.InputStatus;
-import player.AI;
-import player.Human;
 import player.Player;
 
 public abstract class Game extends Check {
@@ -14,6 +12,8 @@ public abstract class Game extends Check {
 	protected Status_Game status;
 	protected int secretCode;
 	protected int[] secretCodeArray;
+	
+
 	protected int attempts = 0;
 
 	protected int max_attempts = Configuration.getMax_attempts();
@@ -33,56 +33,47 @@ public abstract class Game extends Check {
 	public Game(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
-//		setNames();
+		p1.setGame(this);
+		p2.setGame(this);
 	}
 	
-//	private void setNames() {
-//		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-//			nameP1="Paul";
-//			nameP2="John";
-//		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-//			nameP1="Human";
-//			nameP2="AI";
-//		} else {
-//			nameP1="AI";
-//			nameP2="Human";
-//		}
-//	}
 
 	// abstracts methods
 	abstract void getVerdict(int a, int b);
 	 
-	public void play(){
+	public Status_Game play(Status_Game status){
 		
 		p2.tryToGuess();
-		
 		setInput(p2.getInput());
 		p1.setInput(p2.getInput());
-		validPlay();
+		return validPlay(status);
 	}
 	
-	public void answer(){
+	public Status_Game answer(Status_Game status){
 		
 		p1.replyToGuess();
 		
 		setAnswer(p1.getInput());
-		validAnswer();
+		status=validAnswer(status);
 		p2.setAnswer(output);
+		return status;
 	}
 
-	public void validSetup() {
-		// Gets input from Player 1
-		// p1.input();
+	public Status_Game validSetup(Status_Game status) {
+		
+
 		input = p1.input();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
-					setSecretCode(Integer.parseInt(input));
+					// saves the secret code
+					secretCode=Integer.parseInt(input);
 					// converts secretCode into array
 					secretCodeArray = intToArray(secretCode);
-					p1.setCodeToFind(input);
-					setStatus(Status_Game.PLAY);
+//					p1.setCodeToFind(input);
+//					setStatus(Status_Game.PLAY);
 					setError("");
+					return Status_Game.PLAY;
 				} else {
 					error = IStatus.getOutput();
 				}
@@ -93,15 +84,17 @@ public abstract class Game extends Check {
 			error = IStatus.getOutput();
 		}
 		incrementAttempt();
+		return status;
 	}
 
-	public void validPlay() {
+	public Status_Game validPlay(Status_Game status) {
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
-					setStatus(Status_Game.ANSWER);
+//					setStatus(Status_Game.ANSWER);
 					incrementAttempt();
 					setError("");
+					return Status_Game.ANSWER;
 				} else {
 					error = IStatus.getOutput();
 				}
@@ -111,30 +104,32 @@ public abstract class Game extends Check {
 		} else {
 			error = IStatus.getOutput();
 		}
+		return status;
 
 	}
 
 	// overwritten in game subclasses(Mastermind / MoreLess)
-	public void validAnswer() {
+	public Status_Game validAnswer(Status_Game status) {
+		return status;
 	}
 
-	public String gameVerdict(Player winner, Player loser) {
+	public void gameVerdict(Player winner, Player loser) {
 
-		verdict = winner.getName() + " wins!  " + loser.getName() + " loses!";
-		return verdict;
+		verdict = "Winner: "+winner.getName();
+//		return Status_Game.REPLAY;
 	}
 
-	public void validPlayAgain() {
-		checkYesOrNo(Status_Game.SETUP, Status_Game.EXIT);
-
-	}
-
-	public void validExit() {
-		checkYesOrNo(null, Status_Game.END);
+	public Status_Game validPlayAgain() {
+		return checkYesOrNo(Status_Game.SETUP, Status_Game.EXIT);
 
 	}
 
-	protected void checkYesOrNo(Status_Game yes, Status_Game no) {
+	public Status_Game validExit() {
+		return checkYesOrNo(null, Status_Game.END);
+
+	}
+
+	protected Status_Game checkYesOrNo(Status_Game yes, Status_Game no) {
 		error = "";
 		if (isEmpty()) {
 			error = IStatus.getOutput();
@@ -147,6 +142,7 @@ public abstract class Game extends Check {
 		} else {
 			error = InputStatus.WRONGCHARACTER.getOutput();
 		}
+		return status;
 	}
 
 	protected int[] intToArray(int code) {
@@ -161,10 +157,11 @@ public abstract class Game extends Check {
 		return tab;
 	}
 
-	public void checkAttempts() {
+	public Status_Game checkAttempts(Status_Game status) {
 		if (attempts == max_attempts) {
-			setStatus(Status_Game.NO_MORE_TRIES);
+			return Status_Game.NO_MORE_TRIES;
 		}
+		return status;
 	}
 
 	private void incrementAttempt() {
@@ -186,6 +183,9 @@ public abstract class Game extends Check {
 	}
 
 	// Getters and Setters
+	public int[] getSecretCodeArray() {
+		return secretCodeArray;
+	}
 	public String getNameP1() {
 		return nameP1;
 	}
