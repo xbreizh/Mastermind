@@ -2,8 +2,8 @@ package menu;
 
 public enum Status_Menu {
 
-	MENU_GAME("Chose a Game:\n"+GamesList.MoreLess.getReference()+"- "+GamesList.MoreLess+GamesList.MoreLess.getRules()+"\n"
-			+GamesList.MasterMind.getReference()+"- "+GamesList.MasterMind+GamesList.MasterMind.getRules()), 
+	MENU_GAME("Chose a Game:\n"+GamesList.MoreLess.getReference()+"- "+GamesList.MoreLess+GamesList.MoreLess.getHowToGuess()+"\n"
+			+GamesList.MasterMind.getReference()+"- "+GamesList.MasterMind+GamesList.MasterMind.getHowToGuess()), 
 	
 	MENU_MODE("Chose a Mode:\n"+
 			ModeList.CHALLENGER.getReference()+"- "+ModeList.CHALLENGER+"\n"+

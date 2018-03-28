@@ -21,18 +21,10 @@ public class Main {
 		ct.setMenu(menu);
 		ct.setView(view);
 		ct.switchMenu();
-//		Game game=new MasterMind(new Human(), new Human()); 
-//		
-//		System.out.println("Game: "+game.getClass().getSimpleName());
-//		System.out.println(GamesList.MasterMind.name());
-////		if (game.getClass().getName().equals(GamesList.MoreLess.name())) {
-//////			tryToGuessMoreless();
-////		}
-//		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
-//			System.out.println("win");
-////			tryToGuessMasterMind();
-//		}
 		
+		
+		
+
 	}
 
 }

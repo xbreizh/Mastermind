@@ -6,11 +6,9 @@ import menu.GamesList;
 public abstract class Player {
 	
 	protected String input = "";
-	protected String wrong = "wrong answer";
+//	protected String wrong = "wrong answer";
 	protected String feedBack = "";
-//	protected String codeToFind;
 	protected String answerToGive = "";
-//	protected GamesList gameType;
 	protected String name;
 	protected Game game;
 
@@ -75,20 +73,4 @@ public abstract class Player {
 	public String getInput() {
 		return input;
 	}
-
-//	public String getCodeToFind() {
-//		return codeToFind;
-//	}
-//
-//	public void setCodeToFind(String codeToFind) {
-//		this.codeToFind = codeToFind;
-//	}
-
-//	public GamesList getGame() {
-//		return gameType;
-//	}
-//
-//	public void setGame(GamesList game) {
-//		this.gameType = game;
-//	}
 }

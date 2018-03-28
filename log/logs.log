@@ -1,5 +1,9 @@
-15:24:04 Line 77  INFO [main] - initGames - CHALLENGER
-15:24:04 Line 144  INFO [main] - checkStatusGame - Secret Code: 4015
-15:24:09 Line 144  INFO [main] - checkStatusGame - Secret Code: 4272
-15:24:17 Line 77  INFO [main] - initGames - CHALLENGER
-15:24:17 Line 144  INFO [main] - checkStatusGame - Secret Code: 5259
+18:50:21 Line 77  INFO [main] - initGames - CHALLENGER
+18:50:21 Line 138  INFO [main] - checkStatusGame - Secret Code: 4596
+18:50:43 Line 77  INFO [main] - initGames - DEFENDER
+18:50:46 Line 138  INFO [main] - checkStatusGame - Secret Code: 1225
+18:50:52 Line 199  WARN [main] - checkError - Wrong answer!, should be 10
+18:51:06 Line 199  WARN [main] - checkError - Wrong answer!, should be 10
+18:51:14 Line 199  WARN [main] - checkError - Wrong answer!, should be 20
+18:51:30 Line 199  WARN [main] - checkError - Wrong answer!, should be 10
+18:51:35 Line 199  WARN [main] - checkError - Wrong answer!, should be 20

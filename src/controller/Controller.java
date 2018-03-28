@@ -11,14 +11,15 @@ import menu.GamesList;
 import menu.Menu;
 import menu.ModeList;
 import menu.Status_Menu;
+import player.Human;
 import player.Player;
 import view.View;
 
 public class Controller {
 	private static final Logger log = Logger.getLogger(Log4J.class);
 	private Player p0;
-	private Player p1;
-	private Player p2;
+//	private Player p1;
+//	private Player p2;
 	private View view;
 	private Status_Menu stMenu;
 	private Status_Game stGame;
@@ -50,7 +51,7 @@ public class Controller {
 
 	private void checkStatusMenu() {
 		log.debug(stMenu);
-		view.displayOutput(stMenu.getOutput());
+		view.displayLineBreak(stMenu.getOutput());
 		switch (stMenu) {
 		case MENU_GAME:
 			stMenu = menu.selectAndValidGame(stMenu);
@@ -73,7 +74,6 @@ public class Controller {
 	}
 	
 	private void initGames(GamesList gameType, ModeList mode) {
-		System.out.println("mode: "+mode);
 		log.info(mode);
 		gameArray=GameFactory.createGameArray(gameType, mode);
 		
@@ -81,7 +81,6 @@ public class Controller {
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			game = gameArray[i];
-//			updateStatusGame(Status_Game.SETUP);
 			stGame=Status_Game.SETUP;
 		}
 
@@ -91,21 +90,16 @@ public class Controller {
 		round = 0;
 		for (int i = round; i < gameArray.length; i++) {
 			game = gameArray[i];
-			p1 = gameArray[i].getP1();
-			p2 = gameArray[i].getP2();
+//			p1 = gameArray[i].getP1();
+//			p2 = gameArray[i].getP2();
 			log.debug(stGame);
-			while (stGame != Status_Game.VERDICT) {
+			while (stGame != Status_Game.REPLAY) {
 
 				checkStatusGame();
-//				updateStatusGame(game.getStatus());
 			}
-//			view.displayOutput(game.getVerdict());
-//			updateStatusGame(Status_Game.SETUP);
 		}
-
-//		updateStatusGame(Status_Game.REPLAY);
-//		checkStatusGame();
-		view.displayOutput(game.getVerdict());
+//		game.gameVerdict();
+		view.displayInline(game.getWinner().getName());
 		stGame=Status_Game.REPLAY;
 		checkKeepPlaying();
 	}
@@ -136,48 +130,49 @@ public class Controller {
 	private void checkStatusGame() {
 		log.debug(stGame);
 		checkError();
-		view.displayOutput(stGame.getOutput());
+		view.displayInline(stGame.getOutput());
 		switch (stGame) {
 		case SETUP:
-			view.displayOutput(p1.getName());
+			view.displayLineBreak(game.getNameP1());
 			stGame=game.validSetup(stGame);
 			log.info("Secret Code: " + game.getSecretCode());
 			break;
 		case PLAY:
-			view.displayOutput(p2.getName() + " Attempt: " + Integer.toString(game.getAttempts()) + "/"
+			view.displayLineBreak(game.getNameP2() + " Attempt: " + Integer.toString(game.getAttempts()) + "/"
 					+ Configuration.getMax_attempts());
 			stGame=game.play(stGame);
-			view.displayOutput(game.getInput());
+			view.displayLineBreak(game.getInput());
 			break;
 		case ANSWER:
 			log.debug("Code to find: " + game.getSecretCode());
+			if(game.getP1().getClass().getName().equals(Human.class.getName())){
+			view.displayLineBreak(gameType.getHowToAnswer());
+			}
 			stGame=game.answer(stGame);
-			System.out.println(stGame);
-			view.displayOutput(game.getAnswerToGive());
+			view.displayLineBreak(game.getAnswerToGive());
 			break;
 		case NO_MORE_TRIES:
 			stGame=Status_Game.VERDICT;
 			break;
 		case FOUND:
 			stGame=Status_Game.VERDICT;
+			break;
 		case VERDICT:
-//			view.displayOutput(game.gameVerdict(p1, p2));
-			game.gameVerdict(p1, p2);
+//			game.gameVerdict();
 //			view.displayOutput(game.getVerdict());
-//			stGame=Status_Game.REPLAY;
+//			view.displayOutput(stGame.getOutput());
 			round++;
+			stGame=Status_Game.REPLAY;
 			break;
 		case REPLAY:
 			p0.input();
 			game.setInput(p0.getInput());
 			stGame=game.validPlayAgain();
-//			updateStatusGame(game.getStatus());
 			break;
 		case EXIT:
 			p0.input();
 			game.setInput(p0.getInput());
 			stGame=game.validExit();
-//			updateStatusGame(game.getStatus());
 			break;
 		case END:
 			break;
@@ -205,11 +200,6 @@ public class Controller {
 			view.displayError(error);
 		}
 	}
-
-//	private void updateStatusGame(Status_Game status) {
-//		this.stGame = status;
-//		game.setStatus(status);
-//	}
 
 	// Getters and Setters
 

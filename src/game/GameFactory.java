@@ -40,8 +40,6 @@ public class GameFactory {
 		
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
-//			p1.setGame(gameType);
-//			p2.setGame(gameType);
 			setNames(p1, p2);
 		}
 		return gameArray;
