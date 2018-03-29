@@ -9,16 +9,35 @@ public class AI extends Player {
 
 	private String newProposition = "";
 	// Settings conf = Settings.getConfiguration();
-
+	private int min;
+	private int max;
+	
+	public AI(){
+		setMinAndMax(Configuration.getNbDigits());
+		
+	}
+private void setMinAndMax(int maxNbDigits){
+		
+		String minString="1";
+		String maxString="9";
+			for (int i = 0; i < Configuration.getNbDigits()-1; i++) {
+				
+				minString+="0";
+				maxString+="9";
+				min=Integer.parseInt(minString);
+				max=Integer.parseInt(maxString);
+			}
+		
+	}
 	@Override
 	public String input() {
-		return this.input = Integer.toString(ThreadLocalRandom.current().nextInt(1000, 9999));
+		return this.input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
 	}
 
 	@Override
 	public void tryToGuessMoreless() {
 		if (input.length() == 0) {
-			input = "5555";
+			input = Integer.toString(max/2);
 		} else {
 			String newInput = "";
 			for (int i = 0; i < input.length(); i++) {
@@ -41,7 +60,7 @@ public class AI extends Player {
 	}
 	@Override
 	public void tryToGuessMasterMind() {
-		input = Integer.toString(ThreadLocalRandom.current().nextInt(1000, 9999));
+		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
 
 		waiting();
 
