@@ -41,6 +41,7 @@ public class GameFactory {
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			setNames(p1, p2);
+			
 		}
 		return gameArray;
 		

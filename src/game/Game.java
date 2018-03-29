@@ -27,6 +27,9 @@ public abstract class Game extends Check {
 	protected String nameP2;
 	protected Player winner;
 
+
+	
+
 	public Player getWinner() {
 		return winner;
 	}
@@ -37,7 +40,6 @@ public abstract class Game extends Check {
 		this.p2 = p2;
 		p1.setGame(this);
 		p2.setGame(this);
-//		p2.setName(p2.getClass().getSimpleName());
 	}
 
 	// abstracts methods
@@ -111,10 +113,7 @@ public abstract class Game extends Check {
 		return status;
 	}
 
-//	public void gameVerdict() {
-////System.out.println(winner);
-//		verdict = "Winner: " + winner.getName();
-//	}
+
 
 	public Status_Game validPlayAgain(Status_Game status) {
 		return checkYesOrNo(status, Status_Game.SETUP, Status_Game.EXIT);
@@ -223,10 +222,6 @@ public abstract class Game extends Check {
 		this.answerToGive = answerToGive;
 	}
 
-//	public void setStatus(Status_Game status) {
-//		this.status = status;
-//	}
-
 	public String getInput() {
 		return input;
 	}
@@ -246,10 +241,6 @@ public abstract class Game extends Check {
 	public void setError(String error) {
 		this.error = error;
 	}
-
-//	public Status_Game getStatus() {
-//		return status;
-//	}
 
 	public int getSecretCode() {
 		return secretCode;
