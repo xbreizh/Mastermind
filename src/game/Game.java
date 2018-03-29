@@ -9,7 +9,7 @@ public abstract class Game extends Check {
 	protected Player p1;
 
 	protected Player p2;
-	protected Status_Game status;
+//	protected Status_Game status;
 	protected int secretCode;
 	protected int[] secretCodeArray;
 
@@ -37,7 +37,7 @@ public abstract class Game extends Check {
 		this.p2 = p2;
 		p1.setGame(this);
 		p2.setGame(this);
-		p2.setName(p2.getClass().getSimpleName());
+//		p2.setName(p2.getClass().getSimpleName());
 	}
 
 	// abstracts methods
@@ -116,30 +116,32 @@ public abstract class Game extends Check {
 //		verdict = "Winner: " + winner.getName();
 //	}
 
-	public Status_Game validPlayAgain() {
-		return checkYesOrNo(Status_Game.SETUP, Status_Game.EXIT);
+	public Status_Game validPlayAgain(Status_Game status) {
+		return checkYesOrNo(status, Status_Game.SETUP, Status_Game.EXIT);
 
 	}
 
-	public Status_Game validExit() {
-		return checkYesOrNo(null, Status_Game.END);
+	public Status_Game validExit(Status_Game status) {
+		return checkYesOrNo(status, null, Status_Game.END);
 
 	}
 
-	protected Status_Game checkYesOrNo(Status_Game yes, Status_Game no) {
+	protected Status_Game checkYesOrNo(Status_Game init, Status_Game yes, Status_Game no) {
 		error = "";
 		if (isEmpty()) {
 			error = IStatus.getOutput();
+			return init;
 		} else if (input.equalsIgnoreCase("y")) {
 			reset();
-			status = yes;
+			return yes;
 		} else if (input.equalsIgnoreCase("n")) {
 			reset();
-			status = no;
+			return no;
 		} else {
 			error = InputStatus.WRONGCHARACTER.getOutput();
+			return init;
 		}
-		return status;
+		
 	}
 
 	protected int[] intToArray(int code) {
@@ -221,9 +223,9 @@ public abstract class Game extends Check {
 		this.answerToGive = answerToGive;
 	}
 
-	public void setStatus(Status_Game status) {
-		this.status = status;
-	}
+//	public void setStatus(Status_Game status) {
+//		this.status = status;
+//	}
 
 	public String getInput() {
 		return input;
@@ -245,9 +247,9 @@ public abstract class Game extends Check {
 		this.error = error;
 	}
 
-	public Status_Game getStatus() {
-		return status;
-	}
+//	public Status_Game getStatus() {
+//		return status;
+//	}
 
 	public int getSecretCode() {
 		return secretCode;

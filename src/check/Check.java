@@ -9,6 +9,7 @@ public class Check {
 	int nbChar = Configuration.getNbDigits();
 	String[] symbols = { "+", "-", "=" };
 	protected InputStatus IStatus = InputStatus.VALID;
+	
 
 	int test = 1324;
 	protected String[] valid;

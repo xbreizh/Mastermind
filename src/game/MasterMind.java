@@ -52,7 +52,7 @@ public class MasterMind extends Game {
 		} else {
 			setError("");
 			if (answerToGive.equals("04")) {
-				winner=p1;
+				winner=p2;
 				status= Status_Game.FOUND;
 			} else {
 				status = Status_Game.PLAY;

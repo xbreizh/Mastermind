@@ -33,7 +33,7 @@ public class MoreLess extends Game {
 		} else {
 			setError("");
 			if (Integer.parseInt(input) == (secretCode)) {
-				winner=p1;
+				winner=p2;
 				status= Status_Game.FOUND;
 			} else {
 				status= Status_Game.PLAY;

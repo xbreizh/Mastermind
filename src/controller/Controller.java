@@ -93,14 +93,17 @@ public class Controller {
 //			p1 = gameArray[i].getP1();
 //			p2 = gameArray[i].getP2();
 			log.debug(stGame);
-			while (stGame != Status_Game.REPLAY) {
+			while (stGame != Status_Game.VERDICT) {
 
 				checkStatusGame();
 			}
+			checkStatusGame();
+			view.displayInline(game.getWinner().getName());
 		}
 //		game.gameVerdict();
-		view.displayInline(game.getWinner().getName());
-		stGame=Status_Game.REPLAY;
+//		view.displayInline(game.getWinner().getName());
+//		System.out.println(game.getWinner());
+//		stGame=Status_Game.REPLAY;
 		checkKeepPlaying();
 	}
 
@@ -165,14 +168,14 @@ public class Controller {
 			stGame=Status_Game.REPLAY;
 			break;
 		case REPLAY:
-			p0.input();
-			game.setInput(p0.getInput());
-			stGame=game.validPlayAgain();
+//			p0.input();
+			game.setInput(p0.input());
+			stGame=game.validPlayAgain(stGame);
 			break;
 		case EXIT:
-			p0.input();
-			game.setInput(p0.getInput());
-			stGame=game.validExit();
+//			p0.input();
+			game.setInput(p0.input());
+			stGame=game.validExit(stGame);
 			break;
 		case END:
 			break;
