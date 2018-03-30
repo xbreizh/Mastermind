@@ -8,31 +8,33 @@ import player.Player;
 
 public class GameFactory {
 
-
+//	private  Human human;
+//	private static AI robot;
 	public GameFactory() {
-
 	}
 
-	public static Game[] createGameArray(GamesList gameType, ModeList mode){
-		Player p1 = null;
-		Player p2 = null;
+	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human){
+		Player p1 = human;
+		Player p2 = new AI();
+//		System.out.println(p1);
+//		System.out.println(p2);
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
-			p1 = new AI();
-			p2 = new Human();
+//			p1 = new AI();
+//			p2 = new Human();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 
 		}
 		if (mode.equals(ModeList.DEFENDER)) {
-			p1 = new Human();
-			p2 = new AI();
+//			p1 = new Human();
+//			p2 = new AI();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 		}
 		if (mode.equals(ModeList.DUAL)) {
-			p1 = new Human();
-			p2 = new Human();
+//			p1 = new AI();
+//			p2 = new Human();
 			gameArray = new Game[2];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 			gameArray[1] = GameFactory.createGame(gameType, p2, p1);

@@ -12,12 +12,11 @@ import menu.Menu;
 import menu.ModeList;
 import menu.Status_Menu;
 import player.Human;
-import player.Player;
 import view.View;
 
 public class Controller {
 	private static final Logger log = Logger.getLogger(Log4J.class);
-	private Player p0;
+	private Human human;
 	private View view;
 	private Status_Menu stMenu;
 	private Status_Game stGame;
@@ -25,14 +24,8 @@ public class Controller {
 	private Game game;
 	private Game[] gameArray;
 	private Menu menu;
-	private int round = 0;
 	ModeList mode;
 	private String[] resultArray;
-
-//	private void initResultArray(){
-//			resultArray= new String[gameArray.length];
-//		
-//	}
 
 	public Controller() {
 		stGame = null;
@@ -75,52 +68,45 @@ public class Controller {
 
 	private void initGames(GamesList gameType, ModeList mode) {
 		log.info(mode);
-		gameArray = GameFactory.createGameArray(gameType, mode);
+		new GameFactory();
+		gameArray = GameFactory.createGameArray(gameType, mode, human);
 
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			game = gameArray[i];
 			stGame = Status_Game.SETUP;
 		}
-		resultArray= new String[gameArray.length];
-		System.out.println("game array length: "+gameArray.length);
+		resultArray = new String[gameArray.length];
+		System.out.println("game array length: " + gameArray.length);
 
 	}
 
 	private void playing() {
-//		round = 0;
 		for (int i = 0; i < gameArray.length; i++) {
-			stGame=Status_Game.SETUP;
+			stGame = Status_Game.SETUP;
 			game = gameArray[i];
 			log.debug(stGame);
 			while (stGame != Status_Game.REPLAY) {
 
 				checkStatusGame();
 			}
-//			checkStatusGame();
-//			System.out.println(gameArray.length);
-//			round++;
-//			if(gameArray.length==round){
-//				
-//			}
-			resultArray[i]=game.getWinner().getName();
+			resultArray[i] = game.getWinner().getName();
 			view.displayLineBreak(resultArray[i]);
-//			System.out.println("i: "+i);
 		}
 		getFinalresult();
-		stGame=Status_Game.REPLAY;
+		stGame = Status_Game.REPLAY;
 		checkKeepPlaying();
 	}
 
 	private void getFinalresult() {
-		String finalWinner="";
-		if(resultArray.length==2){
-			if(resultArray[0]==resultArray[1]){
-				finalWinner="Both players win!";
-			}else{
-				finalWinner=resultArray[0]+" wins!";
+		String finalWinner = "";
+		if (resultArray.length == 2) {
+			if (resultArray[0] == resultArray[1]) {
+				finalWinner = "Both players win!";
+			} else {
+				finalWinner = resultArray[0] + " wins!";
 			}
-			view.displayLineBreak("Final result: "+finalWinner);
+			view.displayLineBreak("Final result: " + finalWinner);
 		}
 	}
 
@@ -158,7 +144,7 @@ public class Controller {
 			log.info("Secret Code: " + game.getSecretCode());
 			break;
 		case PLAY:
-			view.displayLineBreak(game.getNameP2() + " Attempt: " + Integer.toString(game.getAttempts()+1) + "/"
+			view.displayLineBreak(game.getNameP2() + " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
 					+ Configuration.getMax_attempts());
 			stGame = game.play(stGame);
 			view.displayLineBreak(game.getInput());
@@ -178,15 +164,15 @@ public class Controller {
 			stGame = Status_Game.VERDICT;
 			break;
 		case VERDICT:
-//			round++;
+			// round++;
 			stGame = Status_Game.REPLAY;
 			break;
 		case REPLAY:
-			game.setInput(p0.input());
+			game.setInput(human.input());
 			stGame = game.validPlayAgain(stGame);
 			break;
 		case EXIT:
-			game.setInput(p0.input());
+			game.setInput(human.input());
 			stGame = game.validExit(stGame);
 			break;
 		case END:
@@ -223,16 +209,16 @@ public class Controller {
 		this.menu = menu;
 	}
 
-	public void setP0(Player p0) {
-		this.p0 = p0;
+	public void setHuman(Human human) {
+		this.human = human;
 	}
 
 	public void setStMenu(Status_Menu stMenu) {
 		this.stMenu = stMenu;
 	}
 
-//	public void setStGame(Status_Game stGame) {
-//		this.stGame = stGame;
-//	}
+	// public void setStGame(Status_Game stGame) {
+	// this.stGame = stGame;
+	// }
 
 }
