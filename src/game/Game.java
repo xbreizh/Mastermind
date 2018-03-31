@@ -26,8 +26,6 @@ public abstract class Game extends Check {
 
 	protected String verdict = "";
 	protected String[] yesOrNo = { "y", "n" };
-//	protected String nameP1;
-//	protected String nameP2;
 	protected Player winner;
 
 	// Constructor
@@ -46,7 +44,6 @@ public abstract class Game extends Check {
 				if (hasCorrectNbDigits()) {
 					secretCode = Integer.parseInt(input);
 					secretCodeArray = intToArray(secretCode);
-					showParams();
 					setError("");
 					return Status_Game.PLAY;
 				} else {
@@ -65,7 +62,6 @@ public abstract class Game extends Check {
 	public Status_Game play(Status_Game status) {
 		String gameName = this.getClass().getSimpleName();
 		input = p2.tryToGuess(gameName);
-		showParams();
 		return validPlay(status);
 	}
 
@@ -76,7 +72,6 @@ public abstract class Game extends Check {
 					guess = input;
 					incrementAttempt();
 					setError("");
-					showParams();
 					generateAnswerToGive();
 					p1.setGuess(guess);
 					return Status_Game.ANSWER;
@@ -95,24 +90,19 @@ public abstract class Game extends Check {
 
 	public Status_Game answer(Status_Game status) {
 
-		 if(p1.getClass().equals(Human.class)){
-		showParams();
-		String gameName = this.getClass().getSimpleName();
-		answer = p1.replyToGuess(gameName);
-		 }else{
-			 answer=answerToGive;
-		 }
-		// if(checkIfInArray(input.))
+		if (p1.getClass().equals(Human.class)) {
+			String gameName = this.getClass().getSimpleName();
+			answer = p1.replyToGuess(gameName);
+		} else {
+			answer = answerToGive;
+		}
 
 		status = validAnswer(status);
 		p2.setAnswer(answer);
 		return status;
 	}
 
-	public void showParams() {
-	}
-
-	public Status_Game validAnswer(Status_Game status) {
+	protected Status_Game validAnswer(Status_Game status) {
 		return status;
 	}
 
@@ -176,12 +166,6 @@ public abstract class Game extends Check {
 
 	}
 
-//	public String getOutput() {
-//		output = p1.getName() + " answer: " + output;
-//
-//		return output;
-//	}
-
 	// Getters and Setters
 	public void setLog(Logger log) {
 		this.log = log;
@@ -190,18 +174,6 @@ public abstract class Game extends Check {
 	public Player getWinner() {
 		return winner;
 	}
-
-//	public int[] getSecretCodeArray() {
-//		return secretCodeArray;
-//	}
-
-//	public String getNameP1() {
-//		return p1.getName();
-//	}
-//
-//	public String getNameP2() {
-//		return p2.getName();
-//	}
 
 	public void setP1(Player p1) {
 		this.p1 = p1;
@@ -214,10 +186,6 @@ public abstract class Game extends Check {
 	public Player getP1() {
 		return p1;
 	}
-//
-//	public Player getP2() {
-//		return p2;
-//	}
 
 	public int getAttempts() {
 		return attempts;
@@ -243,9 +211,9 @@ public abstract class Game extends Check {
 		return error;
 	}
 
-	public void setSecretCodeArray() {
-		intToArray(secretCode);
-	}
+	// public void setSecretCodeArray() {
+	// intToArray(secretCode);
+	// }
 
 	public void setError(String error) {
 		this.error = error;
@@ -255,9 +223,9 @@ public abstract class Game extends Check {
 		return secretCode;
 	}
 
-	public void setSecretCode(int secretCode) {
-		this.secretCode = secretCode;
-	}
+	// public void setSecretCode(int secretCode) {
+	// this.secretCode = secretCode;
+	// }
 
 	public void setAnswer(String str) {
 		this.answer = str;

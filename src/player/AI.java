@@ -31,10 +31,10 @@ public class AI extends Player {
 	}
 	
 	private String initFirstGuess(){
+		guess="";
 		for (int i = 0; i < Configuration.getNbDigits(); i++) {
 			guess+="5";
 		}
-//		System.out.println("Guessing: "+guess);
 		return guess;
 		
 	}
@@ -73,16 +73,10 @@ public class AI extends Player {
 	@Override
 	public String tryToGuessMasterMind() {
 		initFirstGuess();
-		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
-//		String str= Integer.toString(Configuration.getNbDigits());
-//		for (int i = 0; i < str.length(); i++) {
-//			input
-//			
-//		}
-//		input = 
-		input = "55";
+//		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+//		input = "55";
 		waiting();
-		return input;
+		return guess;
 
 	}
 

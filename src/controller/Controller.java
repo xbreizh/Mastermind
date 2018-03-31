@@ -3,6 +3,7 @@ package controller;
 import org.apache.log4j.Logger;
 
 import application.Configuration;
+import check.Check;
 import game.Game;
 import game.GameFactory;
 import game.Status_Game;
@@ -13,6 +14,10 @@ import menu.Status_Menu;
 import player.Human;
 import view.View;
 
+/**
+ * @author Xavier.Lamourec
+ *
+ */
 public class Controller {
 	private Logger log;
 	
@@ -33,16 +38,22 @@ public class Controller {
 		stMenu = Status_Menu.MENU_GAME;
 	}
 
+	
+	/**
+	 * loops the menu until correct values are passed
+	 */
 	public void switchMenu() {
 		while (stGame != Status_Game.SETUP) {
-			checkMenuError();
+			checkError(menu);
 			checkStatusMenu();
 		}
 
 		playing();
 
 	}
-
+/**
+ * gets the Game type and mode, then gets to Game initiation
+ */
 	private void checkStatusMenu() {
 		log.debug(stMenu);
 		view.displayLineBreak(stMenu.getOutput());
@@ -66,7 +77,11 @@ public class Controller {
 
 		}
 	}
-
+/**
+ * Uses the gameType and mode to generate the array of games
+ * @param gameType (from the GamesList)
+ * @param mode (from the ModeList)
+ */
 	private void initGames(GamesList gameType, ModeList mode) {
 		log.info(mode);
 		new GameFactory();
@@ -80,7 +95,9 @@ public class Controller {
 		resultArray = new String[gameArray.length];
 
 	}
-
+/**
+ * loops the game methods until status REPLAY is reached
+ */
 	private void playing() {
 		for (int i = 0; i < gameArray.length; i++) {
 			stGame = Status_Game.SETUP;
@@ -97,7 +114,9 @@ public class Controller {
 		stGame = Status_Game.REPLAY;
 		checkKeepPlaying();
 	}
-
+/**
+ * gets and displays the final result
+ */
 	private void getFinalresult() {
 		String finalWinner = "";
 		if (resultArray.length == 2) {
@@ -109,7 +128,9 @@ public class Controller {
 			view.displayLineBreak("Final result: " + finalWinner);
 		}
 	}
-
+/**
+ * asks the user if he wants to restart the game
+ */
 	private void checkKeepPlaying() {
 		while (stGame == Status_Game.REPLAY) {
 			checkStatusGame();
@@ -120,7 +141,9 @@ public class Controller {
 			endGame();
 		}
 	}
-
+/**
+ * asks the user if he wants to play another game (Back to menu) or exit the application
+ */
 	private void endGame() {
 		while (stGame == Status_Game.EXIT) {
 			checkStatusGame();
@@ -132,10 +155,12 @@ public class Controller {
 			checkStatusGame();
 		}
 	}
-
+/**
+ * switches around the game methods depending of its status
+ */
 	private void checkStatusGame() {
 		log.debug(stGame);
-		checkError();
+		checkError(game);
 		view.displayInline(stGame.getOutput());
 		switch (stGame) {
 		case SETUP:
@@ -181,42 +206,58 @@ public class Controller {
 
 		}
 	}
-
-	private void checkMenuError() {
-		String error = menu.getOutput();
+/**
+ * returns any input error 
+ */
+	private void checkError(Check object) {
+		String error = object.getOutput();
 		if (!error.equals("")) {
 			log.warn(error);
 			view.displayError(error);
 		}
 	}
 
-	private void checkError() {
-		String error = game.getError();
-		if (!error.equals("")) {
-			log.warn(error);
-			view.displayError(error);
-		}
-	}
+//	private void checkError() {
+//		String error = game.getError();
+//		if (!error.equals("")) {
+//			log.warn(error);
+//			view.displayError(error);
+//		}
+//	}
 
 	// Getters and Setters
+	/**
+	 * sets the log
+	 * @param log
+	 */
 	public void setLog(Logger log) {
 		this.log = log;
 	}
+	/**
+	 * sets the view
+	 * @param view
+	 */
 	public void setView(View view) {
 		this.view = view;
 	}
-
+	/**
+	 * sets the menu
+	 * @param menu
+	 */
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
-
+	/**
+	 * sets the user(human)
+	 * @param human
+	 */
 	public void setHuman(Human human) {
 		this.human = human;
 	}
 
-	public void setStMenu(Status_Menu stMenu) {
-		this.stMenu = stMenu;
-	}
+//	public void setStMenu(Status_Menu stMenu) {
+//		this.stMenu = stMenu;
+//	}
 
 
 }

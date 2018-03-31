@@ -55,9 +55,6 @@ public abstract class Player {
 		this.name = name;
 	}
 
-//	public void setInput(String input) {
-//		this.input = input;
-//	}
 
 	public String getAnswer() {
 		return answer;
