@@ -12,30 +12,30 @@ public class GameFactory {
 	}
 
 	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human) {
-		Player p1 = human;
-		Player p2 = new AI();
-		// Player p2= new TestPlayer();
+		Player challenger = null;
+		Player defender = null;
+		AI robot = new AI();
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
+			challenger = robot;
+			defender = human;
 			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p2, p1);
+			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
 
 		}
 		if (mode.equals(ModeList.DEFENDER)) {
+			challenger = human;
+			defender = robot;
 			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
 		}
 		if (mode.equals(ModeList.DUAL)) {
+			challenger = human;
+			defender = robot;
 			gameArray = new Game[2];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
+			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
+			gameArray[1] = GameFactory.createGame(gameType, defender, challenger);
 		}
-
-		// Fills the gameArray with the games created
-//		for (int i = 0; i < gameArray.length; i++) {
-//			setNames(p1, p2);
-//
-//		}
 		return gameArray;
 
 	}
@@ -51,17 +51,4 @@ public class GameFactory {
 
 		}
 	}
-
-//	private static void setNames(Player p1, Player p2) {
-//		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-//			p1.setName("Paul");
-//			p2.setName("John");
-//		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-//			p1.setName("Human");
-//			p2.setName("AI");
-//		} else {
-//			p1.setName("AI");
-//			p2.setName("Human");
-//		}
-//	}
 }

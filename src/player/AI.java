@@ -73,8 +73,6 @@ public class AI extends Player {
 	@Override
 	public String tryToGuessMasterMind() {
 		initFirstGuess();
-//		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
-//		input = "55";
 		waiting();
 		return guess;
 
@@ -106,52 +104,12 @@ public class AI extends Player {
 
 	@Override
 	public String replyMoreLess(String gameName) {
-//		int[] a = intToArray(Integer.parseInt(secretCode));
-//		int[] b = intToArray(Integer.parseInt(guess));
-//		String str = "";
-//		for (int i = 0; i < a.length; i++) {
-//			if (a[i] == b[i]) {
-//				str += "=";
-//			} else if (a[i] < b[i]) {
-//				str += "-";
-//			} else if (a[i] > b[i]) {
-//				str += "+";
-//			}
-//		}
 		return "suka";
 
 	}
 
 	@Override
 	public String replyMasterMind(String gameName) {
-//		int[] a = intToArray(Integer.parseInt(secretCode));
-//		int[] b = intToArray(Integer.parseInt(guess));
-//
-//		ArrayList<Integer> aa = new ArrayList<>();
-//		ArrayList<Integer> bb = new ArrayList<>();
-//		int found = 0;
-//		int placed = 0;
-//
-//		arrayToList(a, aa);
-//		arrayToList(b, bb);
-//
-//		for (int i = 0; i < bb.size(); i++) {
-//			if (aa.get(i) == bb.get(i)) {
-//				bb.set(i, i * 10);
-//				placed++;
-//			}
-//			for (int j = 0; j < bb.size(); j++) {
-//
-//				if (aa.get(j) == bb.get(i)) {
-//					bb.set(i, i * 10);
-//					found++;
-//
-//				}
-//
-//			}
-//
-//		}
-//		return input = found + "" + placed;
 return "nada";
 	}
 

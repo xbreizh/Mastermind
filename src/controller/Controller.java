@@ -15,13 +15,13 @@ import player.Human;
 import view.View;
 
 /**
+ * This is the controller of the application
+ * 
  * @author Xavier.Lamourec
- *
+ * @version 1.0
  */
 public class Controller {
 	private Logger log;
-	
-
 	private Human human;
 	private View view;
 	private Status_Menu stMenu;
@@ -38,9 +38,8 @@ public class Controller {
 		stMenu = Status_Menu.MENU_GAME;
 	}
 
-	
 	/**
-	 * loops the menu until correct values are passed
+	 * loops the menu until it gets a valid game and a valid mode
 	 */
 	public void switchMenu() {
 		while (stGame != Status_Game.SETUP) {
@@ -51,9 +50,10 @@ public class Controller {
 		playing();
 
 	}
-/**
- * gets the Game type and mode, then gets to Game initiation
- */
+
+	/**
+	 * gets the Game type and mode, then initiates the game array
+	 */
 	private void checkStatusMenu() {
 		log.debug(stMenu);
 		view.displayLineBreak(stMenu.getOutput());
@@ -77,11 +77,15 @@ public class Controller {
 
 		}
 	}
-/**
- * Uses the gameType and mode to generate the array of games
- * @param gameType (from the GamesList)
- * @param mode (from the ModeList)
- */
+
+	/**
+	 * Uses the gameType and mode to generate the array of games
+	 * 
+	 * @param gameType
+	 *            (from the GamesList enumeration)
+	 * @param mode
+	 *            (from the ModeList enumeration)
+	 */
 	private void initGames(GamesList gameType, ModeList mode) {
 		log.info(mode);
 		new GameFactory();
@@ -95,9 +99,10 @@ public class Controller {
 		resultArray = new String[gameArray.length];
 
 	}
-/**
- * loops the game methods until status REPLAY is reached
- */
+
+	/**
+	 * loops around the different game stages until the REPLAY is reached
+	 */
 	private void playing() {
 		for (int i = 0; i < gameArray.length; i++) {
 			stGame = Status_Game.SETUP;
@@ -108,15 +113,16 @@ public class Controller {
 				checkStatusGame();
 			}
 			resultArray[i] = game.getWinner().getClass().getSimpleName();
-			view.displayLineBreak(resultArray[i]);
+			view.displayInline(resultArray[i]);
 		}
 		getFinalresult();
 		stGame = Status_Game.REPLAY;
 		checkKeepPlaying();
 	}
-/**
- * gets and displays the final result
- */
+
+	/**
+	 * gets and displays the final result
+	 */
 	private void getFinalresult() {
 		String finalWinner = "";
 		if (resultArray.length == 2) {
@@ -128,9 +134,11 @@ public class Controller {
 			view.displayLineBreak("Final result: " + finalWinner);
 		}
 	}
-/**
- * asks the user if he wants to restart the game
- */
+
+	
+	/**
+	 * asks the user if he wants to restart the game
+	 */
 	private void checkKeepPlaying() {
 		while (stGame == Status_Game.REPLAY) {
 			checkStatusGame();
@@ -141,9 +149,12 @@ public class Controller {
 			endGame();
 		}
 	}
-/**
- * asks the user if he wants to play another game (Back to menu) or exit the application
- */
+
+	
+	/**
+	 * asks the user if he wants to play another game (Back to the Menu) or Exit the
+	 * application
+	 */
 	private void endGame() {
 		while (stGame == Status_Game.EXIT) {
 			checkStatusGame();
@@ -155,10 +166,13 @@ public class Controller {
 			checkStatusGame();
 		}
 	}
-/**
- * switches around the game methods depending of its status
- */
+
+	/**
+	 * switches on the status and gets to the corresponding game method
+	 */
 	private void checkStatusGame() {
+		String attempsCount = " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
+				+ Configuration.getMax_attempts();
 		log.debug(stGame);
 		checkError(game);
 		view.displayInline(stGame.getOutput());
@@ -166,21 +180,26 @@ public class Controller {
 		case SETUP:
 			view.displayLineBreak(game.getClass().getSimpleName());
 			stGame = game.validSetup(stGame);
-			log.info("Secret Code: " + game.getSecretCode());
+			// log.info("Secret Code: " + game.getSecretCode());
 			break;
 		case PLAY:
-			view.displayLineBreak(game.getClass().getSimpleName() + " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
-					+ Configuration.getMax_attempts());
+
+			view.displayLineBreak(game.getClass().getSimpleName() + attempsCount);
 			stGame = game.play(stGame);
-			view.displayLineBreak(game.getInput());
+			displaysIfDefenderIsHuman(game.getInput(), "");
 			break;
 		case ANSWER:
-			log.debug("Code to find: " + game.getSecretCode());
-			if (game.getP1().getClass().getName().equals(Human.class.getName())) {
-				view.displayLineBreak(gameType.getHowToAnswer());
-			}
+			// log.debug("Code to find: " + game.getSecretCode());
+			displaysIfDefenderIsHuman(gameType.getHowToAnswer(), game.getAnswerToGive());
+			// if
+			// (game.getDefender().getClass().getName().equals(Human.class.getName()))
+			// {
+			// view.displayLineBreak(gameType.getHowToAnswer());
+			// }else{
+			// view.displayLineBreak(game.getAnswerToGive());
+			// }
+
 			stGame = game.answer(stGame);
-			view.displayLineBreak(game.getAnswerToGive());
 			break;
 		case NO_MORE_TRIES:
 			stGame = Status_Game.VERDICT;
@@ -206,58 +225,66 @@ public class Controller {
 
 		}
 	}
-/**
- * returns any input error 
- */
+
+	/**
+	 * checks if the defender is a human and displays accordingly
+	 */
+	private void displaysIfDefenderIsHuman(String str1, String str2) {
+		if (game.getDefender().getClass().getName().equals(Human.class.getName())) {
+			view.displayLineBreak(str1);
+		} else {
+			if (!str2.isEmpty()) {
+				view.displayLineBreak(str2);
+			}
+
+		}
+	}
+
+	/**
+	 * returns and displays any input error
+	 */
 	private void checkError(Check object) {
-		String error = object.getOutput();
+		String error = object.getError();
 		if (!error.equals("")) {
 			log.warn(error);
 			view.displayError(error);
 		}
 	}
 
-//	private void checkError() {
-//		String error = game.getError();
-//		if (!error.equals("")) {
-//			log.warn(error);
-//			view.displayError(error);
-//		}
-//	}
-
-	// Getters and Setters
 	/**
 	 * sets the log
+	 * 
 	 * @param log
 	 */
 	public void setLog(Logger log) {
 		this.log = log;
 	}
+
 	/**
 	 * sets the view
+	 * 
 	 * @param view
 	 */
 	public void setView(View view) {
 		this.view = view;
 	}
+
 	/**
 	 * sets the menu
+	 * 
 	 * @param menu
 	 */
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
+
 	/**
 	 * sets the user(human)
+	 * 
 	 * @param human
 	 */
 	public void setHuman(Human human) {
 		this.human = human;
 	}
-
-//	public void setStMenu(Status_Menu stMenu) {
-//		this.stMenu = stMenu;
-//	}
-
 
 }

@@ -28,12 +28,13 @@ public class MoreLess extends Game {
 	public Status_Game validAnswer(Status_Game status) {
 //		generateAnswerToGive();
 		if (!answerToGive.equals(answer)) {
-			setError("Wrong answer!, should be " + answerToGive);
+			System.out.println("ici");
+			error="Wrong answer!, should be " + answerToGive;
 			return status;
 		} else {
-			setError("");
+			error="";
 			if (Integer.parseInt(input) == (secretCode)) {
-				winner=p2;
+				winner=challenger;
 				status= Status_Game.FOUND;
 			} else {
 				status= Status_Game.PLAY;

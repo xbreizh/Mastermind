@@ -1,5 +1,11 @@
 package menu;
 
+
+/**
+ * Presents the main menu
+ * @author Xavier.Lamourec
+ *
+ */
 public enum Status_Menu {
 
 	MENU_GAME("Chose a Game:\n"+GamesList.MoreLess.getReference()+"- "+GamesList.MoreLess+GamesList.MoreLess.getHowToGuess()+"\n"

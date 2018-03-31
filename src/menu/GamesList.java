@@ -1,5 +1,11 @@
 package menu;
 
+/**
+ *  List of available games
+ * @author Xavier.Lamourec
+ *
+ */
+
 public enum GamesList {
 
 	MoreLess(1, " ( Guess the code with 'more', 'less' or 'equals' as reply )", 

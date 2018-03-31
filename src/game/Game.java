@@ -8,43 +8,62 @@ import check.InputStatus;
 import player.Human;
 import player.Player;
 
+/**
+ * This is the Model Application. it requires 2 players
+ * and the methods return a status that can be used in the controller for switching
+ * It's a child of the Check class what allows to check the user's inputs.
+ * @author Xavier.Lamourec
+ *
+ */
+
 public abstract class Game extends Check {
 	private Logger log;
-	protected Player p1;
-	protected Player p2;
-	// protected Status_Game status;
-
+	protected Player defender;
+	protected Player challenger;
 	protected int[] secretCodeArray;
 	protected int attempts = 0;
 	protected int max_attempts = Configuration.getMax_attempts();
-	protected String error = "";
-
 	protected int secretCode;
 	protected String guess = "";
 	protected String answerToGive = "";
 	protected String answer = "";
-
-	protected String verdict = "";
+//	protected String verdict = "";
 	protected String[] yesOrNo = { "y", "n" };
 	protected Player winner;
 
-	// Constructor
-	public Game(Player p1, Player p2) {
-		this.p1 = p1;
-		this.p2 = p2;
+	/**
+	 * Constructor of the game (requires 2 players)
+	 * @param defender
+	 * @param challenger
+	 */
+	public Game(Player defender, Player challenger) {
+		this.defender = defender;
+		this.challenger = challenger;
+//		log.info(this.getClass().getSimpleName()+" created"
+//				+"\nChallenger: "+challenger.getClass().getSimpleName()
+//				+"\nDefender: "+defender.getClass().getSimpleName());
 	}
 
-	// abstracts methods
+	/**
+	 * generates the answer to be given to the challenger
+	 * (deined in the respective child class)
+	 */
 	abstract void generateAnswerToGive();
-
+	
+	/**
+	 * Gets the secret Code and changes the status if valid
+	 * @param status
+	 * @return
+	 */
 	public Status_Game validSetup(Status_Game status) {
-		input = p1.setup();
+		input = defender.setup();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
 					secretCode = Integer.parseInt(input);
 					secretCodeArray = intToArray(secretCode);
-					setError("");
+					error="";
+					log.info("Secret code set: "+secretCode);
 					return Status_Game.PLAY;
 				} else {
 					error = IStatus.getOutput();
@@ -55,25 +74,34 @@ public abstract class Game extends Check {
 		} else {
 			error = IStatus.getOutput();
 		}
-		incrementAttempt();
 		return status;
 	}
-
+	
+	/**
+	 * Asks for challenger's guess until it's valid
+	 * @param status
+	 * @return
+	 */
 	public Status_Game play(Status_Game status) {
 		String gameName = this.getClass().getSimpleName();
-		input = p2.tryToGuess(gameName);
+		input = challenger.tryToGuess(gameName);
 		return validPlay(status);
 	}
-
+	
+	/**
+	 * checks the challenger's guess and changes the status if valid
+	 * @param status
+	 * @return
+	 */
 	public Status_Game validPlay(Status_Game status) {
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
 					guess = input;
 					incrementAttempt();
-					setError("");
+					error="";
 					generateAnswerToGive();
-					p1.setGuess(guess);
+					defender.setGuess(guess);
 					return Status_Game.ANSWER;
 				} else {
 					error = IStatus.getOutput();
@@ -87,35 +115,62 @@ public abstract class Game extends Check {
 		return status;
 
 	}
-
+	
+	/**
+	 * Asks for defender's guess until it's valid
+	 * @param status
+	 * @return
+	 */
 	public Status_Game answer(Status_Game status) {
 
-		if (p1.getClass().equals(Human.class)) {
+		if (defender.getClass().equals(Human.class)) {
 			String gameName = this.getClass().getSimpleName();
-			answer = p1.replyToGuess(gameName);
+			answer = defender.replyToGuess(gameName);
 		} else {
 			answer = answerToGive;
 		}
 
 		status = validAnswer(status);
-		p2.setAnswer(answer);
+		challenger.setAnswer(answer);
 		return status;
 	}
-
+	
+	/**
+	 * checks the defender's answer and changes the status if valid
+	 * @param status
+	 * @return
+	 */
 	protected Status_Game validAnswer(Status_Game status) {
 		return status;
 	}
-
+	
+	/**
+	 * asks the user if he wants to replay
+	 * @param status
+	 * @return
+	 */
 	public Status_Game validPlayAgain(Status_Game status) {
 		return checkYesOrNo(status, Status_Game.SETUP, Status_Game.EXIT);
 
 	}
-
+	
+	/**
+	 * ask the user if he wants to play again
+	 * @param status
+	 * @return
+	 */
 	public Status_Game validExit(Status_Game status) {
 		return checkYesOrNo(status, null, Status_Game.END);
 
 	}
-
+	
+	/**
+	 * checks the user's input and changes the status if correct
+	 * @param init
+	 * @param yes
+	 * @param no
+	 * @return
+	 */
 	protected Status_Game checkYesOrNo(Status_Game init, Status_Game yes, Status_Game no) {
 		error = "";
 		if (isEmpty()) {
@@ -133,7 +188,12 @@ public abstract class Game extends Check {
 		}
 
 	}
-
+	
+	/**
+	 * converts an integer into array
+	 * @param code
+	 * @return
+	 */
 	protected int[] intToArray(int code) {
 		int[] tab = new int[Configuration.getNbDigits()];
 		int s = Configuration.getNbDigits() - 1;
@@ -145,21 +205,32 @@ public abstract class Game extends Check {
 		}
 		return tab;
 	}
-
+	
+	/**
+	 * checks the number of attempts and changes the status if the maximum is reached
+	 * @param status
+	 * @return
+	 */
 	public Status_Game checkAttempts(Status_Game status) {
 		if (attempts == max_attempts) {
-			winner = p1;
+			winner = defender;
 			return Status_Game.NO_MORE_TRIES;
 		}
 		return status;
 	}
-
+	
+	/**
+	 * increments the number of attempts
+	 */
 	private void incrementAttempt() {
 		attempts++;
 	}
 
-	// resets the game attempts
+	/**
+	 * reset the game parameters
+	 */
 	private void reset() {
+		error="";
 		output = "";
 		input = "";
 		attempts = 0;
@@ -175,16 +246,16 @@ public abstract class Game extends Check {
 		return winner;
 	}
 
-	public void setP1(Player p1) {
-		this.p1 = p1;
-	}
+//	public void setDefender(Player defender) {
+//		this.defender = defender;
+//	}
+//
+//	public void setChallenger(Player challenger) {
+//		this.challenger = challenger;
+//	}
 
-	public void setP2(Player p2) {
-		this.p2 = p2;
-	}
-
-	public Player getP1() {
-		return p1;
+	public Player getDefender() {
+		return defender;
 	}
 
 	public int getAttempts() {
@@ -195,13 +266,13 @@ public abstract class Game extends Check {
 		return answerToGive;
 	}
 
-	public void setAnswerToGive(String answerToGive) {
-		this.answerToGive = answerToGive;
-	}
+//	protected void setAnswerToGive(String answerToGive) {
+//		this.answerToGive = answerToGive;
+//	}
 
-	public String getInput() {
-		return input;
-	}
+//	public String getInput() {
+//		return input;
+//	}
 
 	public void setInput(String input) {
 		this.input = input;
@@ -214,26 +285,29 @@ public abstract class Game extends Check {
 	// public void setSecretCodeArray() {
 	// intToArray(secretCode);
 	// }
+	/**
+	 * sets the error to be displayed in the view
+	 * @param error
+	 */
+//	public void setError(String error) {
+//		this.error = error;
+//	}
 
-	public void setError(String error) {
-		this.error = error;
-	}
-
-	public int getSecretCode() {
-		return secretCode;
-	}
+//	public int getSecretCode() {
+//		return secretCode;
+//	}
 
 	// public void setSecretCode(int secretCode) {
 	// this.secretCode = secretCode;
 	// }
 
-	public void setAnswer(String str) {
-		this.answer = str;
+//	public void setAnswer(String str) {
+//		this.answer = str;
+//
+//	}
 
-	}
-
-	public String getVerdict() {
-		return verdict;
-	}
+//	public String getVerdict() {
+//		return verdict;
+//	}
 
 }

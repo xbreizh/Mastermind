@@ -21,7 +21,7 @@ public class Menu extends Check {
 
 	public Status_Menu selectAndValidGame(Status_Menu status) {
 		input=human.setup();
-		setNbChar(1);
+		nbChar=1;
 		initValidGameList();
 		if (isEmpty())
 			return status;

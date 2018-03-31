@@ -2,6 +2,13 @@ package check;
 
 import application.Configuration;
 
+/**
+ * This class is about checking the user's input 
+ * and returning the validity with a boolean
+ * @author Xavier.Lamourec
+ *
+ */
+
 public class Check {
 
 	protected String input = "";
@@ -9,15 +16,20 @@ public class Check {
 	protected int nbChar = Configuration.getNbDigits();
 	protected String[] symbols = { "+", "-", "=" };
 	protected InputStatus IStatus = InputStatus.VALID;
-
-//	int test = 1324;
+	protected String error = "";
 	protected String[] valid;
 
 	public Check() {
 
 	}
-
-	public boolean checkIfInArrayNumber() {
+	/**
+	 * checks if user's input is within the valid array.
+	 * Needs valid to be instantiated
+	 * @param valid array is checked for validation
+	 * @param input
+	 * @return
+	 */
+	protected boolean checkIfInArrayNumber() {
 
 		for (int i = 0; i < valid.length; i++) {
 			if (input.equals(valid[i])) {
@@ -25,65 +37,72 @@ public class Check {
 			}
 		}
 		IStatus = InputStatus.WRONGCHARACTER;
-		output = IStatus.getOutput();
+		error = IStatus.getOutput();
 		return false;
 
 	}
 
-	public boolean checkIfInArray(String[] valid) {
-		for (int i = 0; i < input.length(); i++) {
-			int ok = 0;
-			for (int j = 0; j < valid.length; j++) {
-				if (String.valueOf(input.charAt(i)).equals(valid[j])) {
-					ok++;
-				}
-			}
-			if (ok == 0) {
-				IStatus = InputStatus.WRONGCHARACTER;
-				output = IStatus.getOutput();
-				return false;
-			}
+//	protected boolean checkIfInArray(String[] valid) {
+//		for (int i = 0; i < input.length(); i++) {
+//			int ok = 0;
+//			for (int j = 0; j < valid.length; j++) {
+//				if (String.valueOf(input.charAt(i)).equals(valid[j])) {
+//					ok++;
+//				}
+//			}
+//			if (ok == 0) {
+//				IStatus = InputStatus.WRONGCHARACTER;
+//				error = IStatus.getOutput();
+//				return false;
+//			}
+//
+//		}
+//		return true;
+//
+//	}
 
-		}
-		return true;
+//	protected boolean checkSymbol() {
+//		if (!hasCorrectNbDigits()) {
+//			for (int i = 0; i < input.length(); i++) {
+//
+//				if ((!input.substring(i, i + 1).equals(symbols[0])) && (!input.substring(i, i + 1).equals(symbols[1]))
+//						&& (!input.substring(i, i + 1).equals(symbols[2]))) {
+//					IStatus = InputStatus.WRONGCHARACTER;
+//					error = IStatus.getOutput();
+//					return false;
+//				}
+//			}
+//		}
+//		return true;
+//
+//	}
 
-	}
+//	protected InputStatus getCheckStatus() {
+//		return IStatus;
+//	}
 
-	public boolean checkSymbol() {
-		if (!hasCorrectNbDigits()) {
-			for (int i = 0; i < input.length(); i++) {
+//	protected boolean isValidInteger() {
+//		if (isInteger()) {
+//			if (hasCorrectNbDigits()) {
+//				return true;
+//			}
+//		}
+//		return false;
+//
+//	}
+	/**
+	 * checks if the input has the right number of digits
+	 * updates the value for error
+	 * returns a boolean
+	 * @param input
+	 * @return
+	 */
 
-				if ((!input.substring(i, i + 1).equals(symbols[0])) && (!input.substring(i, i + 1).equals(symbols[1]))
-						&& (!input.substring(i, i + 1).equals(symbols[2]))) {
-					IStatus = InputStatus.WRONGCHARACTER;
-					output = IStatus.getOutput();
-					return false;
-				}
-			}
-		}
-		return true;
-
-	}
-
-	public InputStatus getCheckStatus() {
-		return IStatus;
-	}
-
-	public boolean isValidInteger() {
-		if (isInteger()) {
-			if (hasCorrectNbDigits()) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	public boolean hasCorrectNbDigits() {
+	protected boolean hasCorrectNbDigits() {
 		if (!isEmpty()) {
 			if (input.length() != nbChar) {
 				IStatus = InputStatus.WRONGCHARACTER;
-				output = IStatus.getOutput();
+				error = IStatus.getOutput();
 				return false;
 			}
 		}
@@ -91,25 +110,37 @@ public class Check {
 		return true;
 
 	}
-
-	public boolean isEmpty() {
-		output = "";
+	/**
+	 * checks if the input is empty
+	 * updates the value for error
+	 * returns a boolean
+	 * @param input
+	 * @return
+	 */
+	protected boolean isEmpty() {
+		error = "";
 		if (input.length() == 0) {
 			IStatus = InputStatus.EMPTY;
-			output = IStatus.getOutput();
+			error = IStatus.getOutput();
 			return true;
 		}
 		return false;
 	}
-
-	public boolean isInteger() {
+	
+	/**
+	 * checks if the input is an integer
+	 * updates the value for error
+	 * returns a boolean
+	 * @return
+	 */
+	protected boolean isInteger() {
 		if (isEmpty())
 			return false;
 		try {
 			Integer.parseInt(this.input);
 		} catch (NumberFormatException e) {
 			IStatus = InputStatus.NOTINTEGER;
-			output = IStatus.getOutput();
+			error = IStatus.getOutput();
 			return false;
 		}
 		return true;
@@ -117,24 +148,28 @@ public class Check {
 
 	// Setters and Getters
 
-	public void setValid(String[] valid) {
-		this.valid = valid;
+	public String getError() {
+		return error;
 	}
 
-	public void setNbChar(int nbChar) {
-		this.nbChar = nbChar;
-	}
+//	protected void setValid(String[] valid) {
+//		this.valid = valid;
+//	}
 
-	public String getOutput() {
-		return output;
-	}
+//	protected void setNbChar(int nbChar) {
+//		this.nbChar = nbChar;
+//	}
+
+//	protected String getOutput() {
+//		return output;
+//	}
 
 	public String getInput() {
 		return input;
 	}
 
-	public void setInput(String input) {
-		this.input = input;
-	}
+//	protected void setInput(String input) {
+//		this.input = input;
+//	}
 
 }
