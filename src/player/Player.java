@@ -1,60 +1,52 @@
 package player;
 
-import game.Game;
 import menu.GamesList;
 
 public abstract class Player {
-
-	protected String input = "";
-	// protected String wrong = "wrong answer";
+	protected String input="";
+	protected String secretCode = "";
 	protected String answer = "";
 	protected String answerToGive = "";
 	protected String name;
 	protected String guess = "";
-	// protected Game game;
 
 	// Abstract methods
 	public abstract String setup();
 
-	public abstract String tryToGuessMoreless();
+	public abstract String tryToGuessMoreLess();
 
-	public abstract String replyMoreless(Game game);
+	public abstract String replyMoreLess(String gameName);
 
 	public abstract String tryToGuessMasterMind();
 
-	public abstract String replyMasterMind(Game game);
+	public abstract String replyMasterMind(String gameName);
 
-	// public Status_Game tryToGuess(Game game){
-	//
-	// }
 
 	// Trying to guess the result
-	public String tryToGuess(Game game) {
+	public String tryToGuess(String gameName) {
 
-		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
-			return tryToGuessMoreless();
+		if (gameName.equals(GamesList.MoreLess.name())) {
+			return tryToGuessMoreLess();
 		}
-		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
+		if (gameName.equals(GamesList.MasterMind.name())) {
 			return tryToGuessMasterMind();
 		}
 		return "invalid";
 	}
 
 	// Provides feedback on other player's input
-	public String replyToGuess(Game game) {
-		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
-			return replyMoreless(game);
+	public String replyToGuess(String gameName) {
+		if (gameName.equals(GamesList.MoreLess.name())) {
+			return replyMoreLess(gameName);
 		}
-		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
-			return replyMasterMind(game);
+		if (gameName.equals(GamesList.MasterMind.name())) {
+			return replyMasterMind(gameName);
 		}
 		return "Invalid reply";
 	}
 
 	// getters & setters
-	// public void setGame(Game game) {
-	// this.game = game;
-	// }
+
 	public String getName() {
 		return name;
 	}
@@ -63,9 +55,9 @@ public abstract class Player {
 		this.name = name;
 	}
 
-	public void setInput(String input) {
-		this.input = input;
-	}
+//	public void setInput(String input) {
+//		this.input = input;
+//	}
 
 	public String getAnswer() {
 		return answer;
@@ -75,7 +67,7 @@ public abstract class Player {
 		this.answer = answer;
 	}
 
-	public String getInput() {
-		return input;
+	public void setGuess(String guess) {
+		this.guess=guess;
 	}
 }

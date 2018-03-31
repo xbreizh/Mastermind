@@ -5,7 +5,6 @@ import menu.ModeList;
 import player.AI;
 import player.Human;
 import player.Player;
-import player.TestPlayer;
 
 public class GameFactory {
 
@@ -15,11 +14,11 @@ public class GameFactory {
 	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human) {
 		Player p1 = human;
 		Player p2 = new AI();
-//		Player p2= new TestPlayer();
+		// Player p2= new TestPlayer();
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
 			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
+			gameArray[0] = GameFactory.createGame(gameType, p2, p1);
 
 		}
 		if (mode.equals(ModeList.DEFENDER)) {

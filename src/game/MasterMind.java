@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import application.Configuration;
 import player.Player;
 
 public class MasterMind extends Game {
@@ -15,7 +16,7 @@ public class MasterMind extends Game {
 	@Override
 	void generateAnswerToGive() {
 		int[] a = intToArray(secretCode);
-		int[] b = intToArray(Integer.parseInt(input));
+		int[] b = intToArray(Integer.parseInt(guess));
 		ArrayList<Integer> aa = new ArrayList<>();
 		ArrayList<Integer> bb = new ArrayList<>();
 
@@ -51,7 +52,8 @@ public class MasterMind extends Game {
 			status= Status_Game.ANSWER;
 		} else {
 			setError("");
-			if (answerToGive.equals("04")) {
+			String goodResult="0"+Integer.toString(Configuration.getNbDigits());
+			if (answerToGive.equals(goodResult)) {
 				winner=p2;
 				status= Status_Game.FOUND;
 			} else {

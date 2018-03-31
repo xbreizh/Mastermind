@@ -2,8 +2,6 @@ package player;
 
 import java.util.Scanner;
 
-import game.Game;
-
 public class Human extends Player {
 	private Scanner sc = new Scanner(System.in);
 
@@ -13,13 +11,13 @@ public class Human extends Player {
 	}
 
 	@Override
-	public String tryToGuessMoreless() {
+	public String tryToGuessMoreLess() {
 		return setup();
 
 	}
 
 	@Override
-	public String replyMoreless(Game game) {
+	public String replyMoreLess(String gameName) {
 		return setup();
 
 	}
@@ -31,7 +29,7 @@ public class Human extends Player {
 	}
 
 	@Override
-	public String replyMasterMind(Game game) {
+	public String replyMasterMind(String gameName) {
 		return setup();
 
 	}

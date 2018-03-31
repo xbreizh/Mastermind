@@ -3,7 +3,6 @@ package controller;
 import org.apache.log4j.Logger;
 
 import application.Configuration;
-import application.Log4J;
 import game.Game;
 import game.GameFactory;
 import game.Status_Game;
@@ -15,7 +14,9 @@ import player.Human;
 import view.View;
 
 public class Controller {
-	private static final Logger log = Logger.getLogger(Log4J.class);
+	private Logger log;
+	
+
 	private Human human;
 	private View view;
 	private Status_Menu stMenu;
@@ -71,10 +72,10 @@ public class Controller {
 		new GameFactory();
 		gameArray = GameFactory.createGameArray(gameType, mode, human);
 
-		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			game = gameArray[i];
 			stGame = Status_Game.SETUP;
+			game.setLog(log);
 		}
 		resultArray = new String[gameArray.length];
 
@@ -98,8 +99,6 @@ public class Controller {
 	}
 
 	private void getFinalresult() {
-//		System.out.println("Winner game1: "+resultArray[0]);
-//		System.out.println("Winner game2: "+resultArray[1]);
 		String finalWinner = "";
 		if (resultArray.length == 2) {
 			if (resultArray[0] != resultArray[1]) {
@@ -165,7 +164,6 @@ public class Controller {
 			stGame = Status_Game.VERDICT;
 			break;
 		case VERDICT:
-			// round++;
 			stGame = Status_Game.REPLAY;
 			break;
 		case REPLAY:
@@ -201,7 +199,9 @@ public class Controller {
 	}
 
 	// Getters and Setters
-
+	public void setLog(Logger log) {
+		this.log = log;
+	}
 	public void setView(View view) {
 		this.view = view;
 	}
@@ -218,8 +218,5 @@ public class Controller {
 		this.stMenu = stMenu;
 	}
 
-	// public void setStGame(Status_Game stGame) {
-	// this.stGame = stGame;
-	// }
 
 }

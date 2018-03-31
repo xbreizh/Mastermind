@@ -1,26 +1,28 @@
 package game;
 
+import org.apache.log4j.Logger;
+
 import application.Configuration;
 import check.Check;
 import check.InputStatus;
-import player.Human;
 import player.Player;
 
 public abstract class Game extends Check {
+	private Logger log;
 	protected Player p1;
 	protected Player p2;
 	// protected Status_Game status;
-	
+
 	protected int[] secretCodeArray;
 	protected int attempts = 0;
 	protected int max_attempts = Configuration.getMax_attempts();
 	protected String error = "";
-	
+
 	protected int secretCode;
-	protected String guess="";
+	protected String guess = "";
 	protected String answerToGive = "";
 	protected String answer = "";
-	
+
 	protected String verdict = "";
 	protected String[] yesOrNo = { "y", "n" };
 	protected String nameP1;
@@ -31,17 +33,16 @@ public abstract class Game extends Check {
 	public Game(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
-//		p1.setGame(this);
-//		p2.setGame(this);
+		// p1.setGame(this);
+		// p2.setGame(this);
 	}
 
 	// abstracts methods
 	abstract void generateAnswerToGive();
 
-	
-
 	public Status_Game validSetup(Status_Game status) {
-
+//		System.out.println("Player 1: " + p1.getName().toString());
+//		System.out.println("Player 2: " + p2.getName().toString());
 		input = p1.setup();
 		if (!isEmpty()) {
 			if (isInteger()) {
@@ -65,25 +66,26 @@ public abstract class Game extends Check {
 		incrementAttempt();
 		return status;
 	}
-	
-	public Status_Game play(Status_Game status) {
 
-		input=p2.tryToGuess(this);
-//		setInput(p2.getInput());
-//		p1.setInput(p2.getInput());
+	public Status_Game play(Status_Game status) {
+		String gameName = this.getClass().getSimpleName();
+		input = p2.tryToGuess(gameName);
+		// setInput(p2.getInput());
+		// p1.setGuess(p2.getInput());
 		showParams();
 		return validPlay(status);
 	}
-	
+
 	public Status_Game validPlay(Status_Game status) {
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
-					guess=input;
+					guess = input;
 					incrementAttempt();
 					setError("");
 					showParams();
 					generateAnswerToGive();
+					p1.setGuess(guess);
 					return Status_Game.ANSWER;
 				} else {
 					error = IStatus.getOutput();
@@ -100,26 +102,25 @@ public abstract class Game extends Check {
 
 	public Status_Game answer(Status_Game status) {
 
-//		if(p1.getClass().equals(Human.class))
+		// if(p1.getClass().equals(Human.class))
 		showParams();
-		answer =p1.replyToGuess(this);
-		
-//		if(checkIfInArray(input.))
-		
+		String gameName = this.getClass().getSimpleName();
+		answer = p1.replyToGuess(gameName);
+
+		// if(checkIfInArray(input.))
+
 		status = validAnswer(status);
 		p2.setAnswer(answer);
 		return status;
 	}
-	
-	public void showParams(){
-//		System.out.println("Secret code: "+secretCode);
-//		System.out.println("Input: "+input);
-//		System.out.println("Guess: "+guess);
-//		System.out.println("Answer: "+answer);
-//		System.out.println("AnswerToGive: "+answerToGive);
-	}
 
-	
+	public void showParams() {
+		// System.out.println("Secret code: "+secretCode);
+		// System.out.println("Input: "+input);
+		// System.out.println("Guess: "+guess);
+		// System.out.println("Answer: "+answer);
+		// System.out.println("AnswerToGive: "+answerToGive);
+	}
 
 	// overwritten in game subclasses(Mastermind / MoreLess)
 	public Status_Game validAnswer(Status_Game status) {
@@ -193,6 +194,10 @@ public abstract class Game extends Check {
 	}
 
 	// Getters and Setters
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+
 	public Player getWinner() {
 		return winner;
 	}

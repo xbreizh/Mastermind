@@ -4,43 +4,42 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import application.Configuration;
-import game.Game;
 
 public class AI extends Player {
 
 	private String newProposition = "";
-	// Settings conf = Settings.getConfiguration();
 	private int min;
 	private int max;
-	
-	public AI(){
+
+	public AI() {
 		setMinAndMax(Configuration.getNbDigits());
-		
+
 	}
-private void setMinAndMax(int maxNbDigits){
-		
-		String minString="1";
-		String maxString="9";
-			for (int i = 0; i < Configuration.getNbDigits()-1; i++) {
-				
-				minString+="0";
-				maxString+="9";
-				min=Integer.parseInt(minString);
-				max=Integer.parseInt(maxString);
-			}
-		
-	}
-	@Override
-	public String setup() {
-		return  Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+
+	private void setMinAndMax(int maxNbDigits) {
+
+		String minString = "1";
+		String maxString = "9";
+		for (int i = 0; i < Configuration.getNbDigits() - 1; i++) {
+
+			minString += "0";
+			maxString += "9";
+			min = Integer.parseInt(minString);
+			max = Integer.parseInt(maxString);
+		}
+
 	}
 
 	@Override
-	public String  tryToGuessMoreless() {
-//		System.out.println("answered: "+answer);
+	public String setup() {
+		return secretCode = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+	}
+
+	@Override
+	public String tryToGuessMoreLess() {
 		String newGuess = "";
 		if (guess.length() == 0) {
-			newGuess = Integer.toString(max/2);
+			newGuess = Integer.toString(max / 2);
 		} else {
 			for (int i = 0; i < guess.length(); i++) {
 				int a = Character.getNumericValue(guess.charAt(i));
@@ -55,16 +54,17 @@ private void setMinAndMax(int maxNbDigits){
 					newGuess += (a + 1);
 				}
 			}
-//			input = newInput;
+			// input = newInput;
 			waiting();
 		}
-		return guess=newGuess;
+		return guess = newGuess;
 
 	}
+
 	@Override
 	public String tryToGuessMasterMind() {
 		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
-
+		input = "55";
 		waiting();
 		return input;
 
@@ -94,12 +94,10 @@ private void setMinAndMax(int maxNbDigits){
 		return newProposition;
 	}
 
-	
-
 	@Override
-	public String  replyMoreless(Game game) {
-		int[] a = game.getSecretCodeArray();
-		int[] b = intToArray(Integer.parseInt(game.getInput()));
+	public String replyMoreLess(String gameName) {
+		int[] a = intToArray(Integer.parseInt(secretCode));
+		int[] b = intToArray(Integer.parseInt(guess));
 		String str = "";
 		for (int i = 0; i < a.length; i++) {
 			if (a[i] == b[i]) {
@@ -115,9 +113,9 @@ private void setMinAndMax(int maxNbDigits){
 	}
 
 	@Override
-	public String replyMasterMind(Game game) {
-		int[] a = game.getSecretCodeArray();
-		int[] b = intToArray(Integer.parseInt(input));
+	public String replyMasterMind(String gameName) {
+		int[] a = intToArray(Integer.parseInt(secretCode));
+		int[] b = intToArray(Integer.parseInt(guess));
 
 		ArrayList<Integer> aa = new ArrayList<>();
 		ArrayList<Integer> bb = new ArrayList<>();
