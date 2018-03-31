@@ -27,8 +27,6 @@ public abstract class Game extends Check {
 	protected String guess = "";
 	protected String answerToGive = "";
 	protected String answer = "";
-//	protected String verdict = "";
-	protected String[] yesOrNo = { "y", "n" };
 	protected Player winner;
 
 	/**
@@ -126,15 +124,17 @@ public abstract class Game extends Check {
 	}
 	
 	/**
-	 * Asks for defender's guess until it's valid
+	 * Asks for defender's answer until it's valid
+	 * if defender is human
+	 * Otherwise, it sets the answer as game's generated answer
 	 * @param status
 	 * @return
 	 */
 	public Status_Game answer(Status_Game status) {
 
 		if (defender.getClass().equals(Human.class)) {
-			String gameName = this.getClass().getSimpleName();
-			answer = defender.replyToGuess(gameName);
+//			String gameName = this.getClass().getSimpleName();
+			answer = defender.setup();
 		} else {
 			answer = answerToGive;
 		}
@@ -144,14 +144,6 @@ public abstract class Game extends Check {
 		return status;
 	}
 	
-//	/**
-//	 * checks the defender's answer and changes the status if valid
-//	 * @param status
-//	 * @return
-//	 */
-//	protected Status_Game validAnswer(Status_Game status) {
-//		return status;
-//	}
 	
 	/**
 	 * asks the user if he wants to replay

@@ -7,19 +7,23 @@ public abstract class Player {
 	protected String secretCode = "";
 	protected String answer = "";
 	protected String answerToGive = "";
-	protected String name;
+	protected String name="";
 	protected String guess = "";
+	
+	public Player(){
+		
+	}
 
 	// Abstract methods
 	public abstract String setup();
 
 	public abstract String tryToGuessMoreLess();
 
-	public abstract String replyMoreLess(String gameName);
+//	public abstract String replyMoreLess(String gameName);
 
 	public abstract String tryToGuessMasterMind();
 
-	public abstract String replyMasterMind(String gameName);
+//	public abstract String replyMasterMind(String gameName);
 
 
 	// Trying to guess the result
@@ -35,15 +39,15 @@ public abstract class Player {
 	}
 
 	// Provides feedback on other player's input
-	public String replyToGuess(String gameName) {
-		if (gameName.equals(GamesList.MoreLess.name())) {
-			return replyMoreLess(gameName);
-		}
-		if (gameName.equals(GamesList.MasterMind.name())) {
-			return replyMasterMind(gameName);
-		}
-		return "Invalid reply";
-	}
+//	public String replyToGuess(String gameName) {
+//		if (gameName.equals(GamesList.MoreLess.name())) {
+//			return replyMoreLess(gameName);
+//		}
+//		if (gameName.equals(GamesList.MasterMind.name())) {
+//			return replyMasterMind(gameName);
+//		}
+//		return "Invalid reply";
+//	}
 
 	// getters & setters
 

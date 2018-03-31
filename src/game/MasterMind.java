@@ -10,7 +10,6 @@ public class MasterMind extends Game {
 		super(defender, challenger);
 	}
 
-	String result = "";
 
 	@Override
 	void generateAnswerToGive() {
@@ -43,27 +42,6 @@ public class MasterMind extends Game {
 		output = "Found: " + found + ", well placed: " + placed;
 		answerToGive = found + "" + placed;
 	}
-
-//	public Status_Game validAnswer(Status_Game status) {
-////		generateAnswerToGive(secretCode, Integer.parseInt(input));
-//		if (!answerToGive.equals(answer)) {
-//			error="Wrong answer!, should be " + answerToGive;
-//			status= Status_Game.ANSWER;
-//		} else {
-//			error="";
-////			String goodResult="0"+Integer.toString(Configuration.getNbDigits());
-//			if (Integer.parseInt(guess) == (secretCode)) {
-//				winner=challenger;
-//				status= Status_Game.FOUND;
-//			} else {
-//				status = Status_Game.PLAY;
-//				status = checkAttempts(status);
-//				return status;
-//			}
-//		}
-//		return status;
-//
-//	}
 
 
 

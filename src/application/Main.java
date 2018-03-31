@@ -28,6 +28,7 @@ public class Main {
 	private static final Logger log = Logger.getLogger(Controller.class);
 
 	public static void main(String[] args) {
+		
 		if(new Configuration().getError()!=null){
 			log.fatal("Error while loading the configuration file\n "
 					+ "The application can't be launched");

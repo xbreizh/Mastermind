@@ -30,17 +30,9 @@ public enum GamesList {
 	public String getHowToGuess() {
 		return howToGuess;
 	}
-
-//	public void setHowToGuess(String howToGuess) {
-//		this.howToGuess = howToGuess;
-//	}
 	
 	public String getHowToAnswer() {
 		return howToAnswer;
 	}
-
-//	public void setHowToAnswer(String howToAnswer) {
-//		this.howToAnswer = howToAnswer;
-//	}
 
 }

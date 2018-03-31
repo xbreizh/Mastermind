@@ -180,7 +180,6 @@ public class Controller {
 		case SETUP:
 			view.displayLineBreak(game.getClass().getSimpleName());
 			stGame = game.validSetup(stGame);
-			// log.info("Secret Code: " + game.getSecretCode());
 			break;
 		case PLAY:
 
@@ -189,7 +188,6 @@ public class Controller {
 			displaysIfDefenderIsHuman(game.getInput(), "");
 			break;
 		case ANSWER:
-			// log.debug("Code to find: " + game.getSecretCode());
 			displaysIfDefenderIsHuman(gameType.getHowToAnswer(), game.getOutput());
 			stGame = game.answer(stGame);
 			break;

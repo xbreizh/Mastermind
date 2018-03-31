@@ -1,21 +1,38 @@
 package player;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import application.Configuration;
 
 public class AI extends Player {
 
-	private String newProposition = "";
+//	private String newProposition = "";
 	private int min;
 	private int max;
+	
+	/**
+	 * Initiates the AI and setups the min and max to 
+	 * define the range of possible guessing
+	 */
 
 	public AI() {
 		setMinAndMax(Configuration.getNbDigits());
 
 	}
+	
+	/**
+	 * generates and returns the secret code
+	 * @param secretCode
+	 */
+	@Override
+	public String setup() {
+		return secretCode = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+	}
 
+	/**
+	 * setups the min and max bases on the configuration file
+	 * @param maxNbDigits
+	 */
 	private void setMinAndMax(int maxNbDigits) {
 
 		String minString = "1";
@@ -30,6 +47,12 @@ public class AI extends Player {
 
 	}
 	
+	/**
+	 * returns the first guess of the game
+	 * which will be 55
+	 * @return
+	 */
+	
 	private String initFirstGuess(){
 		guess="";
 		for (int i = 0; i < Configuration.getNbDigits(); i++) {
@@ -39,10 +62,14 @@ public class AI extends Player {
 		
 	}
 
-	@Override
-	public String setup() {
-		return secretCode = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
-	}
+	/**
+	 * returns a guess of the possible secretCode
+	 * for the MoreLess game
+	 * based on the other player's feedback and the 
+	 * previous guess
+	 * @param answer (other player's feedback)
+	 * @param guess (previous guess)
+	 */
 
 	@Override
 	public String tryToGuessMoreLess() {
@@ -63,28 +90,44 @@ public class AI extends Player {
 					newGuess += (a + 1);
 				}
 			}
-			waiting();
+//			waiting();
 		}
 		
 		return guess=newGuess;
 
 	}
+	
+	/**
+	 * returns a guess of the possible secretCode
+	 * for the MoreLess game
+	 * based on the other player's feedback and the 
+	 * previous guess
+	 * @param answer (other player's feedback)
+	 * @param guess (previous guess)
+	 */
 
 	@Override
 	public String tryToGuessMasterMind() {
 		initFirstGuess();
-		waiting();
+//		waiting();
 		return guess;
 
 	}
 
-	protected void waiting() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-	}
+//	protected void waiting() {
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException ex) {
+//			Thread.currentThread().interrupt();
+//		}
+//	}
+	
+	/**
+	 * Converts an integer into an array of
+	 * integer and returns that array
+	 * @param code
+	 * @return
+	 */
 
 	public int[] intToArray(int code) {
 		int[] tab = new int[Configuration.getNbDigits()];
@@ -98,26 +141,26 @@ public class AI extends Player {
 		return tab;
 	}
 
-	public String getNewProposition() {
-		return newProposition;
-	}
+//	public String getNewProposition() {
+//		return newProposition;
+//	}
 
-	@Override
-	public String replyMoreLess(String gameName) {
-		return "suka";
+//	@Override
+//	public String replyMoreLess(String gameName) {
+//		return "suka";
+//
+//	}
+//
+//	@Override
+//	public String replyMasterMind(String gameName) {
+//return "nada";
+//	}
 
-	}
-
-	@Override
-	public String replyMasterMind(String gameName) {
-return "nada";
-	}
-
-	void arrayToList(int[] array, ArrayList<Integer> aList) {
-		for (int i = 0; i < array.length; i++) {
-			aList.add(array[i]);
-		}
-
-	}
+//	void arrayToList(int[] array, ArrayList<Integer> aList) {
+//		for (int i = 0; i < array.length; i++) {
+//			aList.add(array[i]);
+//		}
+//
+//	}
 
 }

@@ -28,8 +28,5 @@ public enum Status_Menu {
 		return output;
 	}
 
-//	public void setOutput(String output) {
-//		this.output = output;
-//	}
 
 }
