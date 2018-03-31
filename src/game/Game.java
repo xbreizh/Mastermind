@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import application.Configuration;
 import check.Check;
 import check.InputStatus;
+import player.Human;
 import player.Player;
 
 public abstract class Game extends Check {
@@ -25,31 +26,25 @@ public abstract class Game extends Check {
 
 	protected String verdict = "";
 	protected String[] yesOrNo = { "y", "n" };
-	protected String nameP1;
-	protected String nameP2;
+//	protected String nameP1;
+//	protected String nameP2;
 	protected Player winner;
 
 	// Constructor
 	public Game(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
-		// p1.setGame(this);
-		// p2.setGame(this);
 	}
 
 	// abstracts methods
 	abstract void generateAnswerToGive();
 
 	public Status_Game validSetup(Status_Game status) {
-//		System.out.println("Player 1: " + p1.getName().toString());
-//		System.out.println("Player 2: " + p2.getName().toString());
 		input = p1.setup();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
-					// saves the secret code
 					secretCode = Integer.parseInt(input);
-					// converts secretCode into array
 					secretCodeArray = intToArray(secretCode);
 					showParams();
 					setError("");
@@ -70,8 +65,6 @@ public abstract class Game extends Check {
 	public Status_Game play(Status_Game status) {
 		String gameName = this.getClass().getSimpleName();
 		input = p2.tryToGuess(gameName);
-		// setInput(p2.getInput());
-		// p1.setGuess(p2.getInput());
 		showParams();
 		return validPlay(status);
 	}
@@ -102,11 +95,13 @@ public abstract class Game extends Check {
 
 	public Status_Game answer(Status_Game status) {
 
-		// if(p1.getClass().equals(Human.class))
+		 if(p1.getClass().equals(Human.class)){
 		showParams();
 		String gameName = this.getClass().getSimpleName();
 		answer = p1.replyToGuess(gameName);
-
+		 }else{
+			 answer=answerToGive;
+		 }
 		// if(checkIfInArray(input.))
 
 		status = validAnswer(status);
@@ -115,14 +110,8 @@ public abstract class Game extends Check {
 	}
 
 	public void showParams() {
-		// System.out.println("Secret code: "+secretCode);
-		// System.out.println("Input: "+input);
-		// System.out.println("Guess: "+guess);
-		// System.out.println("Answer: "+answer);
-		// System.out.println("AnswerToGive: "+answerToGive);
 	}
 
-	// overwritten in game subclasses(Mastermind / MoreLess)
 	public Status_Game validAnswer(Status_Game status) {
 		return status;
 	}
@@ -187,11 +176,11 @@ public abstract class Game extends Check {
 
 	}
 
-	public String getOutput() {
-		output = p1.getName() + " answer: " + output;
-
-		return output;
-	}
+//	public String getOutput() {
+//		output = p1.getName() + " answer: " + output;
+//
+//		return output;
+//	}
 
 	// Getters and Setters
 	public void setLog(Logger log) {
@@ -202,17 +191,17 @@ public abstract class Game extends Check {
 		return winner;
 	}
 
-	public int[] getSecretCodeArray() {
-		return secretCodeArray;
-	}
+//	public int[] getSecretCodeArray() {
+//		return secretCodeArray;
+//	}
 
-	public String getNameP1() {
-		return p1.getName();
-	}
-
-	public String getNameP2() {
-		return p2.getName();
-	}
+//	public String getNameP1() {
+//		return p1.getName();
+//	}
+//
+//	public String getNameP2() {
+//		return p2.getName();
+//	}
 
 	public void setP1(Player p1) {
 		this.p1 = p1;
@@ -225,10 +214,10 @@ public abstract class Game extends Check {
 	public Player getP1() {
 		return p1;
 	}
-
-	public Player getP2() {
-		return p2;
-	}
+//
+//	public Player getP2() {
+//		return p2;
+//	}
 
 	public int getAttempts() {
 		return attempts;

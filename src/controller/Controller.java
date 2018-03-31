@@ -90,7 +90,7 @@ public class Controller {
 
 				checkStatusGame();
 			}
-			resultArray[i] = game.getWinner().getName();
+			resultArray[i] = game.getWinner().getClass().getSimpleName();
 			view.displayLineBreak(resultArray[i]);
 		}
 		getFinalresult();
@@ -139,12 +139,12 @@ public class Controller {
 		view.displayInline(stGame.getOutput());
 		switch (stGame) {
 		case SETUP:
-			view.displayLineBreak(game.getNameP1());
+			view.displayLineBreak(game.getClass().getSimpleName());
 			stGame = game.validSetup(stGame);
 			log.info("Secret Code: " + game.getSecretCode());
 			break;
 		case PLAY:
-			view.displayLineBreak(game.getNameP2() + " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
+			view.displayLineBreak(game.getClass().getSimpleName() + " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
 					+ Configuration.getMax_attempts());
 			stGame = game.play(stGame);
 			view.displayLineBreak(game.getInput());

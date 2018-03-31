@@ -29,6 +29,15 @@ public class AI extends Player {
 		}
 
 	}
+	
+	private String initFirstGuess(){
+		for (int i = 0; i < Configuration.getNbDigits(); i++) {
+			guess+="5";
+		}
+//		System.out.println("Guessing: "+guess);
+		return guess;
+		
+	}
 
 	@Override
 	public String setup() {
@@ -39,7 +48,7 @@ public class AI extends Player {
 	public String tryToGuessMoreLess() {
 		String newGuess = "";
 		if (guess.length() == 0) {
-			newGuess = Integer.toString(max / 2);
+			newGuess=initFirstGuess();
 		} else {
 			for (int i = 0; i < guess.length(); i++) {
 				int a = Character.getNumericValue(guess.charAt(i));
@@ -54,16 +63,23 @@ public class AI extends Player {
 					newGuess += (a + 1);
 				}
 			}
-			// input = newInput;
 			waiting();
 		}
-		return guess = newGuess;
+		
+		return guess=newGuess;
 
 	}
 
 	@Override
 	public String tryToGuessMasterMind() {
+		initFirstGuess();
 		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+//		String str= Integer.toString(Configuration.getNbDigits());
+//		for (int i = 0; i < str.length(); i++) {
+//			input
+//			
+//		}
+//		input = 
 		input = "55";
 		waiting();
 		return input;
@@ -96,53 +112,53 @@ public class AI extends Player {
 
 	@Override
 	public String replyMoreLess(String gameName) {
-		int[] a = intToArray(Integer.parseInt(secretCode));
-		int[] b = intToArray(Integer.parseInt(guess));
-		String str = "";
-		for (int i = 0; i < a.length; i++) {
-			if (a[i] == b[i]) {
-				str += "=";
-			} else if (a[i] < b[i]) {
-				str += "-";
-			} else if (a[i] > b[i]) {
-				str += "+";
-			}
-		}
-		return str;
+//		int[] a = intToArray(Integer.parseInt(secretCode));
+//		int[] b = intToArray(Integer.parseInt(guess));
+//		String str = "";
+//		for (int i = 0; i < a.length; i++) {
+//			if (a[i] == b[i]) {
+//				str += "=";
+//			} else if (a[i] < b[i]) {
+//				str += "-";
+//			} else if (a[i] > b[i]) {
+//				str += "+";
+//			}
+//		}
+		return "suka";
 
 	}
 
 	@Override
 	public String replyMasterMind(String gameName) {
-		int[] a = intToArray(Integer.parseInt(secretCode));
-		int[] b = intToArray(Integer.parseInt(guess));
-
-		ArrayList<Integer> aa = new ArrayList<>();
-		ArrayList<Integer> bb = new ArrayList<>();
-		int found = 0;
-		int placed = 0;
-
-		arrayToList(a, aa);
-		arrayToList(b, bb);
-
-		for (int i = 0; i < bb.size(); i++) {
-			if (aa.get(i) == bb.get(i)) {
-				bb.set(i, i * 10);
-				placed++;
-			}
-			for (int j = 0; j < bb.size(); j++) {
-
-				if (aa.get(j) == bb.get(i)) {
-					bb.set(i, i * 10);
-					found++;
-
-				}
-
-			}
-
-		}
-		return input = found + "" + placed;
-
+//		int[] a = intToArray(Integer.parseInt(secretCode));
+//		int[] b = intToArray(Integer.parseInt(guess));
+//
+//		ArrayList<Integer> aa = new ArrayList<>();
+//		ArrayList<Integer> bb = new ArrayList<>();
+//		int found = 0;
+//		int placed = 0;
+//
+//		arrayToList(a, aa);
+//		arrayToList(b, bb);
+//
+//		for (int i = 0; i < bb.size(); i++) {
+//			if (aa.get(i) == bb.get(i)) {
+//				bb.set(i, i * 10);
+//				placed++;
+//			}
+//			for (int j = 0; j < bb.size(); j++) {
+//
+//				if (aa.get(j) == bb.get(i)) {
+//					bb.set(i, i * 10);
+//					found++;
+//
+//				}
+//
+//			}
+//
+//		}
+//		return input = found + "" + placed;
+return "nada";
 	}
 
 	void arrayToList(int[] array, ArrayList<Integer> aList) {

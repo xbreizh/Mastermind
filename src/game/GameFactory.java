@@ -32,10 +32,10 @@ public class GameFactory {
 		}
 
 		// Fills the gameArray with the games created
-		for (int i = 0; i < gameArray.length; i++) {
-			setNames(p1, p2);
-
-		}
+//		for (int i = 0; i < gameArray.length; i++) {
+//			setNames(p1, p2);
+//
+//		}
 		return gameArray;
 
 	}
@@ -52,16 +52,16 @@ public class GameFactory {
 		}
 	}
 
-	private static void setNames(Player p1, Player p2) {
-		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
-			p1.setName("Paul");
-			p2.setName("John");
-		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
-			p1.setName("Human");
-			p2.setName("AI");
-		} else {
-			p1.setName("AI");
-			p2.setName("Human");
-		}
-	}
+//	private static void setNames(Player p1, Player p2) {
+//		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
+//			p1.setName("Paul");
+//			p2.setName("John");
+//		} else if (p1.getClass().equals(Human.class) && p2.getClass().equals(AI.class)) {
+//			p1.setName("Human");
+//			p2.setName("AI");
+//		} else {
+//			p1.setName("AI");
+//			p2.setName("Human");
+//		}
+//	}
 }

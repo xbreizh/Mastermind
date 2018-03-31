@@ -24,8 +24,22 @@ public class Main {
 		ct.setMenu(menu);
 		ct.setView(view);
 		ct.switchMenu();
-		
+//		
 
+//		new Configuration();
+//		int str=Configuration.getNbDigits();
+//		System.out.println();
+//		String guess="";
+//		for (int i = 0; i < str; i++) {
+//			System.out.println(i);
+//			guess+="5";
+//		}
+//		System.out.println("Guessing: "+guess);
+//		
+		
+		
+		
+		
 	}
 
 }
