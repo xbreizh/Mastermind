@@ -7,12 +7,31 @@ import menu.Menu;
 import player.Human;
 import view.View;
 
+
+	/**
+	 * Main class of the application.
+	 * tries to load the configuration from the configuration file
+	 * initiates the view(View), the controller(Controller), 
+	 * the menu, the human user and the logger(log)
+	 * The first phase of the application (switchMenu)
+	 * is also initiated here after passing the user as
+	 * parameter
+	 * @author Xavier.Lamourec
+	 *@param View
+	 *@param Controller
+	 *@param Human
+	 *@param Menu
+	 *@param Logger
+	 */
 public class Main {
 	
-	private static final Logger log = Logger.getLogger(Log4J.class);
+	private static final Logger log = Logger.getLogger(Controller.class);
 
 	public static void main(String[] args) {
-		new Configuration();
+		if(new Configuration().getError()!=null){
+			log.fatal("Error while loading the configuration file\n "
+					+ "The application can't be launched");
+		}else{
 		Human human = new Human();
 		View view = new View();
 		Controller ct = new Controller();
@@ -24,6 +43,7 @@ public class Main {
 		ct.setMenu(menu);
 		ct.setView(view);
 		ct.switchMenu();
+		}
 		
 		
 		

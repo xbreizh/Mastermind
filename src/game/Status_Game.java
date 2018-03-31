@@ -16,7 +16,7 @@ public enum Status_Game {
 	private String output;
 	
 	
-	Status_Game(String output){
+	private Status_Game(String output){
 		this.output=output;
 	}
 	
@@ -24,9 +24,9 @@ public enum Status_Game {
 		return output;
 	}
 
-	public void setOutput(String output) {
-		this.output = output;
-	}
+//	public void setOutput(String output) {
+//		this.output = output;
+//	}
 	
 	
 }

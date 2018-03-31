@@ -1,5 +1,7 @@
 package check;
 
+import java.util.ArrayList;
+
 import application.Configuration;
 
 /**
@@ -42,54 +44,6 @@ public class Check {
 
 	}
 
-//	protected boolean checkIfInArray(String[] valid) {
-//		for (int i = 0; i < input.length(); i++) {
-//			int ok = 0;
-//			for (int j = 0; j < valid.length; j++) {
-//				if (String.valueOf(input.charAt(i)).equals(valid[j])) {
-//					ok++;
-//				}
-//			}
-//			if (ok == 0) {
-//				IStatus = InputStatus.WRONGCHARACTER;
-//				error = IStatus.getOutput();
-//				return false;
-//			}
-//
-//		}
-//		return true;
-//
-//	}
-
-//	protected boolean checkSymbol() {
-//		if (!hasCorrectNbDigits()) {
-//			for (int i = 0; i < input.length(); i++) {
-//
-//				if ((!input.substring(i, i + 1).equals(symbols[0])) && (!input.substring(i, i + 1).equals(symbols[1]))
-//						&& (!input.substring(i, i + 1).equals(symbols[2]))) {
-//					IStatus = InputStatus.WRONGCHARACTER;
-//					error = IStatus.getOutput();
-//					return false;
-//				}
-//			}
-//		}
-//		return true;
-//
-//	}
-
-//	protected InputStatus getCheckStatus() {
-//		return IStatus;
-//	}
-
-//	protected boolean isValidInteger() {
-//		if (isInteger()) {
-//			if (hasCorrectNbDigits()) {
-//				return true;
-//			}
-//		}
-//		return false;
-//
-//	}
 	/**
 	 * checks if the input has the right number of digits
 	 * updates the value for error
@@ -145,6 +99,20 @@ public class Check {
 		}
 		return true;
 	}
+	
+	/**
+	 * Transforms an array into an ArrayList
+	 * @param array
+	 * @param aList
+	 */
+	
+	protected void arrayToList(int[] array, ArrayList<Integer> aList) {
+		for (int i = 0; i < array.length; i++) {
+			aList.add(array[i]);
+
+		}
+
+	}
 
 	// Setters and Getters
 
@@ -152,24 +120,8 @@ public class Check {
 		return error;
 	}
 
-//	protected void setValid(String[] valid) {
-//		this.valid = valid;
-//	}
-
-//	protected void setNbChar(int nbChar) {
-//		this.nbChar = nbChar;
-//	}
-
-//	protected String getOutput() {
-//		return output;
-//	}
-
 	public String getInput() {
 		return input;
 	}
-
-//	protected void setInput(String input) {
-//		this.input = input;
-//	}
 
 }

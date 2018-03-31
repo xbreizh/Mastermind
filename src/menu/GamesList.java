@@ -17,7 +17,7 @@ public enum GamesList {
 	private String howToAnswer;
 	private int reference;
 
-	GamesList(int reference,String howToGuess, String howToAnswer) {
+	private GamesList(int reference,String howToGuess, String howToAnswer) {
 		this.reference=reference;
 		this.howToGuess = howToGuess;
 		this.howToAnswer = howToAnswer;
@@ -31,16 +31,16 @@ public enum GamesList {
 		return howToGuess;
 	}
 
-	public void setHowToGuess(String howToGuess) {
-		this.howToGuess = howToGuess;
-	}
+//	public void setHowToGuess(String howToGuess) {
+//		this.howToGuess = howToGuess;
+//	}
 	
 	public String getHowToAnswer() {
 		return howToAnswer;
 	}
 
-	public void setHowToAnswer(String howToAnswer) {
-		this.howToAnswer = howToAnswer;
-	}
+//	public void setHowToAnswer(String howToAnswer) {
+//		this.howToAnswer = howToAnswer;
+//	}
 
 }

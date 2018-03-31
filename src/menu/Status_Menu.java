@@ -20,7 +20,7 @@ public enum Status_Menu {
 
 	private String output;
 
-	Status_Menu(String output) {
+	private Status_Menu(String output) {
 		this.output = output;
 	}
 
@@ -28,8 +28,8 @@ public enum Status_Menu {
 		return output;
 	}
 
-	public void setOutput(String output) {
-		this.output = output;
-	}
+//	public void setOutput(String output) {
+//		this.output = output;
+//	}
 
 }

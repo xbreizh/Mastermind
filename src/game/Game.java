@@ -51,12 +51,19 @@ public abstract class Game extends Check {
 	abstract void generateAnswerToGive();
 	
 	/**
+	 * asks the defender to provide the secret code
+	 */
+	private void requestSecretCode() {
+		input = defender.setup();
+	}
+	
+	/**
 	 * Gets the secret Code and changes the status if valid
 	 * @param status
-	 * @return
+	 * @return status (updated or no)
 	 */
 	public Status_Game validSetup(Status_Game status) {
-		input = defender.setup();
+		requestSecretCode();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
@@ -76,6 +83,8 @@ public abstract class Game extends Check {
 		}
 		return status;
 	}
+
+
 	
 	/**
 	 * Asks for challenger's guess until it's valid
@@ -135,14 +144,14 @@ public abstract class Game extends Check {
 		return status;
 	}
 	
-	/**
-	 * checks the defender's answer and changes the status if valid
-	 * @param status
-	 * @return
-	 */
-	protected Status_Game validAnswer(Status_Game status) {
-		return status;
-	}
+//	/**
+//	 * checks the defender's answer and changes the status if valid
+//	 * @param status
+//	 * @return
+//	 */
+//	protected Status_Game validAnswer(Status_Game status) {
+//		return status;
+//	}
 	
 	/**
 	 * asks the user if he wants to replay
@@ -236,6 +245,32 @@ public abstract class Game extends Check {
 		attempts = 0;
 
 	}
+	
+	/**
+	 * checks the validity of the answer provided compared to the answer built
+	 * and returns a status accordingly
+	 * @param answer
+	 * @param answerToGive
+	 * @param status
+	 * @return status
+	 */
+	public Status_Game validAnswer(Status_Game status) {
+		if (!answerToGive.equals(answer)) {
+			error="Wrong answer!, should be " + answerToGive;
+			return status;
+		} else {
+			error="";
+			if (Integer.parseInt(guess) == (secretCode)) {
+				winner=challenger;
+				status= Status_Game.FOUND;
+			} else {
+				status= Status_Game.PLAY;
+				status=checkAttempts(status);
+				return status;
+			}
+		}
+		return status;
+	}
 
 	// Getters and Setters
 	public void setLog(Logger log) {
@@ -282,13 +317,17 @@ public abstract class Game extends Check {
 		return error;
 	}
 
+	public String getOutput() {
+		return output;
+	}
+
 	// public void setSecretCodeArray() {
 	// intToArray(secretCode);
 	// }
-	/**
-	 * sets the error to be displayed in the view
-	 * @param error
-	 */
+//	/**
+//	 * sets the error to be displayed in the view
+//	 * @param error
+//	 */
 //	public void setError(String error) {
 //		this.error = error;
 //	}

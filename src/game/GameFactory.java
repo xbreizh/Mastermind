@@ -6,11 +6,27 @@ import player.AI;
 import player.Human;
 import player.Player;
 
+	/** This Class creates the games using the gameType and mode
+	 * It also creates the required missing player and passes 
+	 * the games into an array
+	 * @param gameType
+	 * @param mode
+	 * @author Xavier.Lamourec
+	 *
+	 */
+
 public class GameFactory {
 
 	public GameFactory() {
 	}
 
+	/**
+	 * creates the games using the gameType and mode
+	 * @param gameType
+	 * @param mode
+	 * @param human
+	 * @return
+	 */
 	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human) {
 		Player challenger = null;
 		Player defender = null;
@@ -39,13 +55,22 @@ public class GameFactory {
 		return gameArray;
 
 	}
+	
+	/**
+	 * creates and return the game from the gameType and Players received
+	 * The first player received will be the 
+	 * @param gameType
+	 * @param p1
+	 * @param p2
+	 * @return
+	 */
 
-	private static Game createGame(GamesList gameType, Player p1, Player p2) {
+	private static Game createGame(GamesList gameType, Player challenger, Player defender) {
 		switch (gameType.getReference()) {
 		case 1:
-			return new MoreLess(p1, p2);
+			return new MoreLess(defender, challenger);
 		case 2:
-			return new MasterMind(p1, p2);
+			return new MasterMind(defender, challenger);
 		default:
 			return null;
 

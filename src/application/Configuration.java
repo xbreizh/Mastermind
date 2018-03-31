@@ -5,12 +5,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+
+	/**
+	 * Gets the informations from the configuration file
+	 * @author Xavier.Lamourec
+	 *
+	 */
 public class Configuration {
 
 	private static Properties prop = new Properties();
 	private static int max_attempts;
 	private static int nbDigits;
-	private String error="";
+	private static Exception error=null;
 
 	static FileInputStream fs;
 
@@ -19,17 +25,18 @@ public class Configuration {
 	}
 
 	private static void loadConfiguration() {
-
 		try {
 			fs = new FileInputStream(System.getProperty("user.dir") + "/Files/config.properties");
 			prop.load(fs);
 			max_attempts = Integer.parseInt(prop.getProperty("max_attempts"));
 			nbDigits = Integer.parseInt(prop.getProperty("nbDigits"));
 		} catch (FileNotFoundException e) {
-			System.err.println(e);
+			 error=e;
 		} catch (IOException e) {
-			System.err.println(e);
+			 error=e;
 		}
+		
+		
 	}
 	
 	// Getters and Setters
@@ -42,7 +49,7 @@ public class Configuration {
 		return nbDigits;
 	}
 
-	public String getError() {
+	public Exception getError() {
 		return error;
 	}
 

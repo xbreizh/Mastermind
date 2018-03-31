@@ -190,15 +190,7 @@ public class Controller {
 			break;
 		case ANSWER:
 			// log.debug("Code to find: " + game.getSecretCode());
-			displaysIfDefenderIsHuman(gameType.getHowToAnswer(), game.getAnswerToGive());
-			// if
-			// (game.getDefender().getClass().getName().equals(Human.class.getName()))
-			// {
-			// view.displayLineBreak(gameType.getHowToAnswer());
-			// }else{
-			// view.displayLineBreak(game.getAnswerToGive());
-			// }
-
+			displaysIfDefenderIsHuman(gameType.getHowToAnswer(), game.getOutput());
 			stGame = game.answer(stGame);
 			break;
 		case NO_MORE_TRIES:
@@ -227,7 +219,8 @@ public class Controller {
 	}
 
 	/**
-	 * checks if the defender is a human and displays accordingly
+	 * checks if the defender is a human and sends output
+	 * to display accordingly
 	 */
 	private void displaysIfDefenderIsHuman(String str1, String str2) {
 		if (game.getDefender().getClass().getName().equals(Human.class.getName())) {

@@ -2,13 +2,12 @@ package game;
 
 import java.util.ArrayList;
 
-import application.Configuration;
 import player.Player;
 
 public class MasterMind extends Game {
 
-	public MasterMind(Player p1, Player p2) {
-		super(p1, p2);
+	public MasterMind(Player defender, Player challenger) {
+		super(defender, challenger);
 	}
 
 	String result = "";
@@ -45,34 +44,27 @@ public class MasterMind extends Game {
 		answerToGive = found + "" + placed;
 	}
 
-	public Status_Game validAnswer(Status_Game status) {
-//		generateAnswerToGive(secretCode, Integer.parseInt(input));
-		if (!answerToGive.equals(answer)) {
-			error="Wrong answer!, should be " + answerToGive;
-			status= Status_Game.ANSWER;
-		} else {
-			error="";
-			String goodResult="0"+Integer.toString(Configuration.getNbDigits());
-			if (answerToGive.equals(goodResult)) {
-				winner=challenger;
-				status= Status_Game.FOUND;
-			} else {
-				status = Status_Game.PLAY;
-				status = checkAttempts(status);
+//	public Status_Game validAnswer(Status_Game status) {
+////		generateAnswerToGive(secretCode, Integer.parseInt(input));
+//		if (!answerToGive.equals(answer)) {
+//			error="Wrong answer!, should be " + answerToGive;
+//			status= Status_Game.ANSWER;
+//		} else {
+//			error="";
+////			String goodResult="0"+Integer.toString(Configuration.getNbDigits());
+//			if (Integer.parseInt(guess) == (secretCode)) {
+//				winner=challenger;
+//				status= Status_Game.FOUND;
+//			} else {
+//				status = Status_Game.PLAY;
+//				status = checkAttempts(status);
 //				return status;
+//			}
+//		}
+//		return status;
+//
+//	}
 
-			}
-		}
-		return status;
 
-	}
-
-	void arrayToList(int[] array, ArrayList<Integer> aList) {
-		for (int i = 0; i < array.length; i++) {
-			aList.add(array[i]);
-
-		}
-
-	}
 
 }

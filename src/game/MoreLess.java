@@ -2,14 +2,34 @@ package game;
 
 import player.Player;
 
-public class MoreLess extends Game {
+	/**
+	 * The MoreLess classes extends the Game class
+	 * It contains a specific method for generating a valid answer
+	 * and another for validating a suggestion of answer
+	 * @author Xavier.Lamourec
+	 *
+	 */
 
-	public MoreLess(Player p1, Player p2) {
-		super(p1, p2);
+public class MoreLess extends Game {
+	
+	/**
+	 * Initiates the MoreLess game based on the parent(Game) class
+	 * @param defender
+	 * @param challenger
+	 */
+
+	public MoreLess(Player defender, Player challenger) {
+		super(defender, challenger);
 	}
 
+	/**
+	 * generates the answer to provide based on the secret code
+	 * and the input provided(guess)
+	 * @param secretCode
+	 * @param guess
+	 */
 	public void generateAnswerToGive() {
-		int[] a = intToArray(secretCode);
+		int[] a = secretCodeArray;
 		int[] b = intToArray(Integer.parseInt(guess));
 		String str = "";
 		for (int i = 0; i < a.length; i++) {
@@ -21,28 +41,10 @@ public class MoreLess extends Game {
 				str += "+";
 			}
 		}
+		output=str;
 		answerToGive = str;
-//		output = answerToGive;
 	}
 
-	public Status_Game validAnswer(Status_Game status) {
-//		generateAnswerToGive();
-		if (!answerToGive.equals(answer)) {
-			System.out.println("ici");
-			error="Wrong answer!, should be " + answerToGive;
-			return status;
-		} else {
-			error="";
-			if (Integer.parseInt(input) == (secretCode)) {
-				winner=challenger;
-				status= Status_Game.FOUND;
-			} else {
-				status= Status_Game.PLAY;
-				status=checkAttempts(status);
-				return status;
-			}
-		}
-		return status;
-	}
+	
 
 }
