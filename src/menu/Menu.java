@@ -7,7 +7,8 @@ public class Menu extends Check {
 
 	private String[] validList;
 	private GamesList game;
-	private Player player;
+	private Player human;
+	
 	private ModeList mode;
 
 	
@@ -19,7 +20,7 @@ public class Menu extends Check {
 	}
 
 	public Status_Menu selectAndValidGame(Status_Menu status) {
-		input=player.input();
+		input=human.setup();
 		setNbChar(1);
 		initValidGameList();
 		if (isEmpty())
@@ -35,7 +36,7 @@ public class Menu extends Check {
 
 
 	public Status_Menu selectAndValidMode(Status_Menu status) {
-		input=player.input();
+		input=human.setup();
 		initValidModeList();
 		if (isEmpty())
 			return status;
@@ -67,13 +68,16 @@ public class Menu extends Check {
 
 	
 //	Getters and Setters
+	public Player getPlayer() {
+		return human;
+	}
 	
 	public String[] getValidList() {
 		return validList;
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		this.human = player;
 	}
 
 	public GamesList getGame() {

@@ -8,9 +8,9 @@ public class MoreLess extends Game {
 		super(p1, p2);
 	}
 
-	public void getVerdict(int n1, int n2) {
-		int[] a = intToArray(n1);
-		int[] b = intToArray(n2);
+	public void generateAnswerToGive() {
+		int[] a = intToArray(secretCode);
+		int[] b = intToArray(Integer.parseInt(guess));
 		String str = "";
 		for (int i = 0; i < a.length; i++) {
 			if (a[i] == b[i]) {
@@ -22,11 +22,11 @@ public class MoreLess extends Game {
 			}
 		}
 		answerToGive = str;
-		output = answerToGive;
+//		output = answerToGive;
 	}
 
 	public Status_Game validAnswer(Status_Game status) {
-		getVerdict(secretCode, Integer.parseInt(input));
+//		generateAnswerToGive();
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
 			return status;

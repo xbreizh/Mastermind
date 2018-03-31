@@ -6,12 +6,11 @@ public class Check {
 
 	protected String input = "";
 	protected String output = "";
-	int nbChar = Configuration.getNbDigits();
-	String[] symbols = { "+", "-", "=" };
+	protected int nbChar = Configuration.getNbDigits();
+	protected String[] symbols = { "+", "-", "=" };
 	protected InputStatus IStatus = InputStatus.VALID;
-	
 
-	int test = 1324;
+//	int test = 1324;
 	protected String[] valid;
 
 	public Check() {

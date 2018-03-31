@@ -13,9 +13,9 @@ public class MasterMind extends Game {
 	String result = "";
 
 	@Override
-	void getVerdict(int n1, int n2) {
-		int[] a = intToArray(n1);
-		int[] b = intToArray(n2);
+	void generateAnswerToGive() {
+		int[] a = intToArray(secretCode);
+		int[] b = intToArray(Integer.parseInt(input));
 		ArrayList<Integer> aa = new ArrayList<>();
 		ArrayList<Integer> bb = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class MasterMind extends Game {
 	}
 
 	public Status_Game validAnswer(Status_Game status) {
-		getVerdict(secretCode, Integer.parseInt(input));
+//		generateAnswerToGive(secretCode, Integer.parseInt(input));
 		if (!answerToGive.equals(answer)) {
 			setError("Wrong answer!, should be " + answerToGive);
 			status= Status_Game.ANSWER;

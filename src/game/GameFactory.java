@@ -5,50 +5,42 @@ import menu.ModeList;
 import player.AI;
 import player.Human;
 import player.Player;
+import player.TestPlayer;
 
 public class GameFactory {
 
-//	private  Human human;
-//	private static AI robot;
 	public GameFactory() {
 	}
 
-	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human){
+	public static Game[] createGameArray(GamesList gameType, ModeList mode, Human human) {
 		Player p1 = human;
 		Player p2 = new AI();
-//		System.out.println(p1);
-//		System.out.println(p2);
+//		Player p2= new TestPlayer();
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
-//			p1 = new AI();
-//			p2 = new Human();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 
 		}
 		if (mode.equals(ModeList.DEFENDER)) {
-//			p1 = new Human();
-//			p2 = new AI();
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 		}
 		if (mode.equals(ModeList.DUAL)) {
-//			p1 = new AI();
-//			p2 = new Human();
 			gameArray = new Game[2];
 			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
 			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
 		}
-		
+
 		// Fills the gameArray with the games created
 		for (int i = 0; i < gameArray.length; i++) {
 			setNames(p1, p2);
-			
+
 		}
 		return gameArray;
-		
+
 	}
-	
+
 	private static Game createGame(GamesList gameType, Player p1, Player p2) {
 		switch (gameType.getReference()) {
 		case 1:
@@ -60,7 +52,7 @@ public class GameFactory {
 
 		}
 	}
-	
+
 	private static void setNames(Player p1, Player p2) {
 		if (p1.getClass().equals(Human.class) && p2.getClass().equals(Human.class)) {
 			p1.setName("Paul");
@@ -74,4 +66,3 @@ public class GameFactory {
 		}
 	}
 }
-

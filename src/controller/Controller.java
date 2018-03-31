@@ -24,7 +24,7 @@ public class Controller {
 	private Game game;
 	private Game[] gameArray;
 	private Menu menu;
-	ModeList mode;
+	private ModeList mode;
 	private String[] resultArray;
 
 	public Controller() {
@@ -77,7 +77,6 @@ public class Controller {
 			stGame = Status_Game.SETUP;
 		}
 		resultArray = new String[gameArray.length];
-		System.out.println("game array length: " + gameArray.length);
 
 	}
 
@@ -99,9 +98,11 @@ public class Controller {
 	}
 
 	private void getFinalresult() {
+//		System.out.println("Winner game1: "+resultArray[0]);
+//		System.out.println("Winner game2: "+resultArray[1]);
 		String finalWinner = "";
 		if (resultArray.length == 2) {
-			if (resultArray[0] == resultArray[1]) {
+			if (resultArray[0] != resultArray[1]) {
 				finalWinner = "Both players win!";
 			} else {
 				finalWinner = resultArray[0] + " wins!";
@@ -168,11 +169,11 @@ public class Controller {
 			stGame = Status_Game.REPLAY;
 			break;
 		case REPLAY:
-			game.setInput(human.input());
+			game.setInput(human.setup());
 			stGame = game.validPlayAgain(stGame);
 			break;
 		case EXIT:
-			game.setInput(human.input());
+			game.setInput(human.setup());
 			stGame = game.validExit(stGame);
 			break;
 		case END:

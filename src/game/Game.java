@@ -3,69 +3,46 @@ package game;
 import application.Configuration;
 import check.Check;
 import check.InputStatus;
+import player.Human;
 import player.Player;
 
 public abstract class Game extends Check {
 	protected Player p1;
-
 	protected Player p2;
-//	protected Status_Game status;
-	protected int secretCode;
+	// protected Status_Game status;
+	
 	protected int[] secretCodeArray;
-
 	protected int attempts = 0;
-
 	protected int max_attempts = Configuration.getMax_attempts();
 	protected String error = "";
+	
+	protected int secretCode;
+	protected String guess="";
 	protected String answerToGive = "";
-
 	protected String answer = "";
+	
 	protected String verdict = "";
 	protected String[] yesOrNo = { "y", "n" };
 	protected String nameP1;
-
 	protected String nameP2;
 	protected Player winner;
-
-
-	
-
-	public Player getWinner() {
-		return winner;
-	}
 
 	// Constructor
 	public Game(Player p1, Player p2) {
 		this.p1 = p1;
 		this.p2 = p2;
-		p1.setGame(this);
-		p2.setGame(this);
+//		p1.setGame(this);
+//		p2.setGame(this);
 	}
 
 	// abstracts methods
-	abstract void getVerdict(int a, int b);
+	abstract void generateAnswerToGive();
 
-	public Status_Game play(Status_Game status) {
-
-		p2.tryToGuess();
-		setInput(p2.getInput());
-		p1.setInput(p2.getInput());
-		return validPlay(status);
-	}
-
-	public Status_Game answer(Status_Game status) {
-
-		p1.replyToGuess();
-
-		setAnswer(p1.getInput());
-		status = validAnswer(status);
-		p2.setAnswer(output);
-		return status;
-	}
+	
 
 	public Status_Game validSetup(Status_Game status) {
 
-		input = p1.input();
+		input = p1.setup();
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
@@ -73,6 +50,7 @@ public abstract class Game extends Check {
 					secretCode = Integer.parseInt(input);
 					// converts secretCode into array
 					secretCodeArray = intToArray(secretCode);
+					showParams();
 					setError("");
 					return Status_Game.PLAY;
 				} else {
@@ -87,13 +65,25 @@ public abstract class Game extends Check {
 		incrementAttempt();
 		return status;
 	}
+	
+	public Status_Game play(Status_Game status) {
 
+		input=p2.tryToGuess(this);
+//		setInput(p2.getInput());
+//		p1.setInput(p2.getInput());
+		showParams();
+		return validPlay(status);
+	}
+	
 	public Status_Game validPlay(Status_Game status) {
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
+					guess=input;
 					incrementAttempt();
 					setError("");
+					showParams();
+					generateAnswerToGive();
 					return Status_Game.ANSWER;
 				} else {
 					error = IStatus.getOutput();
@@ -108,12 +98,33 @@ public abstract class Game extends Check {
 
 	}
 
+	public Status_Game answer(Status_Game status) {
+
+//		if(p1.getClass().equals(Human.class))
+		showParams();
+		answer =p1.replyToGuess(this);
+		
+//		if(checkIfInArray(input.))
+		
+		status = validAnswer(status);
+		p2.setAnswer(answer);
+		return status;
+	}
+	
+	public void showParams(){
+//		System.out.println("Secret code: "+secretCode);
+//		System.out.println("Input: "+input);
+//		System.out.println("Guess: "+guess);
+//		System.out.println("Answer: "+answer);
+//		System.out.println("AnswerToGive: "+answerToGive);
+	}
+
+	
+
 	// overwritten in game subclasses(Mastermind / MoreLess)
 	public Status_Game validAnswer(Status_Game status) {
 		return status;
 	}
-
-
 
 	public Status_Game validPlayAgain(Status_Game status) {
 		return checkYesOrNo(status, Status_Game.SETUP, Status_Game.EXIT);
@@ -140,7 +151,7 @@ public abstract class Game extends Check {
 			error = InputStatus.WRONGCHARACTER.getOutput();
 			return init;
 		}
-		
+
 	}
 
 	protected int[] intToArray(int code) {
@@ -157,7 +168,7 @@ public abstract class Game extends Check {
 
 	public Status_Game checkAttempts(Status_Game status) {
 		if (attempts == max_attempts) {
-			winner=p1;
+			winner = p1;
 			return Status_Game.NO_MORE_TRIES;
 		}
 		return status;
@@ -182,6 +193,10 @@ public abstract class Game extends Check {
 	}
 
 	// Getters and Setters
+	public Player getWinner() {
+		return winner;
+	}
+
 	public int[] getSecretCodeArray() {
 		return secretCodeArray;
 	}

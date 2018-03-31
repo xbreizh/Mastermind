@@ -4,53 +4,57 @@ import game.Game;
 import menu.GamesList;
 
 public abstract class Player {
-	
+
 	protected String input = "";
-//	protected String wrong = "wrong answer";
-	protected String feedBack = "";
+	// protected String wrong = "wrong answer";
+	protected String answer = "";
 	protected String answerToGive = "";
 	protected String name;
-	protected Game game;
-
-	
-
-	
+	protected String guess = "";
+	// protected Game game;
 
 	// Abstract methods
-	public abstract String input();
+	public abstract String setup();
 
-	public abstract void tryToGuessMoreless();
+	public abstract String tryToGuessMoreless();
 
-	public abstract void replyMoreless();
+	public abstract String replyMoreless(Game game);
 
-	public abstract void tryToGuessMasterMind();
+	public abstract String tryToGuessMasterMind();
 
-	public abstract void replyMasterMind();
+	public abstract String replyMasterMind(Game game);
+
+	// public Status_Game tryToGuess(Game game){
+	//
+	// }
 
 	// Trying to guess the result
-	public void tryToGuess() {
+	public String tryToGuess(Game game) {
+
 		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
-			tryToGuessMoreless();
+			return tryToGuessMoreless();
 		}
 		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
-			tryToGuessMasterMind();
+			return tryToGuessMasterMind();
 		}
+		return "invalid";
 	}
 
 	// Provides feedback on other player's input
-	public void replyToGuess() {
+	public String replyToGuess(Game game) {
 		if (game.getClass().getSimpleName().equals(GamesList.MoreLess.name())) {
-			replyMoreless();
+			return replyMoreless(game);
 		}
 		if (game.getClass().getSimpleName().equals(GamesList.MasterMind.name())) {
-			replyMasterMind();
+			return replyMasterMind(game);
 		}
+		return "Invalid reply";
 	}
 
 	// getters & setters
-	public void setGame(Game game) {
-		this.game = game;
-	}
+	// public void setGame(Game game) {
+	// this.game = game;
+	// }
 	public String getName() {
 		return name;
 	}
@@ -58,16 +62,17 @@ public abstract class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public void setInput(String input) {
 		this.input = input;
 	}
 
 	public String getAnswer() {
-		return feedBack;
+		return answer;
 	}
 
 	public void setAnswer(String answer) {
-		this.feedBack = answer;
+		this.answer = answer;
 	}
 
 	public String getInput() {

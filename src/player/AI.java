@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import application.Configuration;
+import game.Game;
 
 public class AI extends Player {
 
@@ -30,39 +31,42 @@ private void setMinAndMax(int maxNbDigits){
 		
 	}
 	@Override
-	public String input() {
-		return this.input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
+	public String setup() {
+		return  Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
 	}
 
 	@Override
-	public void tryToGuessMoreless() {
-		if (input.length() == 0) {
-			input = Integer.toString(max/2);
+	public String  tryToGuessMoreless() {
+//		System.out.println("answered: "+answer);
+		String newGuess = "";
+		if (guess.length() == 0) {
+			newGuess = Integer.toString(max/2);
 		} else {
-			String newInput = "";
-			for (int i = 0; i < input.length(); i++) {
-				int a = Character.getNumericValue(input.charAt(i));
-				if (feedBack.substring(i, i + 1).equals("=")) {
-					newInput += a;
+			for (int i = 0; i < guess.length(); i++) {
+				int a = Character.getNumericValue(guess.charAt(i));
+				if (answer.substring(i, i + 1).equals("=")) {
+					newGuess += a;
 				}
-				if (feedBack.substring(i, i + 1).equals("-")) {
-					newInput += (a - 1);
+				if (answer.substring(i, i + 1).equals("-")) {
+					newGuess += (a - 1);
 
 				}
-				if (feedBack.substring(i, i + 1).equals("+")) {
-					newInput += (a + 1);
+				if (answer.substring(i, i + 1).equals("+")) {
+					newGuess += (a + 1);
 				}
 			}
-			input = newInput;
+//			input = newInput;
 			waiting();
 		}
+		return guess=newGuess;
 
 	}
 	@Override
-	public void tryToGuessMasterMind() {
+	public String tryToGuessMasterMind() {
 		input = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
 
 		waiting();
+		return input;
 
 	}
 
@@ -93,7 +97,7 @@ private void setMinAndMax(int maxNbDigits){
 	
 
 	@Override
-	public void replyMoreless() {
+	public String  replyMoreless(Game game) {
 		int[] a = game.getSecretCodeArray();
 		int[] b = intToArray(Integer.parseInt(game.getInput()));
 		String str = "";
@@ -106,12 +110,12 @@ private void setMinAndMax(int maxNbDigits){
 				str += "+";
 			}
 		}
-		input = str;
+		return str;
 
 	}
 
 	@Override
-	public void replyMasterMind() {
+	public String replyMasterMind(Game game) {
 		int[] a = game.getSecretCodeArray();
 		int[] b = intToArray(Integer.parseInt(input));
 
@@ -139,7 +143,7 @@ private void setMinAndMax(int maxNbDigits){
 			}
 
 		}
-		input = found + "" + placed;
+		return input = found + "" + placed;
 
 	}
 

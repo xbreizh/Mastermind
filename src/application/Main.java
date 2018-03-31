@@ -10,7 +10,6 @@ public class Main {
 	public static void main(String[] args) {
 		new Configuration();
 		Human human = new Human();
-		// new GameFactory(human);
 		View view = new View();
 		Controller ct = new Controller();
 		Menu menu = new Menu();
