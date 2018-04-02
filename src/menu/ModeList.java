@@ -1,10 +1,17 @@
 package menu;
 
+
+/**
+ * Lists the different game modes.
+ * Each is associated with its reference
+ * @author Xavier.Lamourec
+ *
+ */
 public enum ModeList {
 
 	CHALLENGER(1), DEFENDER(2), DUAL(3);
 
-	int reference;
+	private int reference;
 
 	ModeList(int reference) {
 		this.reference = reference;
@@ -14,7 +21,7 @@ public enum ModeList {
 		return reference;
 	}
 
-	public void setReference(int reference) {
-		this.reference = reference;
-	}
+//	public void setReference(int reference) {
+//		this.reference = reference;
+//	}
 }

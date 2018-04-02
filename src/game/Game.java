@@ -37,14 +37,11 @@ public abstract class Game extends Check {
 	public Game(Player defender, Player challenger) {
 		this.defender = defender;
 		this.challenger = challenger;
-//		log.info(this.getClass().getSimpleName()+" created"
-//				+"\nChallenger: "+challenger.getClass().getSimpleName()
-//				+"\nDefender: "+defender.getClass().getSimpleName());
 	}
 
 	/**
 	 * generates the answer to be given to the challenger
-	 * (deined in the respective child class)
+	 * (defined in the respective child class)
 	 */
 	abstract void generateAnswerToGive();
 	
@@ -52,7 +49,7 @@ public abstract class Game extends Check {
 	 * asks the defender to provide the secret code
 	 */
 	private void requestSecretCode() {
-		input = defender.setup();
+		input = defender.getInput();
 	}
 	
 	/**
@@ -101,6 +98,7 @@ public abstract class Game extends Check {
 	 * @return
 	 */
 	public Status_Game validPlay(Status_Game status) {
+		log.info("Challenger guess: "+input);
 		if (!isEmpty()) {
 			if (isInteger()) {
 				if (hasCorrectNbDigits()) {
@@ -109,6 +107,7 @@ public abstract class Game extends Check {
 					error="";
 					generateAnswerToGive();
 					defender.setGuess(guess);
+					log.debug("Challenger guess: "+guess+" validated");
 					return Status_Game.ANSWER;
 				} else {
 					error = IStatus.getOutput();
@@ -133,12 +132,12 @@ public abstract class Game extends Check {
 	public Status_Game answer(Status_Game status) {
 
 		if (defender.getClass().equals(Human.class)) {
-//			String gameName = this.getClass().getSimpleName();
-			answer = defender.setup();
+			answer = defender.getInput();
 		} else {
 			answer = answerToGive;
 		}
-
+		log.debug("Defender answer: "+answer+"\n"
+				+ "Answer to give: "+answerToGive);
 		status = validAnswer(status);
 		challenger.setAnswer(answer);
 		return status;
@@ -172,20 +171,19 @@ public abstract class Game extends Check {
 	 * @param no
 	 * @return
 	 */
-	protected Status_Game checkYesOrNo(Status_Game init, Status_Game yes, Status_Game no) {
+	protected Status_Game checkYesOrNo(Status_Game status, Status_Game yes, Status_Game no) {
 		error = "";
 		if (isEmpty()) {
 			error = IStatus.getOutput();
-			return init;
+			return status;
 		} else if (input.equalsIgnoreCase("y")) {
-			reset();
+//			reset();
 			return yes;
 		} else if (input.equalsIgnoreCase("n")) {
-			reset();
 			return no;
 		} else {
 			error = InputStatus.WRONGCHARACTER.getOutput();
-			return init;
+			return status;
 		}
 
 	}
@@ -225,17 +223,19 @@ public abstract class Game extends Check {
 	 */
 	private void incrementAttempt() {
 		attempts++;
+		log.debug("Attemps incremented: "+attempts);
 	}
 
 	/**
 	 * reset the game parameters
 	 */
-	private void reset() {
+	public void reset() {
 		error="";
 		output = "";
 		input = "";
+		guess="";
 		attempts = 0;
-
+		log.info("Game values have been reset (error, output, input, attempts)");
 	}
 	
 	/**
@@ -254,6 +254,7 @@ public abstract class Game extends Check {
 			error="";
 			if (Integer.parseInt(guess) == (secretCode)) {
 				winner=challenger;
+				log.debug("Answer valid");
 				status= Status_Game.FOUND;
 			} else {
 				status= Status_Game.PLAY;
@@ -273,14 +274,6 @@ public abstract class Game extends Check {
 		return winner;
 	}
 
-//	public void setDefender(Player defender) {
-//		this.defender = defender;
-//	}
-//
-//	public void setChallenger(Player challenger) {
-//		this.challenger = challenger;
-//	}
-
 	public Player getDefender() {
 		return defender;
 	}
@@ -293,14 +286,6 @@ public abstract class Game extends Check {
 		return answerToGive;
 	}
 
-//	protected void setAnswerToGive(String answerToGive) {
-//		this.answerToGive = answerToGive;
-//	}
-
-//	public String getInput() {
-//		return input;
-//	}
-
 	public void setInput(String input) {
 		this.input = input;
 	}
@@ -312,33 +297,5 @@ public abstract class Game extends Check {
 	public String getOutput() {
 		return output;
 	}
-
-	// public void setSecretCodeArray() {
-	// intToArray(secretCode);
-	// }
-//	/**
-//	 * sets the error to be displayed in the view
-//	 * @param error
-//	 */
-//	public void setError(String error) {
-//		this.error = error;
-//	}
-
-//	public int getSecretCode() {
-//		return secretCode;
-//	}
-
-	// public void setSecretCode(int secretCode) {
-	// this.secretCode = secretCode;
-	// }
-
-//	public void setAnswer(String str) {
-//		this.answer = str;
-//
-//	}
-
-//	public String getVerdict() {
-//		return verdict;
-//	}
 
 }

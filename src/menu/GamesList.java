@@ -1,7 +1,9 @@
 package menu;
 
 /**
- *  List of available games
+ *  List of available games.
+ *  Each is associated with a numerical reference, an explanation for guessing
+ *  and one for answering
  * @author Xavier.Lamourec
  *
  */

@@ -1,26 +1,46 @@
 package menu;
 
 import check.Check;
-import player.Player;
+import player.Human;
 
+	/** The Menu class inherits the Check class
+	 * and allows the user to chose his game's configuration
+	 * (gameType, mode)
+	 * 
+	 * @author Xavier.Lamourec
+	 *@param input (user input)
+	 *@param game (from gameList enumeration)
+	 *@param mode (from modeList enumeration)
+	 */
 public class Menu extends Check {
 
 	private String[] validList;
 	private GamesList game;
-	private Player human;
+	private Human user;
 	
 	private ModeList mode;
 
 	
-
+   /**
+    * Initiates the Menu
+    */
 	
 
 	public Menu() {
 
 	}
+	
+	/**
+	 * This method gets user input and checks its validation.
+	 * If the validation is fine, the game and the status are updated
+	 * @param status
+	 * @param input
+	 * @param gameList
+	 * @return
+	 */
 
 	public Status_Menu selectAndValidGame(Status_Menu status) {
-		input=human.setup();
+		input=user.getInput();
 		nbChar=1;
 		initValidGameList();
 		if (isEmpty())
@@ -33,10 +53,19 @@ public class Menu extends Check {
 		return Status_Menu.MENU_MODE;
 
 	}
+	
+	/**
+	 * This method gets user input and checks its validation.
+	 * If the validation is fine, the mode and the status are updated
+	 * @param status
+	 * @param input
+	 * @param modeList
+	 * @return
+	 */
 
 
 	public Status_Menu selectAndValidMode(Status_Menu status) {
-		input=human.setup();
+		input=user.getInput();
 		initValidModeList();
 		if (isEmpty())
 			return status;
@@ -48,16 +77,27 @@ public class Menu extends Check {
 		return Status_Menu.GAME;
 
 	}
+	
+	/**
+	 * Initialises the validation list for the games
+	 */
 
-	public void initValidGameList() {
+	private void initValidGameList() {
 		initValidList(GamesList.values().length);
 	}
 
-	public void initValidModeList() {
+	/**
+	 * Initialises the validation list for the modes
+	 */
+	private void initValidModeList() {
 
 		initValidList(ModeList.values().length);
 	}
-
+	
+	/**
+	 * Initialises the validation array
+	 * @param validList list of accepted inputs
+	 */
 	private void initValidList(int listLength) {
 		validList = new String[listLength];
 		for (int j = 0; j < listLength; j++) {
@@ -66,18 +106,9 @@ public class Menu extends Check {
 		valid=validList;
 	}
 
-	
-//	Getters and Setters
-	public Player getPlayer() {
-		return human;
-	}
-	
-	public String[] getValidList() {
-		return validList;
-	}
 
-	public void setPlayer(Player player) {
-		this.human = player;
+	public void setUser(Human user) {
+		this.user = user;
 	}
 
 	public GamesList getGame() {

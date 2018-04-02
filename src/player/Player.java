@@ -2,52 +2,67 @@ package player;
 
 import menu.GamesList;
 
+	/**
+	 * The Player class's role is to deal with inputs
+	 * that will feed the game. They can be from the user(Human)
+	 * or auto-generated(AI).
+	 * The Player is a parent class for both Human and AI.
+	 * @author Xavier.Lamourec
+	 *
+	 */
+
 public abstract class Player {
 	protected String input="";
 	protected String secretCode = "";
 	protected String answer = "";
 	protected String answerToGive = "";
 	protected String name="";
-	protected String guess = "";
+	protected String guess;
 	
+	/**
+	 * Instantiates the Player
+	 */
 	public Player(){
 		
 	}
 
-	// Abstract methods
-	public abstract String setup();
-
+	/**
+	 * Gets input 
+	 * @return input
+	 */
+	
+	public abstract String getInput();
+	
+	/**
+	 * gets input for the game MoreLess
+	 * @return
+	 */
+	
 	public abstract String tryToGuessMoreLess();
-
-//	public abstract String replyMoreLess(String gameName);
-
+	
+	/**
+	 * gets input for the game MasterMind
+	 * @return
+	 */
+	
 	public abstract String tryToGuessMasterMind();
 
-//	public abstract String replyMasterMind(String gameName);
 
-
-	// Trying to guess the result
+	/**
+	 * redirects to the corresponding methods depending
+	 * on the game played and return the result
+	 * @param gameName 
+	 * @return guess as a String
+	 */
 	public String tryToGuess(String gameName) {
 
 		if (gameName.equals(GamesList.MoreLess.name())) {
 			return tryToGuessMoreLess();
 		}
-		if (gameName.equals(GamesList.MasterMind.name())) {
+		else {
 			return tryToGuessMasterMind();
 		}
-		return "invalid";
 	}
-
-	// Provides feedback on other player's input
-//	public String replyToGuess(String gameName) {
-//		if (gameName.equals(GamesList.MoreLess.name())) {
-//			return replyMoreLess(gameName);
-//		}
-//		if (gameName.equals(GamesList.MasterMind.name())) {
-//			return replyMasterMind(gameName);
-//		}
-//		return "Invalid reply";
-//	}
 
 	// getters & setters
 

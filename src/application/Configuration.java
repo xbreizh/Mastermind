@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -37,8 +38,10 @@ public class Configuration {
 			prop.load(fs);
 			max_attempts = Integer.parseInt(prop.getProperty("max_attempts"));
 			nbDigits = Integer.parseInt(prop.getProperty("nbDigits"));
+		} catch (FileNotFoundException e) {
+			 error=e;
 		} catch (IOException e) {
-			 System.err.println(error=e);
+			 error=e;
 		} 		
 		
 	}

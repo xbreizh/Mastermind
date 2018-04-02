@@ -3,9 +3,10 @@ package game;
 import player.Player;
 
 	/**
-	 * The MoreLess classes extends the Game class
+	 * The MoreLess classes inherits the Game class
 	 * It contains a specific method for generating a valid answer
-	 * and another for validating a suggestion of answer
+	 * and another for validating a suggestion of answer.
+	 * The user must guess a digits code and gets symbols as reply(+, -, =)
 	 * @author Xavier.Lamourec
 	 *
 	 */

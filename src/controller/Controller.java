@@ -42,11 +42,12 @@ public class Controller {
 	 * loops the menu until it gets a valid game and a valid mode
 	 */
 	public void switchMenu() {
+		log.info(stMenu);
 		while (stGame != Status_Game.SETUP) {
 			checkError(menu);
 			checkStatusMenu();
 		}
-
+		log.info("Game: "+gameType+" // Mode: "+mode);
 		playing();
 
 	}
@@ -112,8 +113,11 @@ public class Controller {
 
 				checkStatusGame();
 			}
-			resultArray[i] = game.getWinner().getClass().getSimpleName();
-			view.displayInline(resultArray[i]);
+			String winner= game.getWinner().getClass().getSimpleName();
+			resultArray[i] = winner;
+			view.displayLineBreak(resultArray[i]);
+			game.reset();
+			log.info("Winner game "+(i+1)+": "+winner);
 		}
 		getFinalresult();
 		stGame = Status_Game.REPLAY;
@@ -131,6 +135,7 @@ public class Controller {
 			} else {
 				finalWinner = resultArray[0] + " wins!";
 			}
+			log.info("End of the game loop. Final winner: "+finalWinner);
 			view.displayLineBreak("Final result: " + finalWinner);
 		}
 	}
@@ -144,8 +149,10 @@ public class Controller {
 			checkStatusGame();
 		}
 		if (stGame == Status_Game.SETUP) {
+			log.info("Game restarting: "+game);
 			playing();
 		} else {
+			log.info("Ending game");
 			endGame();
 		}
 	}
@@ -161,18 +168,19 @@ public class Controller {
 		}
 		if (stGame == null) {
 			stMenu = Status_Menu.MENU_GAME;
+			log.info("Back to menu: ");
 			switchMenu();
 		} else {
 			checkStatusGame();
+			log.info("End of the Application");
 		}
 	}
 
 	/**
 	 * switches on the status and gets to the corresponding game method
+	 * @param stGame
 	 */
 	private void checkStatusGame() {
-		String attempsCount = " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
-				+ Configuration.getMax_attempts();
 		log.debug(stGame);
 		checkError(game);
 		view.displayInline(stGame.getOutput());
@@ -182,7 +190,8 @@ public class Controller {
 			stGame = game.validSetup(stGame);
 			break;
 		case PLAY:
-
+			String attempsCount = " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
+					+ Configuration.getMax_attempts();
 			view.displayLineBreak(game.getClass().getSimpleName() + attempsCount);
 			stGame = game.play(stGame);
 			displaysIfDefenderIsHuman(game.getInput(), "");
@@ -201,11 +210,11 @@ public class Controller {
 			stGame = Status_Game.REPLAY;
 			break;
 		case REPLAY:
-			game.setInput(human.setup());
+			game.setInput(human.getInput());
 			stGame = game.validPlayAgain(stGame);
 			break;
 		case EXIT:
-			game.setInput(human.setup());
+			game.setInput(human.getInput());
 			stGame = game.validExit(stGame);
 			break;
 		case END:

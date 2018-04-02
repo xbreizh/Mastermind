@@ -28,19 +28,24 @@ public class Main {
 	private static final Logger log = Logger.getLogger(Controller.class);
 
 	public static void main(String[] args) {
+		Configuration conf = new Configuration();
 		
-		if(new Configuration().getError()!=null){
+		if(conf.getError()!=null){
 			log.fatal("Error while loading the configuration file\n "
-					+ "The application can't be launched");
+					+ conf.getError());
 		}else{
+			
 		Human human = new Human();
+		log.debug("human created");
 		View view = new View();
+		log.debug("view created");
 		Controller ct = new Controller();
+		log.debug("controller created");
 		ct.setLog(log);
 		Menu menu = new Menu();
-
+		log.debug("menu created");
 		ct.setHuman(human);
-		menu.setPlayer(human);
+		menu.setUser(human);
 		ct.setMenu(menu);
 		ct.setView(view);
 		ct.switchMenu();

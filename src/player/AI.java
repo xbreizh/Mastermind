@@ -6,7 +6,6 @@ import application.Configuration;
 
 public class AI extends Player {
 
-//	private String newProposition = "";
 	private int min;
 	private int max;
 	
@@ -25,7 +24,7 @@ public class AI extends Player {
 	 * @param secretCode
 	 */
 	@Override
-	public String setup() {
+	public String getInput() {
 		return secretCode = Integer.toString(ThreadLocalRandom.current().nextInt(min, max));
 	}
 
@@ -74,7 +73,7 @@ public class AI extends Player {
 	@Override
 	public String tryToGuessMoreLess() {
 		String newGuess = "";
-		if (guess.length() == 0) {
+		if (guess==null) {
 			newGuess=initFirstGuess();
 		} else {
 			for (int i = 0; i < guess.length(); i++) {
@@ -90,7 +89,6 @@ public class AI extends Player {
 					newGuess += (a + 1);
 				}
 			}
-//			waiting();
 		}
 		
 		return guess=newGuess;
@@ -109,7 +107,6 @@ public class AI extends Player {
 	@Override
 	public String tryToGuessMasterMind() {
 		initFirstGuess();
-//		waiting();
 		return guess;
 
 	}
@@ -140,27 +137,5 @@ public class AI extends Player {
 		}
 		return tab;
 	}
-
-//	public String getNewProposition() {
-//		return newProposition;
-//	}
-
-//	@Override
-//	public String replyMoreLess(String gameName) {
-//		return "suka";
-//
-//	}
-//
-//	@Override
-//	public String replyMasterMind(String gameName) {
-//return "nada";
-//	}
-
-//	void arrayToList(int[] array, ArrayList<Integer> aList) {
-//		for (int i = 0; i < array.length; i++) {
-//			aList.add(array[i]);
-//		}
-//
-//	}
 
 }

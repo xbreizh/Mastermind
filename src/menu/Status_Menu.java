@@ -2,7 +2,11 @@ package menu;
 
 
 /**
- * Presents the main menu
+ * Lists the different Menu stages:
+ * 1- game selection
+ * 2- mode selection
+ * 3- game initiation
+ * It gets feeds from the GameList and the ModeList
  * @author Xavier.Lamourec
  *
  */

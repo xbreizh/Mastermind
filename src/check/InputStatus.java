@@ -1,5 +1,13 @@
 package check;
 
+
+/**
+ * InpusStatus lists the status used by the check Class.
+ * Each occurrence is associated with a String value
+ * that describes it.
+ * @author Xavier.Lamourec
+ *
+ */
 public enum InputStatus {
 
 	VALID("Input valid"), 
@@ -16,10 +24,6 @@ public enum InputStatus {
 
 	public String getOutput() {
 		return output;
-	}
-
-	public void setOutput(String output) {
-		this.output = output;
 	}
 
 }

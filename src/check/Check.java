@@ -16,7 +16,6 @@ public class Check {
 	protected String input = "";
 	protected String output = "";
 	protected int nbChar = Configuration.getNbDigits();
-//	protected String[] symbols = { "+", "-", "=" };
 	protected InputStatus IStatus = InputStatus.VALID;
 	protected String error = "";
 	protected String[] valid;

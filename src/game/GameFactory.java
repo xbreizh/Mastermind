@@ -16,6 +16,10 @@ import player.Player;
 	 */
 
 public class GameFactory {
+	
+	/**
+	 * Instantiates the GameFactory
+	 */
 
 	public GameFactory() {
 	}
@@ -34,7 +38,7 @@ public class GameFactory {
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
 			challenger = robot;
-			defender = human;
+			defender = robot;
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
 
