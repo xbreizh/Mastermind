@@ -9,6 +9,7 @@ public class AI extends Player {
 	private int min;
 	private int max;
 	
+	
 	/**
 	 * Initiates the AI and setups the min and max to 
 	 * define the range of possible guessing
@@ -73,8 +74,11 @@ public class AI extends Player {
 	@Override
 	public String tryToGuessMoreLess() {
 		String newGuess = "";
-		if (guess==null) {
+		System.out.println("Guess: "+guess);
+		if (firstGuess==0) {
+			System.out.println("first guess");
 			newGuess=initFirstGuess();
+			firstGuess++;
 		} else {
 			for (int i = 0; i < guess.length(); i++) {
 				int a = Character.getNumericValue(guess.charAt(i));
@@ -82,11 +86,18 @@ public class AI extends Player {
 					newGuess += a;
 				}
 				if (answer.substring(i, i + 1).equals("-")) {
-					newGuess += (a - 1);
-
+					if(Integer.parseInt(guess.substring(i, i + 1))==5){
+						newGuess +=3;
+					}else{
+						newGuess += (a-1);
+					}
 				}
 				if (answer.substring(i, i + 1).equals("+")) {
-					newGuess += (a + 1);
+					if(Integer.parseInt(guess.substring(i, i + 1))==5){
+						newGuess +=7;
+					}else{
+						newGuess += (a+1);
+					}
 				}
 			}
 		}

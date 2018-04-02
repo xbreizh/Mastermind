@@ -115,7 +115,7 @@ public class Controller {
 			}
 			String winner= game.getWinner().getClass().getSimpleName();
 			resultArray[i] = winner;
-			view.displayLineBreak(resultArray[i]);
+			view.displayLineBreak(resultArray[i]+" in "+game.getAttempts()+" attemps");
 			game.reset();
 			log.info("Winner game "+(i+1)+": "+winner);
 		}

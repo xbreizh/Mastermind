@@ -235,6 +235,7 @@ public abstract class Game extends Check {
 		input = "";
 		guess="";
 		attempts = 0;
+		challenger.setFirstGuess(0);
 		log.info("Game values have been reset (error, output, input, attempts)");
 	}
 	

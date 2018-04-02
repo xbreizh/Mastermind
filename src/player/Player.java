@@ -18,7 +18,12 @@ public abstract class Player {
 	protected String answerToGive = "";
 	protected String name="";
 	protected String guess;
+	protected int firstGuess=0;
 	
+	public void setFirstGuess(int firstGuess) {
+		this.firstGuess = firstGuess;
+	}
+
 	/**
 	 * Instantiates the Player
 	 */

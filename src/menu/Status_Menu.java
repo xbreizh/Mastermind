@@ -18,7 +18,8 @@ public enum Status_Menu {
 	MENU_MODE("Chose a Mode:\n"+
 			ModeList.CHALLENGER.getReference()+"- "+ModeList.CHALLENGER+"\n"+
 			ModeList.DEFENDER.getReference()+"- "+ModeList.DEFENDER+"\n"+
-			ModeList.DUAL.getReference()+"- "+ModeList.DUAL),
+			ModeList.DUAL.getReference()+"- "+ModeList.DUAL+"\n"+
+			ModeList.CYBER.getReference()+"- "+ModeList.CYBER),
 	
 	GAME("");
 

@@ -9,7 +9,7 @@ package menu;
  */
 public enum ModeList {
 
-	CHALLENGER(1), DEFENDER(2), DUAL(3);
+	CHALLENGER(1), DEFENDER(2), DUAL(3), CYBER(4);
 
 	private int reference;
 

@@ -35,9 +35,10 @@ public class GameFactory {
 		Player challenger = null;
 		Player defender = null;
 		AI robot = new AI();
+		AI robot2 = new AI();
 		Game[] gameArray = null;
 		if (mode.equals(ModeList.CHALLENGER)) {
-			challenger = robot;
+			challenger = human;
 			defender = robot;
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
@@ -51,6 +52,13 @@ public class GameFactory {
 		}
 		if (mode.equals(ModeList.DUAL)) {
 			challenger = human;
+			defender = robot;
+			gameArray = new Game[2];
+			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
+			gameArray[1] = GameFactory.createGame(gameType, defender, challenger);
+		}
+		if (mode.equals(ModeList.CYBER)) {
+			challenger = robot2;
 			defender = robot;
 			gameArray = new Game[2];
 			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
