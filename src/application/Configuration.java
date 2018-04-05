@@ -14,7 +14,8 @@ import java.util.Properties;
 public class Configuration {
 
 	private static Properties prop = new Properties();
-	private static int max_attempts;
+	private static int max_attemptsMasterMind;
+	private static int max_attemptsMoreLess;
 	private static int nbDigits;
 	private static Exception error=null;
 	private static String filePath="/Files/config.properties";
@@ -36,7 +37,8 @@ public class Configuration {
 		try {
 			fs = new FileInputStream(System.getProperty("user.dir") + filePath);
 			prop.load(fs);
-			max_attempts = Integer.parseInt(prop.getProperty("max_attempts"));
+			max_attemptsMoreLess = Integer.parseInt(prop.getProperty("max_attemptsMoreLess"));
+			max_attemptsMasterMind = Integer.parseInt(prop.getProperty("max_attemptsMasterMind"));
 			nbDigits = Integer.parseInt(prop.getProperty("nbDigits"));
 		} catch (FileNotFoundException e) {
 			 error=e;
@@ -48,8 +50,12 @@ public class Configuration {
 	
 	// Getters and Setters
 	
-	public static int getMax_attempts() {
-		return max_attempts;
+	public static int getMax_attemptsMoreLess() {
+		return max_attemptsMoreLess;
+	}
+
+	public static int getMax_attemptsMasterMin() {
+		return max_attemptsMasterMind;
 	}
 
 	public static int getNbDigits() {

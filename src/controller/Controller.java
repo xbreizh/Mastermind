@@ -191,7 +191,7 @@ public class Controller {
 			break;
 		case PLAY:
 			String attempsCount = " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
-					+ Configuration.getMax_attempts();
+					+ game.getMax_attempts();
 			view.displayLineBreak(game.getClass().getSimpleName() + attempsCount);
 			stGame = game.play(stGame);
 			displaysIfDefenderIsHuman(game.getInput(), "");

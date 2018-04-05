@@ -22,7 +22,11 @@ public abstract class Game extends Check {
 	protected Player challenger;
 	protected int[] secretCodeArray;
 	protected int attempts = 0;
-	protected int max_attempts = Configuration.getMax_attempts();
+	protected int max_attempts;
+	public int getMax_attempts() {
+		return max_attempts;
+	}
+
 	protected int secretCode;
 	protected String guess = "";
 	protected String answerToGive = "";
@@ -83,8 +87,8 @@ public abstract class Game extends Check {
 	
 	/**
 	 * Asks for challenger's guess until it's valid
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game play(Status_Game status) {
 		String gameName = this.getClass().getSimpleName();
@@ -94,8 +98,8 @@ public abstract class Game extends Check {
 	
 	/**
 	 * checks the challenger's guess and changes the status if valid
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game validPlay(Status_Game status) {
 		log.info("Challenger guess: "+input);
@@ -126,8 +130,8 @@ public abstract class Game extends Check {
 	 * Asks for defender's answer until it's valid
 	 * if defender is human
 	 * Otherwise, it sets the answer as game's generated answer
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game answer(Status_Game status) {
 
@@ -146,8 +150,8 @@ public abstract class Game extends Check {
 	
 	/**
 	 * asks the user if he wants to replay
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game validPlayAgain(Status_Game status) {
 		return checkYesOrNo(status, Status_Game.SETUP, Status_Game.EXIT);
@@ -156,8 +160,8 @@ public abstract class Game extends Check {
 	
 	/**
 	 * ask the user if he wants to play again
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game validExit(Status_Game status) {
 		return checkYesOrNo(status, null, Status_Game.END);
@@ -166,10 +170,10 @@ public abstract class Game extends Check {
 	
 	/**
 	 * checks the user's input and changes the status if correct
-	 * @param init
+	 * @param status
 	 * @param yes
 	 * @param no
-	 * @return
+	 * @return status
 	 */
 	protected Status_Game checkYesOrNo(Status_Game status, Status_Game yes, Status_Game no) {
 		error = "";
@@ -191,7 +195,7 @@ public abstract class Game extends Check {
 	/**
 	 * converts an integer into array
 	 * @param code
-	 * @return
+	 * @return tab
 	 */
 	protected int[] intToArray(int code) {
 		int[] tab = new int[Configuration.getNbDigits()];
@@ -207,8 +211,8 @@ public abstract class Game extends Check {
 	
 	/**
 	 * checks the number of attempts and changes the status if the maximum is reached
-	 * @param status
-	 * @return
+	 * @param 
+	 * @return status
 	 */
 	public Status_Game checkAttempts(Status_Game status) {
 		if (attempts == max_attempts) {

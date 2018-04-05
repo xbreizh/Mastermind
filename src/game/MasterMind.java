@@ -2,6 +2,8 @@ package game;
 
 import java.util.ArrayList;
 
+import application.Configuration;
+
 /**
  * The MasterMind classes inherits the Game class
  * It contains a specific method for generating a valid answer
@@ -23,6 +25,7 @@ public class MasterMind extends Game {
 
 	public MasterMind(Player defender, Player challenger) {
 		super(defender, challenger);
+		max_attempts=Configuration.getMax_attemptsMasterMin();
 	}
 
 	/**

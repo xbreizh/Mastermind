@@ -51,6 +51,8 @@ public class Main {
 		ct.switchMenu();
 		}
 		
+//		Configuration conf = new Configuration();
+//		System.out.println(new AI().tryToGuessMasterMind());
 		
 		
 		

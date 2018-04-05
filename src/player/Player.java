@@ -17,7 +17,7 @@ public abstract class Player {
 	protected String answer = "";
 	protected String answerToGive = "";
 	protected String name="";
-	protected String guess;
+	protected String guess="";;
 	protected int firstGuess=0;
 	
 	public void setFirstGuess(int firstGuess) {

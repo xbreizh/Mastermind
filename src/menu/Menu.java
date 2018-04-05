@@ -55,12 +55,10 @@ public class Menu extends Check {
 	}
 	
 	/**
-	 * This method gets user input and checks its validation.
-	 * If the validation is fine, the mode and the status are updated
+	 * 	This method gets user input and checks its validation.
+	 * 	If the validation is fine, the mode and the status are updated
 	 * @param status
-	 * @param input
-	 * @param modeList
-	 * @return
+	 * @return status
 	 */
 
 

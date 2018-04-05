@@ -45,8 +45,8 @@ public class GameFactory {
 
 		}
 		if (mode.equals(ModeList.DEFENDER)) {
-			challenger = human;
-			defender = robot;
+			challenger = robot;
+			defender = human;
 			gameArray = new Game[1];
 			gameArray[0] = GameFactory.createGame(gameType, challenger, defender);
 		}
