@@ -43,7 +43,7 @@
                
         </appender>
         <root> 
-                <level value="info"/> 
+                <level value="warn"/> 
                 <appender-ref ref="info-out" /> 
                <appender-ref ref="detailedLog" />
         </root> 
