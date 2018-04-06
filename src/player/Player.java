@@ -17,9 +17,18 @@ public abstract class Player {
 	protected String answer = "";
 	protected String answerToGive = "";
 	protected String name="";
-	protected String guess="";;
+	protected String guess="";
 	protected int firstGuess=0;
+	protected int phase=0;
 	
+	public int getPhase() {
+		return phase;
+	}
+
+	public void setPhase(int phase) {
+		this.phase = phase;
+	}
+
 	public void setFirstGuess(int firstGuess) {
 		this.firstGuess = firstGuess;
 	}

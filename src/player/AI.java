@@ -10,25 +10,16 @@ public class AI extends Player {
 
 	private int min;
 	private int max;
-//	private ArrayList<Integer> possible= new ArrayList<>();
 	private int value;
 	private ArrayList<Integer> possible = new ArrayList<>();
 	private ArrayList<Integer> initialList = new ArrayList<>();
 	private ArrayList<Integer> foundList = new ArrayList<>();
 	private ArrayList<Integer[]> finalList = new ArrayList<>();
 	private int maxDigits = Configuration.getNbDigits();
-//	private String guess;
-	private int phase=0;
 	private int test=15;
 	private int position=0;
 	private int pick;
 	private int get=0;
-	
-//	private void initPossibleList(){
-//		for (int i = 0; i < 5; i++) {
-//			possible.add(i);
-//		}
-//	}
 	
 	
 	/**
@@ -96,7 +87,6 @@ public class AI extends Player {
 	public String tryToGuessMoreLess() {
 		String newGuess = "";
 		if (firstGuess==0) {
-			System.out.println("first guess");
 			newGuess=initFirstGuess();
 			firstGuess++;
 		} else {
@@ -137,22 +127,9 @@ public class AI extends Player {
 
 	@Override
 	public String tryToGuessMasterMind() {
-//		guess();
 		return guess=guess();
 
 	}
-	
-//	private void convertArrayListToString(){
-//		
-//	}
-
-//	protected void waiting() {
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException ex) {
-//			Thread.currentThread().interrupt();
-//		}
-//	}
 	
 	/**
 	 * Converts an integer into an array of
@@ -174,23 +151,88 @@ public class AI extends Player {
 	}
 ///////////////////////////////////////////////////////////////////////////////
 	
-	public void initFirstPossibleList(){
+	/**
+	 * Core of the Mastermind guessing for AI
+	 * phase 0: initiates first list
+	 * phase 1: tests the possible integer until the required number of digits is found
+	 * phase 2: tests the possible position of each previous found integer
+	 * phase 3: returns the final result
+	 * @return
+	 */
+	
+	public String guess(){
+		if(answer.length()==0){
+			initFirstPossibleList();
+		}
+		 if(phase==0){
+			guess=initList();
+			phase=1;
+		}
+		else if(phase==1){	
+			if(foundList.size()<maxDigits){
+				if(initialList.size()==1){
+					foundList.add(initialList.get(0));
+					phase=2;
+				}else{
+				guess=analyseFirstPhase();
+				}
+			}else{
+				possible.clear();
+				value=getRandomFromList(foundList);
+				phase=2;
+			}
+		}
+		else if(phase==2){
+			if(foundList.size() >0){
+			guess=analyseSecondPhase();
+			
+		}
+		
+		}else{
+			phase=3;
+		}
+		if(phase==3){
+			System.out.println("trying");
+			
+			guess=getFinalResult();
+			
+		}
+		return guess;
+	}
+	
+	/**
+	 * initiates the first list for the application MasterMind
+	 */
+	
+	private void initFirstPossibleList(){
+		possible.clear();
+		foundList.clear();
+		finalList.clear();
+		position=0;
 		for (int i = 0; i < 10; i++) {
 			possible.add(i);
 		}
 	}
 
-	public int getRandomFromList(ArrayList<Integer> list){
+	/**
+	 * returns a random int from a list of integer
+	 * @param list
+	 * @return integer
+	 */
+	
+	private int getRandomFromList(ArrayList<Integer> list){
 		Random random = new Random();
 		pick=random.nextInt(list.size());
 		int number=list.get(pick);
-//		list.remove(pick);
-		System.out.println("Number: "+number);
-		System.out.println(list);
 		return number;
 	}
 
-		public String initList(){
+	/**
+	 * creates a new list by taking a random integer from another list
+	 * and duplicating it until the list size matches the maximum possible number of digits
+	 * @return string
+	 */
+		private String initList(){
 			initialList.clear();
 			value=getRandomFromList(possible);
 			possible.remove(pick);
@@ -200,95 +242,56 @@ public class AI extends Player {
 			
 			return arrayListToString(initialList);
 		}
-		
-		public String initSecondList(){
+		/**
+		 * creates a new list filled with a rejected number duplicated and an integer from the possible list
+		 * the first integer is duplicated to fill the list but there will be only 1 integer from the possible 
+		 * list
+		 * @return string
+		 */
+		private String initSecondList(){
 			possible.clear();
+			System.out.println("Get: "+get);
 			value=foundList.get(get);
-			System.out.println("Value: "+value);
 			for (int i = 0; i < maxDigits-1; i++) {
 				possible.add(test);
 			}
 			possible.add(position, value);
 			
-//			possible.add(position, value);
-			
 			return arrayListToString(possible);
 		}
 
-		public String guess(){
-			if(answer.length()==0){
-				initFirstPossibleList();
-			}
-			System.out.println("Phase: "+phase);
-			if(phase==0){
-				System.out.println("first guess");
-				guess=initList();
-				phase=1;
-			}
-			else if(phase==1){	
-				if(foundList.size()<maxDigits){
-					if(initialList.size()==1){
-						foundList.add(initialList.get(0));
-						phase=2;
-					}else{
-					guess=analyseFirstPhase();
-					}
-				}else{
-					possible.clear();
-					value=getRandomFromList(foundList);
-					phase=2;
-				}
-			}
-			else if(phase==2){
-				if(foundList.size() >0){
-				System.out.println("first guess second phase: ");
-				guess=analyseSecondPhase();
-				
-			}
-			
-			}else{
-				phase=3;
-			}
-			if(phase==3){
-				guess=getFinalResult();
-			}
-			System.out.println("Guess: "+guess);
-			return guess;
-		}
+		/**
+		 * tests the position of each integer from the found list.
+		 * if ko -> moves digit to the next position
+		 * if ok -> stores the position and integer in final result list
+		 * @return string
+		 */
 		
 		private String analyseSecondPhase(){
-			if(finalList.size()== maxDigits){
-				System.out.println("Victory is near");
-			}
-				
 			int placed = Integer.parseInt(answer.substring(1, 2));
 			Integer[] array = {position, value};
-//			if(foundList.size()>0)
 			if(placed >0){
 				finalList.add(array);
-				System.out.println("removed: "+foundList.get(0));
 				foundList.remove(get);
-				System.out.println("foundList: "+foundList);
 				if(foundList.size()>0){
-//				value=getRandomFromList(foundList);
-				System.out.println("placed");
-//				value=getRandomFromList(possible);
 				position++;
 				get=0;
 				}else{
+					phase=3;
 					return getFinalResult();
 				}
 			}else{
 				get++;
 			}
-			System.out.println("second list: "+possible);
-			
-			
 			return initSecondList();
 			
 			
 		}
 		
+		/**
+		 * returns a string from the arraylist where the digits and their position are stored
+		 * @return string
+		 */
 		private String getFinalResult(){
 			ArrayList<Integer> finalResult = new ArrayList<>();
 			for (int i = 0; i < finalList.size(); i++) {
@@ -297,9 +300,16 @@ public class AI extends Player {
 			}
 			return arrayListToString(finalResult);
 		}
+		
+		/**
+		 * tests the integer from the first initiated list.
+		 * if first ko -> stored as test
+		 * if ko -> removed from the list
+		 * if ok -> stored in found list
+		 * @return string
+		 */
 
 		private String analyseFirstPhase(){
-//			int found = Integer.parseInt(answer.substring(0, 1));
 			int placed = Integer.parseInt(answer.substring(1, 2));
 			if(placed > 0){
 				for (int i = 0; i < placed; i++) {
@@ -309,7 +319,6 @@ public class AI extends Player {
 			}else{
 				if(test == 15){
 					test=value;
-					System.out.println("test initiated: "+value);
 				}
 				
 			}
@@ -319,10 +328,8 @@ public class AI extends Player {
 				initialList.clear();
 			}
 			else if(foundList.size()==maxDigits){
-				System.out.println("full");
 				if(test == 15){
 					test=getRandomFromList(possible);
-					System.out.println("test initiated at the end: "+test);
 				}
 				phase=2;
 				initialList.clear();
@@ -330,34 +337,16 @@ public class AI extends Player {
 				return initSecondList();
 				
 			}
-				System.out.println("Foundlist: "+foundList);
-				System.out.println("Foundlist size: "+foundList.size());
 				return initList();
 		}
-
+		
+		
 		/**
-		 * 
+		 * Converts an arraylist of integers into a string
+		 * @param list
+		 * @return string
 		 */
-		private void initiateTest(int value) {
-			if(test == 15){
-				test=value;
-			}
-			System.out.println("test initiated: "+value);
-		}
-		
-		
-		
-		public ArrayList<Integer> stringToArrayList(String str){
-			ArrayList<Integer> list = new ArrayList<>();
-			for (int i = 0; i < str.length(); i++) {
-				list.add(Integer.parseInt(str.substring(0, i+1)));
-			}
-			
-			return list;
-			
-		}
-		
-		public String arrayListToString(ArrayList<Integer> list){
+		private String arrayListToString(ArrayList<Integer> list){
 			String str="";
 			
 			for (int i = 0; i < list.size(); i++) {

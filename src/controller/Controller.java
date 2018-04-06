@@ -2,7 +2,6 @@ package controller;
 
 import org.apache.log4j.Logger;
 
-import application.Configuration;
 import check.Check;
 import game.Game;
 import game.GameFactory;

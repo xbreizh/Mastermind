@@ -19,6 +19,7 @@ public class Configuration {
 	private static int nbDigits;
 	private static Exception error=null;
 	private static String filePath="/Files/config.properties";
+	
 
 	static FileInputStream fs;
 	

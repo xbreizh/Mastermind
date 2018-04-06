@@ -102,6 +102,7 @@ public abstract class Game extends Check {
 	 * @return status
 	 */
 	public Status_Game validPlay(Status_Game status) {
+		log.info("Phase: "+challenger.getPhase());
 		log.info("Challenger guess: "+input);
 		if (!isEmpty()) {
 			if (isInteger()) {
@@ -140,7 +141,7 @@ public abstract class Game extends Check {
 		} else {
 			answer = answerToGive;
 		}
-		log.debug("Defender answer: "+answer+"\n"
+		log.info("Defender answer: "+answer+"\n"
 				+ "Answer to give: "+answerToGive);
 		status = validAnswer(status);
 		challenger.setAnswer(answer);
@@ -181,7 +182,7 @@ public abstract class Game extends Check {
 			error = IStatus.getOutput();
 			return status;
 		} else if (input.equalsIgnoreCase("y")) {
-//			reset();
+			reset();
 			return yes;
 		} else if (input.equalsIgnoreCase("n")) {
 			return no;
@@ -240,7 +241,14 @@ public abstract class Game extends Check {
 		guess="";
 		attempts = 0;
 		challenger.setFirstGuess(0);
+		challenger.setAnswer("");
+		defender.setAnswer("");
+		challenger.setPhase(0);
+		
+//		challenger
+		System.out.println("Gam has been reset");
 		log.info("Game values have been reset (error, output, input, attempts)");
+		log.info("challenger phase: "+challenger.getPhase());
 	}
 	
 	/**
