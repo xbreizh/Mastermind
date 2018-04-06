@@ -1,0 +1,664 @@
+14:32:46 Line 44  INFO [main] - switchMenu - MENU_GAME
+14:32:49 Line 90  INFO [main] - initGames - CYBER
+14:32:49 Line 49  INFO [main] - switchMenu - Game: MasterMind // Mode: CYBER
+14:32:49 Line 72  INFO [main] - validSetup - Secret code set: 8790
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 8111
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 11
+Answer to give: 11
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1011
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1711
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1101
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1191
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1110
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 8790
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 14
+Answer to give: 14
+14:32:49 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:49 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:49 Line 119  INFO [main] - playing - Winner game 1: AI
+14:32:49 Line 72  INFO [main] - validSetup - Secret code set: 7058
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 8333
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 7333
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 11
+Answer to give: 11
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3833
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3033
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3383
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3353
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 3338
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:49 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:49 Line 106  INFO [main] - validPlay - Challenger guess: 7058
+14:32:49 Line 144  INFO [main] - answer - Defender answer: 14
+Answer to give: 14
+14:32:49 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:49 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:49 Line 119  INFO [main] - playing - Winner game 2: AI
+14:32:49 Line 137  INFO [main] - getFinalresult - End of the game loop. Final winner: Both players win!
+14:32:51 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:51 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:51 Line 151  INFO [main] - checkKeepPlaying - Game restarting: game.MasterMind@312b1dae
+14:32:51 Line 72  INFO [main] - validSetup - Secret code set: 9673
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 9111
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1611
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1171
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1113
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 9673
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 04
+Answer to give: 04
+14:32:51 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:51 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:51 Line 119  INFO [main] - playing - Winner game 1: AI
+14:32:51 Line 72  INFO [main] - validSetup - Secret code set: 1311
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 13
+Answer to give: 13
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1333
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3133
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 40
+Answer to give: 40
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3133
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 40
+Answer to give: 40
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3313
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 3331
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:51 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:51 Line 106  INFO [main] - validPlay - Challenger guess: 1311
+14:32:51 Line 144  INFO [main] - answer - Defender answer: 04
+Answer to give: 04
+14:32:51 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:51 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:51 Line 119  INFO [main] - playing - Winner game 2: AI
+14:32:51 Line 137  INFO [main] - getFinalresult - End of the game loop. Final winner: Both players win!
+14:32:53 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:53 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:53 Line 151  INFO [main] - checkKeepPlaying - Game restarting: game.MasterMind@312b1dae
+14:32:53 Line 72  INFO [main] - validSetup - Secret code set: 6933
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3111
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3111
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 6111
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1311
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1311
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1911
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1131
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1113
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 6933
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 04
+Answer to give: 04
+14:32:53 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:53 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:53 Line 119  INFO [main] - playing - Winner game 1: AI
+14:32:53 Line 72  INFO [main] - validSetup - Secret code set: 5179
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 7333
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 1333
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 5333
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3733
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3133
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3373
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 3339
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:53 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:53 Line 106  INFO [main] - validPlay - Challenger guess: 5179
+14:32:53 Line 144  INFO [main] - answer - Defender answer: 04
+Answer to give: 04
+14:32:53 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:53 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:53 Line 119  INFO [main] - playing - Winner game 2: AI
+14:32:53 Line 137  INFO [main] - getFinalresult - End of the game loop. Final winner: Both players win!
+14:32:55 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:55 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:55 Line 151  INFO [main] - checkKeepPlaying - Game restarting: game.MasterMind@312b1dae
+14:32:55 Line 72  INFO [main] - validSetup - Secret code set: 4650
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 5111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 20
+Answer to give: 20
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 0111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 6111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 20
+Answer to give: 20
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 4111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 11
+Answer to give: 11
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1511
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1011
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1611
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1151
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1110
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 4650
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 14
+Answer to give: 14
+14:32:55 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:55 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:55 Line 119  INFO [main] - playing - Winner game 1: AI
+14:32:55 Line 72  INFO [main] - validSetup - Secret code set: 2292
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 6666
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 13
+Answer to give: 13
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 4444
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 2333
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3233
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3323
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 10
+Answer to give: 10
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3393
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 3332
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 01
+Answer to give: 01
+14:32:55 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:55 Line 106  INFO [main] - validPlay - Challenger guess: 2292
+14:32:55 Line 144  INFO [main] - answer - Defender answer: 04
+Answer to give: 04
+14:32:55 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:55 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:55 Line 119  INFO [main] - playing - Winner game 2: AI
+14:32:55 Line 137  INFO [main] - getFinalresult - End of the game loop. Final winner: Both players win!
+14:32:56 Line 250  INFO [main] - reset - Game values have been reset (error, output, input, attempts)
+14:32:56 Line 251  INFO [main] - reset - challenger phase: 0
+14:32:56 Line 151  INFO [main] - checkKeepPlaying - Game restarting: game.MasterMind@312b1dae
+14:32:56 Line 72  INFO [main] - validSetup - Secret code set: 3130
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 0000
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 8888
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 7777
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 2222
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 5555
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 9999
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 00
+Answer to give: 00
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 32
+Answer to give: 32
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 0111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 31
+Answer to give: 31
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1131
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 32
+Answer to give: 32
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1113
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 3
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 0133
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 0
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 0133
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 22
+Answer to give: 22
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 1
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 3333
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 32
+Answer to give: 32
+14:32:56 Line 105  INFO [main] - validPlay - Phase: 2
+14:32:56 Line 106  INFO [main] - validPlay - Challenger guess: 1111
+14:32:56 Line 144  INFO [main] - answer - Defender answer: 41
+Answer to give: 41

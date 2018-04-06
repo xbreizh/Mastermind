@@ -189,12 +189,9 @@ public class AI extends Player {
 		}
 		
 		}else{
-			phase=3;
-		}
-		if(phase==3){
-			System.out.println("trying");
 			
 			guess=getFinalResult();
+			phase=0;
 			
 		}
 		return guess;
@@ -250,7 +247,6 @@ public class AI extends Player {
 		 */
 		private String initSecondList(){
 			possible.clear();
-			System.out.println("Get: "+get);
 			value=foundList.get(get);
 			for (int i = 0; i < maxDigits-1; i++) {
 				possible.add(test);

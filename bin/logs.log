@@ -1,0 +1,2 @@
+13:48:11 Line 34 FATAL [main] - main - Error while loading the configuration file
+ java.io.FileNotFoundException: C:\Users\xavier.lamourec\Documents\openClassrooms\workspaces\Mastermind\config.properties (The system cannot find the file specified)
