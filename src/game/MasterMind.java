@@ -25,7 +25,7 @@ public class MasterMind extends Game {
 
 	public MasterMind(Player defender, Player challenger) {
 		super(defender, challenger);
-		max_attempts=Configuration.getMax_attemptsMasterMin();
+		max_attempts=Configuration.getMax_attempts();
 	}
 
 	/**

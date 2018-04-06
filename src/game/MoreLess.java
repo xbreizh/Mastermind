@@ -22,7 +22,7 @@ public class MoreLess extends Game {
 
 	public MoreLess(Player defender, Player challenger) {
 		super(defender, challenger);
-		max_attempts=Configuration.getMax_attemptsMoreLess();
+		max_attempts=Configuration.getMax_attempts();
 	}
 
 	/**

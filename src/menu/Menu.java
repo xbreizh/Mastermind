@@ -34,8 +34,6 @@ public class Menu extends Check {
 	 * This method gets user input and checks its validation.
 	 * If the validation is fine, the game and the status are updated
 	 * @param status
-	 * @param input
-	 * @param gameList
 	 * @return
 	 */
 
