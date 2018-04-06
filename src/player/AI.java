@@ -247,7 +247,12 @@ public class AI extends Player {
 		 */
 		private String initSecondList(){
 			possible.clear();
+			if(position<=foundList.size()){
 			value=foundList.get(get);
+			
+			}else{
+				get=0;
+			}
 			for (int i = 0; i < maxDigits-1; i++) {
 				possible.add(test);
 			}
