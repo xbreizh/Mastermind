@@ -2,247 +2,288 @@ package controller;
 
 import org.apache.log4j.Logger;
 
-import application.Log4J;
 import check.Check;
 import game.Game;
 import game.GameFactory;
-import game.GamesList;
 import game.Status_Game;
+import menu.GamesList;
 import menu.Menu;
 import menu.ModeList;
 import menu.Status_Menu;
-import player.AI;
 import player.Human;
-import player.Player;
 import view.View;
 
+/**
+ * This is the controller of the application
+ * 
+ * @author Xavier.Lamourec
+ * @version 1.0
+ */
 public class Controller {
-	public static final Logger log =Logger.getLogger(Log4J.class);
-	Player p0;
-	Player p1;
-	Player p2;
-	View view;
-	Status_Menu stMenu;
-	Status_Game stGame;
-	GamesList gameType;
-	Game game;
-	Game[] gameArray;
-	int dual = 0;
-	Check ch;
-	Menu menu;
+	private Logger log;
+	private Human human;
+	private View view;
+	private Status_Menu stMenu;
+	private Status_Game stGame;
+	private GamesList gameType;
+	private Game game;
+	private Game[] gameArray;
+	private Menu menu;
+	private ModeList mode;
+	private String[] resultArray;
 
 	public Controller() {
-		view = new View();
-		setP0(new Human());
-		GameFactory gf = new GameFactory();
+		stGame = null;
 		stMenu = Status_Menu.MENU_GAME;
-		menu = new Menu();
-		log.info("Menu Created");
-		checkStatusMenu();
 	}
 
-	public Player getP0() {
-		return p0;
-	}
-
-	public void setP0(Player p0) {
-		this.p0 = p0;
-	}
-
-	public void checkStatusMenu() {
+	/**
+	 * loops the menu until it gets a valid game and a valid mode
+	 */
+	public void switchMenu() {
 		log.info(stMenu);
+		while (stGame != Status_Game.SETUP) {
+			checkError(menu);
+			checkStatusMenu();
+		}
+		log.info("Game: "+gameType+" // Mode: "+mode);
+		playing();
+
+	}
+
+	/**
+	 * gets the Game type and mode, then initiates the game array
+	 */
+	private void checkStatusMenu() {
+		log.debug(stMenu);
+		view.displayLineBreak(stMenu.getOutput());
 		switch (stMenu) {
 		case MENU_GAME:
-			view.displayOutput(stMenu.getOutput());
-			p0.input();
-			menu.setInput(p0.getInput());
-			if (menu.validGame()) {
-				stMenu = stMenu.MENU_MODE;
-				gameType = menu.getGame();
-				log.info(stMenu+" "+gameType);
-			} else {
-				view.displayError(menu.getOutput());
-			}
-			checkStatusMenu();
+			stMenu = menu.selectAndValidGame(stMenu);
+			gameType = menu.getGame();
+			log.debug(stMenu + " " + gameType);
 			break;
 		case MENU_MODE:
-			view.displayOutput(stMenu.getOutput());
-			p0.input();
-			menu.setInput(p0.getInput());
-			if (menu.validMode()) {
-				log.info(ModeList.values()[Integer.parseInt(p0.getInput())]);
-				stMenu = stMenu.GAME;	
-			} else {
-				view.displayError(menu.getOutput());
+			stMenu = menu.selectAndValidMode(stMenu);
+			if (stMenu == Status_Menu.GAME) {
+				gameType = menu.getGame();
+				mode = menu.getMode();
+				log.debug(ModeList.values()[Integer.parseInt(menu.getInput()) - 1]);
 			}
-
-			checkStatusMenu();
+			break;
 		case GAME:
-			initGame();
-			for (int i = 0; i < gameArray.length; i++) {
-				game = gameArray[i];
-				setStGame(Status_Game.SETUP);
-				game.setStatus(Status_Game.SETUP);			
-				System.out.println("dual: "+dual);
-				checkStatusGame();
-				dual--;
-				
-			}
+			initGames(gameType, mode);
+			break;
+
 		}
 	}
 
+	/**
+	 * Uses the gameType and mode to generate the array of games
+	 * 
+	 * @param gameType
+	 *            (from the GamesList enumeration)
+	 * @param mode
+	 *            (from the ModeList enumeration)
+	 */
+	private void initGames(GamesList gameType, ModeList mode) {
+		log.info(mode);
+		new GameFactory();
+		gameArray = GameFactory.createGameArray(gameType, mode, human);
 
+		for (int i = 0; i < gameArray.length; i++) {
+			game = gameArray[i];
+			stGame = Status_Game.SETUP;
+			game.setLog(log);
+		}
+		resultArray = new String[gameArray.length];
 
-	public void checkStatusGame() {
-		stGame = game.getStatus();
-		log.info(stGame);
-		switch (stGame) {
-		case SETUP:
-			view.displayOutput(stGame.getOutput());
-			p1.input();
-			p1.setCodeToFind(p1.getInput());
-			game.setInput(p1.getCodeToFind());
-			game.validSetup();
-			checkError();
-			checkStatusGame();
-			break;
-		case PLAY:
-			view.displayOutput(stGame.getOutput());
-			p2.tryToGuess();
-			game.setInput(p2.getInput());
-			p1.setInput(p2.getInput());
-			view.displayOutput(p2.getInput());
-			game.validInput();
-			checkError();
-			checkStatusGame();
-			break;
-		case ANSWER:
-			view.displayOutput(stGame.getOutput());
-			p1.replyToGuess();
-			game.setAnswer(p1.getInput());
-			game.validAnswer();
-			view.displayOutput(game.getOutput());
-			p2.setAnswer(game.getOutput());
-			game.checkAttempts();
-			checkError();
-			checkStatusGame();
-			break;
-		case REPLAY:
-			view.displayOutput(stGame.getOutput());
-			p0.input();
-			game.setInput(p0.getInput());
-			game.validPlayAgain();
-			checkError();
-			checkStatusGame();
-			break;
-		case EXIT:
-			if (dual != 2) {
-				view.displayOutput(stGame.getOutput());
-				p0.input();
-				if (p0.getInput().toLowerCase().equals("y")) {
-					stMenu = Status_Menu.MENU_GAME;
-					checkStatusMenu();
-				}
-				if (p0.getInput().toLowerCase().equals("n")) {
-					game.setStatus(stGame.END);
-					checkStatusGame();
-				}
-			} else {
-				view.displayOutput("Game " + (dual - 1) + " over!");
-				game.setStatus(stGame.SETUP);
+	}
+
+	/**
+	 * loops around the different game stages until the REPLAY is reached
+	 */
+	private void playing() {
+		for (int i = 0; i < gameArray.length; i++) {
+			stGame = Status_Game.SETUP;
+			game = gameArray[i];
+			log.debug(stGame);
+			while (stGame != Status_Game.REPLAY) {
+
 				checkStatusGame();
 			}
+			String winner= game.getWinner().getClass().getSimpleName();
+			resultArray[i] = winner;
+			view.displayLineBreak(resultArray[i]+" in "+game.getAttempts()+" attemps");
+			game.reset();
+			log.info("Winner game "+(i+1)+": "+winner);
+		}
+		getFinalresult();
+		stGame = Status_Game.REPLAY;
+		checkKeepPlaying();
+	}
 
+	/**
+	 * gets and displays the final result
+	 */
+	private void getFinalresult() {
+		String finalWinner = "";
+		if (resultArray.length == 2) {
+			if (resultArray[0] != resultArray[1]) {
+				finalWinner = "Both players win!";
+			} else {
+				finalWinner = resultArray[0] + " wins!";
+			}
+			log.info("End of the game loop. Final winner: "+finalWinner);
+			view.displayLineBreak("Final result: " + finalWinner);
+		}
+	}
+
+	
+	/**
+	 * asks the user if he wants to restart the game
+	 */
+	private void checkKeepPlaying() {
+		while (stGame == Status_Game.REPLAY) {
+			checkStatusGame();
+		}
+		if (stGame == Status_Game.SETUP) {
+			log.info("Game restarting: "+game);
+			playing();
+		} else {
+			log.info("Ending game");
+			endGame();
+		}
+	}
+
+	
+	/**
+	 * asks the user if he wants to play another game (Back to the Menu) or Exit the
+	 * application
+	 */
+	private void endGame() {
+		while (stGame == Status_Game.EXIT) {
+			checkStatusGame();
+		}
+		if (stGame == null) {
+			stMenu = Status_Menu.MENU_GAME;
+			log.info("Back to menu: ");
+			switchMenu();
+		} else {
+			checkStatusGame();
+			log.info("End of the Application");
+		}
+	}
+
+	/**
+	 * switches on the status and gets to the corresponding game method
+	 * @param stGame
+	 */
+	private void checkStatusGame() {
+		log.debug(stGame);
+		checkError(game);
+		view.displayInline(stGame.getOutput());
+		switch (stGame) {
+		case SETUP:
+			view.displayLineBreak(game.getClass().getSimpleName());
+			stGame = game.validSetup(stGame);
+			break;
+		case PLAY:
+			String attempsCount = " Attempt: " + Integer.toString(game.getAttempts() + 1) + "/"
+					+ game.getMax_attempts();
+			view.displayLineBreak(game.getClass().getSimpleName() + attempsCount);
+			stGame = game.play(stGame);
+			displaysIfDefenderIsHuman(game.getInput(), "");
+			break;
+		case ANSWER:
+			displaysIfDefenderIsHuman(gameType.getHowToAnswer(), game.getOutput());
+			stGame = game.answer(stGame);
 			break;
 		case NO_MORE_TRIES:
-			view.displayOutput(stGame.getOutput());
-			view.displayOutput(game.gameResult(p2, p1));
-			game.reset();
-			game.setStatus(stGame.REPLAY);
-			checkStatusGame();
+			stGame = Status_Game.VERDICT;
 			break;
-		case WIN:
-			view.displayOutput(game.gameResult(p2, p1));
-			game.reset();
-			game.setStatus(stGame.REPLAY);
-			checkStatusGame();
+		case FOUND:
+			stGame = Status_Game.VERDICT;
+			break;
+		case VERDICT:
+			stGame = Status_Game.REPLAY;
+			break;
+		case REPLAY:
+			game.setInput(human.getInput());
+			stGame = game.validPlayAgain(stGame);
+			break;
+		case EXIT:
+			game.setInput(human.getInput());
+			stGame = game.validExit(stGame);
 			break;
 		case END:
-			view.displayOutput(stGame.getOutput());
 			break;
 		default:
 			break;
+
 		}
 	}
-	
-	protected void initGame() {
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[0].geti()))) {
-			p1 = new AI();
-			p2 = new Human();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
-			
+
+	/**
+	 * checks if the defender is a human and sends output
+	 * to display accordingly
+	 */
+	private void displaysIfDefenderIsHuman(String str1, String str2) {
+		if (game.getDefender().getClass().getName().equals(Human.class.getName())) {
+			view.displayLineBreak(str1);
+		} else {
+			if (!str2.isEmpty()) {
+				view.displayLineBreak(str2);
+			}
+
 		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[1].geti()))) {
-			p1 = new Human();
-			p2 = new AI();
-			gameArray = new Game[1];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
-		}
-		if (p0.getInput().equals(Integer.toString(ModeList.values()[2].geti()))) {
-			p1 = new Human();
-			p2 = new Human();
-			gameArray = new Game[2];
-			gameArray[0] = GameFactory.createGame(gameType, p1, p2);
-			gameArray[1] = GameFactory.createGame(gameType, p2, p1);
-			dual = 2;
-			log.info("Number of games:"+gameArray.length+"\n"
-					+"P1:"+p1+"\n"
-					+ "P2:"+p2+
-					"Game:"+gameType);
-		}
-		p1.setGame(gameType);
-		p2.setGame(gameType);
-		
 	}
 
-	public Status_Menu getStMenu() {
-		return stMenu;
-	}
-
-	public void setStMenu(Status_Menu stMenu) {
-		this.stMenu = stMenu;
-	}
-
-	public Status_Game getStGame() {
-		return stGame;
-	}
-
-	public void setStGame(Status_Game stGame) {
-		this.stGame = stGame;
-	}
-
-	public void checkMenuError() {
-		String error = menu.getOutput();
+	/**
+	 * returns and displays any input error
+	 */
+	private void checkError(Check object) {
+		String error = object.getError();
 		if (!error.equals("")) {
+			log.warn(error);
 			view.displayError(error);
 		}
 	}
 
-	public void checkError() {
-		String error = game.getError();
-		if (!error.equals("")) {
-			view.displayError(error);
-			log.error(error);
-		}
+	/**
+	 * sets the log
+	 * 
+	 * @param log
+	 */
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+
+	/**
+	 * sets the view
+	 * 
+	 * @param view
+	 */
+	public void setView(View view) {
+		this.view = view;
+	}
+
+	/**
+	 * sets the menu
+	 * 
+	 * @param menu
+	 */
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+	/**
+	 * sets the user(human)
+	 * 
+	 * @param human
+	 */
+	public void setHuman(Human human) {
+		this.human = human;
 	}
 
 }

@@ -1,47 +1,53 @@
 package game;
 
-
+import application.Configuration;
 import player.Player;
 
-public class MoreLess extends Game{
+	/**
+	 * The MoreLess classes inherits the Game class
+	 * It contains a specific method for generating a valid answer
+	 * and another for validating a suggestion of answer.
+	 * The user must guess a digits code and gets symbols as reply(+, -, =)
+	 * @author Xavier.Lamourec
+	 *
+	 */
 
-	public MoreLess(Player p1, Player p2) {
-		super(p1, p2);
+public class MoreLess extends Game {
+	
+	/**
+	 * Initiates the MoreLess game based on the parent(Game) class
+	 * @param defender
+	 * @param challenger
+	 */
+
+	public MoreLess(Player defender, Player challenger) {
+		super(defender, challenger);
+		max_attempts=Configuration.getMax_attemptsMoreLess();
 	}
-	
-	
-	public void getVerdict(int n1, int n2){
-		int[] a=intToArray(n1);
-		int[] b=intToArray(n2);
-		String str="";
+
+	/**
+	 * generates the answer to provide based on the secret code
+	 * and the input provided(guess)
+	 * @param secretCode
+	 * @param guess
+	 */
+	public void generateAnswerToGive() {
+		int[] a = secretCodeArray;
+		int[] b = intToArray(Integer.parseInt(guess));
+		String str = "";
 		for (int i = 0; i < a.length; i++) {
-			if(a[i]==b[i]){
-				str+="=";
-			}else if(a[i]<b[i]){
-				str+="-";
-			}else if(a[i]>b[i]){
-				str+="+";
+			if (a[i] == b[i]) {
+				str += "=";
+			} else if (a[i] < b[i]) {
+				str += "-";
+			} else if (a[i] > b[i]) {
+				str += "+";
 			}
 		}
-		answerToGive=str;
-		output=answerToGive;
+		output=str;
+		answerToGive = str;
 	}
 
-
-	public  void validAnswer() {
-		
-		getVerdict(secretCode, Integer.parseInt(input));
-		if (!answerToGive.equals(answer)) {
-			setError("Wrong answer!, should be " + answerToGive);
-		} else {
-			setError("");
-			if (Integer.parseInt(input) == (secretCode)) {
-				setStatus(Status_Game.WIN);
-			} else {
-				setStatus(Status_Game.PLAY);
-			}
-		}
-		
-	}
+	
 
 }

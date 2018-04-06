@@ -1,131 +1,126 @@
 package check;
 
-import controller.Controller;
-import game.Configuration;
+import java.util.ArrayList;
+
+import application.Configuration;
+
+/**
+ * This class is about checking the user's input 
+ * and returning the validity with a boolean
+ * @author Xavier.Lamourec
+ *
+ */
 
 public class Check {
 
 	protected String input = "";
-	String output = "";
-	int nbChar = Configuration.getNbDigits();
-	String[] symbols = { "+", "-", "=" };
-	InputStatus status = InputStatus.VALID;
-	
-
-	int test=1324;
+	protected String output = "";
+	protected int nbChar = Configuration.getNbDigits();
+	protected InputStatus IStatus = InputStatus.VALID;
+	protected String error = "";
 	protected String[] valid;
-
-	
 
 	public Check() {
 
 	}
-	
-	public boolean checkIfInArray(){
-		for (int i = 0; i < input.length(); i++) {
-			int ok=0;
-			for (int j = 0; j < valid.length; j++) {
-				if(String.valueOf(input.charAt(i)).equals(valid[j])){
-					ok++;
-				}
-			}
-			if(ok==0){
-				status = InputStatus.WRONGCHARACTER;
-				output = status.getOutput();
-				return false;
-			}
-			
-		}
-		return true;
-		
-	}
+	/**
+	 * checks if user's input is within the valid array.
+	 * Needs valid to be instantiated
+	 * @param valid array is checked for validation
+	 * @param input
+	 * @return
+	 */
+	protected boolean checkIfInArrayNumber() {
 
-	public boolean checkSymbol() {
-		if (!hasCorrectNbDigits()) {
-			for (int i = 0; i < input.length(); i++) {
-
-				if ((!input.substring(i, i + 1).equals(symbols[0])) && (!input.substring(i, i + 1).equals(symbols[1]))
-						&& (!input.substring(i, i + 1).equals(symbols[2]))) {
-					status = InputStatus.WRONGCHARACTER;
-					output = status.getOutput();
-					return false;
-				}
-			}
-		}
-		return true;
-
-	}
-
-	public InputStatus getCheckStatus() {
-		return status;
-	}
-
-	public boolean isValidInteger(){
-		if(isInteger()){
-			if(hasCorrectNbDigits()){
+		for (int i = 0; i < valid.length; i++) {
+			if (input.equals(valid[i])) {
 				return true;
 			}
 		}
+		IStatus = InputStatus.WRONGCHARACTER;
+		error = IStatus.getOutput();
 		return false;
-		
+
 	}
-	public boolean hasCorrectNbDigits() {
-		if(!isEmpty()){
+
+	/**
+	 * checks if the input has the right number of digits
+	 * updates the value for error
+	 * returns a boolean
+	 * @param input
+	 * @return
+	 */
+
+	protected boolean hasCorrectNbDigits() {
+		if (!isEmpty()) {
 			if (input.length() != nbChar) {
-				status = InputStatus.OUTOFRANGE;
-				output = status.getOutput();
+				IStatus = InputStatus.WRONGCHARACTER;
+				error = IStatus.getOutput();
 				return false;
 			}
 		}
-		
+
 		return true;
 
 	}
-
-	public boolean isEmpty() {
-		output = "";
+	/**
+	 * checks if the input is empty
+	 * updates the value for error
+	 * returns a boolean
+	 * @param input
+	 * @return
+	 */
+	protected boolean isEmpty() {
+		error = "";
 		if (input.length() == 0) {
-			status = InputStatus.EMPTY;
-			output = status.getOutput();
+			IStatus = InputStatus.EMPTY;
+			error = IStatus.getOutput();
 			return true;
 		}
 		return false;
 	}
-
-	public boolean isInteger() {
+	
+	/**
+	 * checks if the input is an integer
+	 * updates the value for error
+	 * returns a boolean
+	 * @return
+	 */
+	protected boolean isInteger() {
 		if (isEmpty())
 			return false;
 		try {
 			Integer.parseInt(this.input);
 		} catch (NumberFormatException e) {
-			status = InputStatus.NOTINTEGER;
-			output = status.getOutput();
+			IStatus = InputStatus.NOTINTEGER;
+			error = IStatus.getOutput();
 			return false;
 		}
 		return true;
 	}
+	
+	/**
+	 * Transforms an array into an ArrayList
+	 * @param array
+	 * @param aList
+	 */
+	
+	protected void arrayToList(int[] array, ArrayList<Integer> aList) {
+		for (int i = 0; i < array.length; i++) {
+			aList.add(array[i]);
+
+		}
+
+	}
 
 	// Setters and Getters
-	
-	
-	public void setValid(String[] valid) {
-		this.valid = valid;
-	}
-	
-	public void setNbChar(int nbChar) {
-		this.nbChar = nbChar;
-	}
 
-	public String getOutput() {
-		return output;
+	public String getError() {
+		return error;
 	}
 
 	public String getInput() {
 		return input;
-	}
-
-	public void setInput(String input) {
-		this.input = input;
 	}
 
 }

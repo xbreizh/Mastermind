@@ -2,42 +2,49 @@ package player;
 
 import java.util.Scanner;
 
-import game.Game;
+	/**
+	 * The Human class provides String
+	 * from user's input
+	 * @author Xavier.Lamourec
+	 *
+	 */
 
-public class Human extends Player{
-	Scanner sc=new Scanner(System.in);
+public class Human extends Player {
+	private Scanner sc;
 	
-	public String input(){
-		String str=sc.nextLine();
-		if(str.equals(null)){
-			str="1234";
-		}
-		return this.input=str;
-	}
-	
-
-	@Override
-	public void guessMoreless() {
-		input();
-		
-	}
-
-	@Override
-	public void replyMoreless() {
-		input();
-		
-	}
-
-	@Override
-	public void guessMasterMind() {
-		input();
-		
-	}
-
-	@Override
-	public void replyMasterMind() {
-		input();
-		
+	/**
+	 * Initiates the Human object
+	 * and the scanner
+	 */
+	public Human(){
+		sc= new Scanner(System.in);
 	}
 	
+	
+	@Override
+	public String tryToGuessMoreLess() {
+		return getInput();
+
+	}
+
+	@Override
+	public String tryToGuessMasterMind() {
+		return getInput();
+
+	}
+
+	
+	public String answerToGuess() {
+		return getInput();
+	}
+
+	public String getInput() {
+		return sc.nextLine();
+	}
+
+	
+
+	
+	
+
 }

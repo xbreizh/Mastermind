@@ -1,72 +1,119 @@
 package menu;
 
 import check.Check;
-import game.GamesList;
+import player.Human;
 
-public class Menu extends Check{
+	/** The Menu class inherits the Check class
+	 * and allows the user to chose his game's configuration
+	 * (gameType, mode)
+	 * 
+	 * @author Xavier.Lamourec
+	 *@param input (user input)
+	 *@param game (from gameList enumeration)
+	 *@param mode (from modeList enumeration)
+	 */
+public class Menu extends Check {
 
-	String[] validList;
-	Status_Menu status;
-	GamesList game;
+	private String[] validList;
+	private GamesList game;
+	private Human user;
 	
+	private ModeList mode;
 
-	public GamesList getGame() {
-		return game;
-	}
+	
+   /**
+    * Initiates the Menu
+    */
+	
 
 	public Menu() {
 
 	}
 	
-	public boolean validGame(){
-		setNbChar(1);
+	/**
+	 * This method gets user input and checks its validation.
+	 * If the validation is fine, the game and the status are updated
+	 * @param status
+	 * @param input
+	 * @param gameList
+	 * @return
+	 */
+
+	public Status_Menu selectAndValidGame(Status_Menu status) {
+		input=user.getInput();
+		nbChar=1;
 		initValidGameList();
-		valid=validList;
-		if(isEmpty())return false;
-		if(!isValidInteger())return false;
-		if(!hasCorrectNbDigits())return false;
-		if(!checkIfInArray())return false;
-		game=GamesList.values()[Integer.valueOf(input)-1];
-		return true;
-		
+		if (isEmpty())
+			return status;
+		if (!isInteger())
+			return status;
+		if (!checkIfInArrayNumber())
+			return status;
+		game = GamesList.values()[Integer.valueOf(input) - 1];
+		return Status_Menu.MENU_MODE;
+
 	}
 	
-	public void readArray(){
-		for (int i = 0; i < valid.length; i++) {
-			System.out.println(valid[i]);
-		}
-	}
-	
-	public boolean validMode(){
+	/**
+	 * 	This method gets user input and checks its validation.
+	 * 	If the validation is fine, the mode and the status are updated
+	 * @param status
+	 * @return status
+	 */
+
+
+	public Status_Menu selectAndValidMode(Status_Menu status) {
+		input=user.getInput();
 		initValidModeList();
+		if (isEmpty())
+			return status;
+		if (!isInteger())
+			return status;
+		if (!checkIfInArrayNumber())
+			return status;
+		mode=ModeList.values()[Integer.parseInt(input )-1];
+		return Status_Menu.GAME;
+
+	}
+	
+	/**
+	 * Initialises the validation list for the games
+	 */
+
+	private void initValidGameList() {
+		initValidList(GamesList.values().length);
+	}
+
+	/**
+	 * Initialises the validation list for the modes
+	 */
+	private void initValidModeList() {
+
+		initValidList(ModeList.values().length);
+	}
+	
+	/**
+	 * Initialises the validation array
+	 * @param validList list of accepted inputs
+	 */
+	private void initValidList(int listLength) {
+		validList = new String[listLength];
+		for (int j = 0; j < listLength; j++) {
+			validList[j] = String.valueOf(j + 1);
+		}
 		valid=validList;
-		if(isEmpty())return false;
-		if(!isValidInteger())return false;
-		if(!hasCorrectNbDigits())return false;	
-		if(!checkIfInArray())return false;
-		return true;
-		
 	}
 
-	public void initValidGameList() {
-		int listLength = GamesList.values().length;
-		validList = new String[listLength];
-		for (int j = 0; j < listLength; j++) {
-			validList[j] = String.valueOf(j + 1);
-		}
+
+	public void setUser(Human user) {
+		this.user = user;
 	}
 
-	public void initValidModeList() {
-
-		int listLength = ModeList.values().length;
-		validList = new String[listLength];
-		for (int j = 0; j < listLength; j++) {
-			validList[j] = String.valueOf(j + 1);
-		}
+	public GamesList getGame() {
+		return game;
 	}
-
-	public String[] getValidList() {
-		return validList;
+	public ModeList getMode() {
+		return mode;
 	}
-
+	
 }

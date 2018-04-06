@@ -1,73 +1,103 @@
 package player;
 
-import java.util.Scanner;
+import menu.GamesList;
 
-import game.Game;
-import game.GamesList;
+	/**
+	 * The Player class's role is to deal with inputs
+	 * that will feed the game. They can be from the user(Human)
+	 * or auto-generated(AI).
+	 * The Player is a parent class for both Human and AI.
+	 * @author Xavier.Lamourec
+	 *
+	 */
 
 public abstract class Player {
-	Scanner sc=new Scanner(System.in);
-	String input="";
-	String wrong="wrong answer";
-	String feedBack="";
-	String codeToFind;
-	String answerToGive="";
-	GamesList game;
+	protected String input="";
+	protected String secretCode = "";
+	protected String answer = "";
+	protected String answerToGive = "";
+	protected String name="";
+	protected String guess="";
+	protected int firstGuess=0;
+	protected int phase=0;
 	
-	
-	//Abstract methods
-	public abstract String input();
-	public abstract void guessMoreless();
-	public abstract void replyMoreless();
-	public abstract void guessMasterMind();
-	public abstract void replyMasterMind();
+	public int getPhase() {
+		return phase;
+	}
 
-	// Trying to guess the result
-	public void tryToGuess() {
-		if(game.equals(GamesList.MoreLess)){
-			guessMoreless();
+	public void setPhase(int phase) {
+		this.phase = phase;
+	}
+
+	public void setFirstGuess(int firstGuess) {
+		this.firstGuess = firstGuess;
+	}
+
+	/**
+	 * Instantiates the Player
+	 */
+	public Player(){
+		
+	}
+
+	/**
+	 * Gets input 
+	 * @return input
+	 */
+	
+	public abstract String getInput();
+	
+	/**
+	 * gets input for the game MoreLess
+	 * @return
+	 */
+	
+	public abstract String tryToGuessMoreLess();
+	
+	/**
+	 * gets input for the game MasterMind
+	 * @return
+	 */
+	
+	public abstract String tryToGuessMasterMind();
+
+
+	/**
+	 * redirects to the corresponding methods depending
+	 * on the game played and return the result
+	 * @param gameName 
+	 * @return guess as a String
+	 */
+	public String tryToGuess(String gameName) {
+
+		if (gameName.equals(GamesList.MoreLess.name())) {
+			return tryToGuessMoreLess();
 		}
-		if(game.equals(GamesList.MasterMind)){
-			guessMasterMind();
+		else {
+			return tryToGuessMasterMind();
 		}
 	}
-	
-	
-	//Provides feedback on other player's input
-	public void replyToGuess() {
-		if(game.equals(GamesList.MoreLess)){
-			replyMoreless();
-		}
-		if(game.equals(GamesList.MasterMind)){
-			replyMasterMind();
-		}
+
+	// getters & setters
+
+	public String getName() {
+		return name;
 	}
-	
-	
-	
-	//getters & setters
-	public void setInput(String input) {
-		this.input = input;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
 	public String getAnswer() {
-		return feedBack;
+		return answer;
 	}
+
 	public void setAnswer(String answer) {
-		this.feedBack = answer;
+		this.answer = answer;
 	}
-	public String getInput() {
-		return input;
-	}
-	public String getCodeToFind() {
-		return codeToFind;
-	}
-	public void setCodeToFind(String codeToFind) {
-		this.codeToFind = codeToFind;
-	}
-	public GamesList getGame() {
-		return game;
-	}
-	public void setGame(GamesList game) {
-		this.game = game;
+
+	public void setGuess(String guess) {
+		this.guess=guess;
 	}
 }
